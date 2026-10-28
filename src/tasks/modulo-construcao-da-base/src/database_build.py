@@ -56,11 +56,14 @@ def parse_ano_mes(valor: str) -> tuple[int, int]:
 
 
 def listar_arquivos(
-    origem: Path, inicio: tuple[int, int], fim: tuple[int, int]
+    origem: Path,
+    inicio: tuple[int, int],
+    fim: tuple[int, int],
+    nome_arquivo: str = "contratacoes.csv",
 ) -> list[ArquivoColeta]:
-    """Lista os ``contratacoes.csv`` das coletas entre ``inicio`` e ``fim`` (inclusive)."""
+    """Lista os ``nome_arquivo`` das coletas entre ``inicio`` e ``fim`` (inclusive)."""
     arquivos = []
-    for caminho in origem.glob("Coletas - */*/*/contratacoes.csv"):
+    for caminho in origem.glob(f"Coletas - */*/*/{nome_arquivo}"):
         periodo_dir = caminho.parent
         mes_dir = periodo_dir.parent
         ano_dir = mes_dir.parent
