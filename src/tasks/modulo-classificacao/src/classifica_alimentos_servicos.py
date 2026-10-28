@@ -229,12 +229,15 @@ def ligar_contratacoes(servicos: pd.DataFrame, contratacoes: pd.DataFrame) -> pd
         validate="many_to_one",
         indicator=True,
     )
+    # O PNCP traz endpoints com ano inválido (ex.: compras/20214/1/itens), que
+    # não casam com nenhuma contratação. Esses serviços saem com aviso.
     sem_contratacao = resultado["_merge"].eq("left_only")
     if sem_contratacao.any():
-        raise ValueError(
-            f"{int(sem_contratacao.sum())} serviços não têm contratação correspondente."
+        print(
+            f"Aviso: {int(sem_contratacao.sum())} serviços sem contratação "
+            "correspondente foram descartados."
         )
-    return resultado.drop(columns=["chave_contratacao", "_merge"])
+    return resultado.loc[~sem_contratacao].drop(columns=["chave_contratacao", "_merge"])
 
 
 def marcar_codigo_catser(servicos: pd.DataFrame, referencia: pd.DataFrame) -> pd.DataFrame:
@@ -468,7 +471,8 @@ def executar_classificacao(
 
     # Passos 1 a 3.
     contratacoes = preparar_contratacoes(caminho_contratacoes)
-    servicos = ligar_contratacoes(preparar_servicos(itens), contratacoes)
+    servicos_com_descricao = preparar_servicos(itens)
+    servicos = ligar_contratacoes(servicos_com_descricao, contratacoes)
     servicos = marcar_codigo_catser(servicos, referencia)
     servicos = filtrar_contexto_alimentar(servicos, padroes)
 
@@ -498,7 +502,8 @@ def executar_classificacao(
         "contagens": {
             "itens_recebidos": len(itens),
             "servicos": int(itens["materialOuServico"].eq("S").sum()),
-            "servicos_com_descricao": len(resultado),
+            "servicos_com_descricao": len(servicos_com_descricao),
+            "servicos_sem_contratacao": len(servicos_com_descricao) - len(servicos),
             "contratacoes_amparo_pnae": int(contratacoes["servico_alimentacao_escolar"].sum()),
             "servicos_codigo_catser": int(resultado["codigo_catser_informado"].sum()),
             "servicos_por_metodo": resultado["metodo_classificacao"].value_counts().to_dict(),
