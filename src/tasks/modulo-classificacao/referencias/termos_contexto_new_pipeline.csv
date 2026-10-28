@@ -1,0 +1,74 @@
+id,grupo,tipo,padrao,origem,exemplo_positivo,exemplo_negativo,observacao
+A01,alimentar,radical,aliment,atual,Fornecimento de alimentação preparada,,Usos elétricos e benefícios são retirados pelas exclusões E01 a E05
+A03,alimentar,radical,refeic,atual,Fornecimento de refeições,,
+A04,alimentar,radical,lanche,atual,Fornecimento de lanches,,
+A05,alimentar,radical,cozinh,atual,Auxiliar de cozinha,,Reformas de cozinha são retiradas pela exclusão E10
+A06,alimentar,radical,copeir,atual,Serviços de copeiragem,,
+A07,alimentar,radical,nutri,atual,Serviços de nutricionista,,Dietas enterais são marcadas pelo outro contexto O12
+A08,alimentar,radical,cardapi,atual,Elaboração de cardápios,,
+A09,alimentar,radical,comida,atual,Fornecimento de comida pronta,,
+A10,alimentar,radical,buffet,atual,Serviço de buffet,,Buffet de eventos é marcado pelo outro contexto O01
+A11,alimentar,radical,bufe,atual,Serviço de bufê,,
+A12,alimentar,radical,marmit,atual,Fornecimento de marmitex,,
+A13,alimentar,radical,quentinh,atual,Fornecimento de quentinhas,,
+A14,alimentar,radical,restaurante,atual,Gestão de restaurante popular,,
+A15,alimentar,radical,leite,atual,Distribuição de leite,,Também casa com nomes de lugares como Serra Leite
+A16,alimentar,radical,cafe,atual,Serviço de café e água,,Café da manhã de hospedagem é retirado pela exclusão E06
+A18,alimentar,radical,bromatolog,atual,Análise bromatológica de alimentos,,Sem ocorrências no lote de abril de 2026
+A19,alimentar,radical,frigorif,atual,Manutenção de câmara frigorífica,,
+A20,alimentar,radical,hortifrut,atual,Distribuição de hortifrutigranjeiros,,
+A21,alimentar,radical,almoc,novo,Fornecimento de refeição tipo almoço,,
+A22,alimentar,radical,jantar,novo,Refeição tipo jantar,,
+A23,alimentar,radical,desjejum,novo,Serviço do tipo desjejum,,No lote aparece sobretudo em dietas de pacientes
+A24,alimentar,regex,\bcamaras? frias?\b,novo,Manutenção de câmara fria | Instalação de câmaras frias,,
+A25,alimentar,radical,coffee,novo,Serviço de coffee break,,Também marcado como outro contexto em O02
+A26,alimentar,radical,coquetel,novo,Serviço de coquetel,,
+A27,alimentar,radical,salgad,novo,Fornecimento de salgados,,
+A28,alimentar,radical,merend,novo,Preparo da merenda | Posto de merendeira,,Repete B01 e F01 para que merenda e merendeira contem como termo alimentar próprio nos resgates
+B01,escolar_forte,radical,merenda,atual,Preparo da merenda escolar,,Estava no grupo alimentar como A02. Termos escolares fortes também contam como alimentares
+B02,escolar_forte,radical,pnae,atual,Nutricionista responsável técnico pelo PNAE,,Estava no grupo alimentar como A17
+B04,escolar_forte,expressao,alimentacao escolar,TdP,Divisão de alimentação escolar,,
+B05,escolar_forte,regex,\b11\.947\b,novo,Lei nº 11.947/2009 | Lei Federal 11.947,Item 11.9470,Lei do PNAE. O texto de busca transforma nº em no
+B06,escolar_forte,regex,"\b(refeic|aliment|lanche|merend|almoc|desjejum|cafe da manha|cardapi)[a-z]*( [a-z0-9]+){0,4} (alunos?|alunas?|estudantes?|educandos?|escolas?|escolares|creches?|cmeis?|emeis?)\b",novo,Refeições destinadas aos alunos das escolas estaduais | Refeição para os alunos | Lanche para os estudantes,"Buffet para a Secretaria Municipal de Educação | Alimentação de comissão técnica, jogadores e alunos","COALES: comida + até 4 palavras + aluno/escola. Repete palavras do grupo alimentar porque o termo é a junção das duas, próximas no texto"
+F01,escolar_funcao,radical,merendeir,novo,Posto tipo merendeira | Prestação de serviços de A.S.H.A. merendeira,,Estava no grupo escolar forte como B03. Função descreve o trabalho contratado
+F02,escolar_funcao,regex,\bprepar[a-z]*( (e|de|da|do|das|dos|a|o|para))* (alimentacao escolar|merenda),novo,Preparo da merenda | Empresa para prepara de alimentação escolar | Preparação de alimentação escolar,Preparação de documentos sobre alimentação escolar,Só palavras de ligação entre o verbo e o objeto
+C01,escolar_fraco,radical,escola,TdP,Unidade escolar | Escolas municipais,Escolha do fornecedor,Transporte e material escolar são retirados pelas exclusões
+C02,escolar_fraco,radical,aluno,novo,Refeitório para alunos,,
+C03,escolar_fraco,radical,estudant,novo,Atendimento aos estudantes,,
+C04,escolar_fraco,radical,creche,novo,Refeições para creches,,
+C05,escolar_fraco,regex,\b(cmei|emei|cemei)s?\b,novo,CMEI Pequeno Príncipe | EMEI Nilza,,
+C06,escolar_fraco,radical,ensino,novo,Rede municipal de ensino,,
+C07,escolar_fraco,radical,educac,TdP,Secretaria Municipal de Educação | Atividades educacionais,,
+C08,escolar_fraco,expressao,fnde,novo,Prestação de contas ao FNDE,,No lote aparece sobretudo em obras padrão FNDE
+C09,escolar_fraco,expressao,agricultura familiar,novo,Produtos da agricultura familiar,,Também aparece no PAA. Por isso não é escolar forte
+C10,escolar_fraco,regex,\b(seduc|semed|smed)\b,novo,Gêneros alimentícios CP 04/25-SEDUC | Secretaria Municipal de Educação - SEMED,,Siglas de secretarias de educação nos objetos e nomes de unidade
+E01,exclusao,regex,\bfontes? de alimentacao\b,TdP,Fonte de alimentação bivolt | 2 fontes de alimentação,,
+E02,exclusao,expressao,alimentacao eletrica,novo,Ponto de alimentação elétrica,,
+E03,exclusao,radical,alimentador,novo,Alimentador automático de documentos,,
+E04,exclusao,regex,\bturbo ?aliment[a-z0-9]*,novo,Motor diesel turbo alimentado | Motor turboalimentado,,
+E05,exclusao,regex,\b(vale|auxilio|cartao|ticket|tiquete)s? alimentacao\b,novo,Vale alimentação aos servidores | Cartão alimentação,,Benefícios a servidores
+E06,exclusao,regex,\b(incluindo|incluso|inclusive|com) cafe da manha\b,novo,Serviço de quarto incluindo café da manhã,Fornecimento de café da manhã,Hospedagem
+E07,exclusao,regex,\btransportes? escolar(es)?\b,novo,Serviço de transporte escolar,,
+E08,exclusao,regex,\bmateria(l|is) escolar(es)?\b,novo,Aquisição de material escolar,,Sem ocorrências entre os serviços do lote
+E09,exclusao,regex,\buniformes? escolar(es)?\b,novo,Confecção de uniforme escolar,,Sem ocorrências entre os serviços do lote
+E10,exclusao,regex,"\b(reforma|construcao|ampliacao)( [a-z0-9.]+){0,4} cozinhas?\b",novo,Reforma da cozinha da escola municipal,Auxiliar de cozinha,Sem ocorrências entre os serviços do lote
+E11,exclusao,expressao,educacao fisica,novo,Atividades de educação física,,Encontrado em objetos de contratação
+E12,exclusao,regex,\bpatrulhas? escolar(es)?\b,novo,Batalhão de Patrulha Escolar Comunitária,,Policiamento. Encontrado em objetos de contratação
+E13,exclusao,regex,\beducacao (alimentar e nutricional|alimentar|nutricional)\b,novo,Ações de educação nutricional | Educação alimentar e nutricional | Orientação nutricional e educação alimentar,,Atividade de nutrição. Sozinha não indica escola
+O17,outro_contexto,radical,universi,novo,Restaurante universitário | Universidade Federal,,Restaurantes universitários não fazem parte do PNAE. Institutos federais continuam como escolares
+O01,outro_contexto,radical,evento,novo,Buffet para eventos,,
+O02,outro_contexto,expressao,coffee break,novo,Coffee break para seminário,,
+O03,outro_contexto,radical,seminario,novo,Lanche para seminário,,
+O04,outro_contexto,radical,congresso,novo,Inscrição em congresso,,
+O05,outro_contexto,radical,solenidade,novo,Buffet para solenidades,,
+O06,outro_contexto,radical,formatura,novo,Cerimônia de formatura,,
+O07,outro_contexto,regex,\b(festas?|festividades?)\b,novo,Festa do município | Festividades de fim de ano,Manifestação,
+O08,outro_contexto,radical,hospedagem,novo,Hospedagem com café da manhã,,
+O09,outro_contexto,radical,hospital,novo,Refeições do hospital municipal | Equipamentos médico-hospitalares,,
+O10,outro_contexto,radical,paciente,novo,Dieta para pacientes,,
+O11,outro_contexto,regex,\b(upa|ubs|ubsf)\b,novo,Equipamentos da UBS | Plantão na UPA,,
+O12,outro_contexto,regex,\b(enteral|parenteral)\b,novo,Dieta enteral,,
+O13,outro_contexto,regex,\b(prision|presidi|detent|apenad|custodiad)[a-z]*,novo,Unidades prisionais | Alimentação de detentos,,
+O14,outro_contexto,radical,socioeducativ,novo,Unidades socioeducativas,,
+O15,outro_contexto,expressao,acolhimento institucional,novo,Serviços de acolhimento institucional,,
+O16,outro_contexto,radical,idoso,novo,Instituição de longa permanência para idosos,,
