@@ -100,6 +100,9 @@ COLUNAS_CONTRATACOES = {
     "data.amparoLegal.codigo": "amparoLegal.codigo",
     "data.modalidadeNome": "modalidadeNome",
 }
+# "data.amparoLegal" só aparece quando alguma contratação do lote veio com o
+# amparo nulo; nos demais lotes o amparo existe apenas desdobrado nos subcampos.
+COLUNAS_CONTRATACOES_OPCIONAIS = {"data.amparoLegal"}
 # Lei 11.947/2009: Art. 14, § 1º (138) e Art. 21 (139).
 CODIGOS_AMPARO_PNAE = {"138", "139"}
 # Colunas da contratação acrescentadas aos itens, nesta ordem.
@@ -189,8 +192,18 @@ COLUNAS_RESULTADO = [
 def preparar_contratacoes(caminho: Path) -> pd.DataFrame:
     """Lê as contratações e marca as que têm amparo legal do PNAE."""
     contratacoes = pd.read_csv(
-        caminho, usecols=list(COLUNAS_CONTRATACOES), dtype=str
-    ).rename(columns=COLUNAS_CONTRATACOES)
+        caminho, usecols=lambda coluna: coluna in COLUNAS_CONTRATACOES, dtype=str
+    )
+    ausentes = (
+        set(COLUNAS_CONTRATACOES)
+        - set(contratacoes.columns)
+        - COLUNAS_CONTRATACOES_OPCIONAIS
+    )
+    if ausentes:
+        raise ValueError(f"Colunas ausentes nas contratações: {sorted(ausentes)}")
+    contratacoes = contratacoes.reindex(columns=list(COLUNAS_CONTRATACOES)).rename(
+        columns=COLUNAS_CONTRATACOES
+    )
     contratacoes["chave_contratacao"] = (
         contratacoes["cnpj_orgao"]
         + "/" + contratacoes["ano_compra"]
