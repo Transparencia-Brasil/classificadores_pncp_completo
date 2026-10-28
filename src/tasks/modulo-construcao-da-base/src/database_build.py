@@ -90,6 +90,35 @@ def colunas_unificadas(arquivos: list[ArquivoColeta]) -> list[str]:
     return ["coleta_ano", "coleta_mes", "coleta_periodo", *colunas]
 
 
+def ultima_coleta_por_chave(
+    arquivos: list[ArquivoColeta], colunas_chave: list[str]
+) -> dict[tuple[str, ...], int]:
+    """Índice do arquivo mais recente em que cada chave aparece."""
+    ultima: dict[tuple[str, ...], int] = {}
+    for indice, arquivo in enumerate(arquivos):
+        chaves = pd.read_csv(
+            arquivo.caminho, dtype=str, keep_default_na=False, usecols=colunas_chave
+        )
+        ultima.update(dict.fromkeys(zip(*(chaves[c] for c in colunas_chave)), indice))
+    return ultima
+
+
+def filtrar_ultima_coleta(
+    bloco: pd.DataFrame,
+    colunas_chave: list[str],
+    ultima: dict[tuple[str, ...], int],
+    indice: int,
+) -> pd.DataFrame:
+    """Mantém só a primeira ocorrência de cada chave na coleta mais recente."""
+    manter = []
+    for chave in zip(*(bloco[c] for c in colunas_chave)):
+        manter.append(ultima.get(chave) == indice)
+        if manter[-1]:
+            # Marca a chave como usada para descartar repetições na mesma coleta.
+            ultima[chave] = -1
+    return bloco[manter]
+
+
 def normalizar_amparo(codigos: pd.Series) -> pd.Series:
     """Padroniza o código do amparo como texto sem casas decimais (``"19.0"`` -> ``"19"``)."""
     return codigos.str.strip().str.replace(r"\.0+$", "", regex=True)
@@ -101,19 +130,24 @@ def grupo_amparo(codigo: str) -> str:
 
 
 def construir_base(
-    arquivos: list[ArquivoColeta], saida_consolidado: Path, saida_filtrado: Path
+    arquivos: list[ArquivoColeta],
+    saida_consolidado: Path,
+    saida_filtrado: Path,
+    deduplicar: bool = False,
 ) -> None:
     """Grava o CSV consolidado e o CSV filtrado pelos amparos legais, lendo em blocos."""
     colunas = colunas_unificadas(arquivos)
     colunas_filtrado = [*colunas, "grupo_amparo"]
+    ultima = ultima_coleta_por_chave(arquivos, [COLUNA_ID]) if deduplicar else None
 
     total_linhas = 0
+    total_descartadas = 0
     total_filtradas = 0
     contagem_amparos: Counter[str] = Counter()
     ids_filtrados: Counter[str] = Counter()
     primeiro_bloco = True
 
-    for arquivo in arquivos:
+    for indice, arquivo in enumerate(arquivos):
         print(f"Lendo {arquivo.ano}/{arquivo.mes:02d} {arquivo.periodo}...")
         blocos = pd.read_csv(
             arquivo.caminho,
@@ -126,6 +160,10 @@ def construir_base(
             bloco.insert(1, "coleta_mes", arquivo.mes)
             bloco.insert(2, "coleta_periodo", arquivo.periodo)
             bloco = bloco.reindex(columns=colunas, fill_value="")
+            if ultima is not None:
+                tamanho = len(bloco)
+                bloco = filtrar_ultima_coleta(bloco, [COLUNA_ID], ultima, indice)
+                total_descartadas += tamanho - len(bloco)
 
             modo = "w" if primeiro_bloco else "a"
             bloco.to_csv(saida_consolidado, mode=modo, header=primeiro_bloco, index=False)
@@ -148,6 +186,8 @@ def construir_base(
     print()
     print(f"Arquivos lidos: {len(arquivos)}")
     print(f"Contratações no consolidado: {total_linhas:,}")
+    if deduplicar:
+        print(f"Repetições descartadas (mantida a coleta mais recente): {total_descartadas:,}")
     print(f"Contratações filtradas por amparo: {total_filtradas:,}")
     print(f"numeroControlePNCP repetidos entre coletas (filtrado): {repetidos:,}")
     print("Contratações por código de amparo:")
@@ -165,6 +205,11 @@ def main() -> None:
     parser.add_argument("--fim", type=parse_ano_mes, required=True, help="Mês final (AAAA-MM)")
     parser.add_argument("--origem", type=Path, default=ORIGEM_PADRAO, help="Pasta tmp das coletas")
     parser.add_argument("--saida", type=Path, default=SAIDA_PADRAO, help="Pasta de saída")
+    parser.add_argument(
+        "--deduplicar",
+        action="store_true",
+        help="Mantém só a versão mais recente de cada contratação no período",
+    )
     args = parser.parse_args()
 
     if args.inicio > args.fim:
@@ -180,6 +225,7 @@ def main() -> None:
         arquivos,
         args.saida / f"contratacoes_{sufixo}.csv",
         args.saida / f"contratacoes_amparos_merenda_{sufixo}.csv",
+        args.deduplicar,
     )
 
 

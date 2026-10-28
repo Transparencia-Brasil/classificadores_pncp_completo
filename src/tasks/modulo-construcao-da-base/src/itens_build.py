@@ -26,14 +26,18 @@ from database_build import (
     TAMANHO_CHUNK,
     ArquivoColeta,
     colunas_unificadas,
+    filtrar_ultima_coleta,
     grupo_amparo,
     listar_arquivos,
     normalizar_amparo,
     parse_ano_mes,
+    ultima_coleta_por_chave,
 )
 
 COLUNA_TIPO = "materialOuServico"
 COLUNA_CONTROLE = "numeroControlePNCP"
+# Um item é identificado pela compra (endpoint) e pelo número dentro dela.
+COLUNAS_CHAVE_ITEM = ["endpoint", "numeroItem"]
 
 # Endpoint do item: .../orgaos/{cnpj}/compras/{ano}/{sequencial}/itens
 PADRAO_ENDPOINT = r"/orgaos/(?P<cnpj>\d+)/compras/(?P<ano>\d{4})/(?P<sequencial>\d+)/itens"
@@ -86,20 +90,23 @@ def construir_itens(
     amparos: dict[str, str],
     saidas: dict[str, Path],
     saidas_merenda: dict[str, Path],
+    deduplicar: bool = False,
 ) -> None:
     """Grava as tabelas de itens do período, completas e filtradas por amparo, lendo em blocos."""
     colunas = colunas_unificadas(arquivos)
     colunas.insert(3, COLUNA_CONTROLE)
     colunas_merenda = [*colunas, COLUNA_AMPARO, "grupo_amparo"]
+    ultima = ultima_coleta_por_chave(arquivos, COLUNAS_CHAVE_ITEM) if deduplicar else None
 
     total_itens = 0
+    total_descartados = 0
     sem_contratacao = 0
     tipos: Counter[str] = Counter()
     tipos_merenda: Counter[str] = Counter()
     grupos_merenda: Counter[str] = Counter()
     primeiro_bloco = True
 
-    for arquivo in arquivos:
+    for indice, arquivo in enumerate(arquivos):
         print(f"Lendo itens de {arquivo.ano}/{arquivo.mes:02d} {arquivo.periodo}...")
         blocos = pd.read_csv(
             arquivo.caminho,
@@ -113,8 +120,12 @@ def construir_itens(
             bloco.insert(2, "coleta_periodo", arquivo.periodo)
             bloco.insert(3, COLUNA_CONTROLE, numero_controle(bloco["endpoint"]))
             bloco = bloco.reindex(columns=colunas, fill_value="")
+            if ultima is not None:
+                tamanho = len(bloco)
+                bloco = filtrar_ultima_coleta(bloco, COLUNAS_CHAVE_ITEM, ultima, indice)
+                total_descartados += tamanho - len(bloco)
 
-            amparo = bloco[COLUNA_CONTROLE].map(amparos)
+            amparo =bloco[COLUNA_CONTROLE].map(amparos)
             merenda = bloco[amparo.isin(AMPAROS_FILTRO)].copy()
             merenda[COLUNA_AMPARO] = amparo[merenda.index]
             merenda["grupo_amparo"] = merenda[COLUNA_AMPARO].map(grupo_amparo)
@@ -133,6 +144,8 @@ def construir_itens(
     print()
     print(f"Arquivos de itens lidos: {len(arquivos)}")
     print(f"Itens no consolidado: {total_itens:,}")
+    if deduplicar:
+        print(f"Repetições descartadas (mantida a coleta mais recente): {total_descartados:,}")
     print(f"  materiais (M): {tipos['M']:,}")
     print(f"  serviços (S):  {tipos['S']:,}")
     outros = {tipo: n for tipo, n in tipos.items() if tipo not in {"M", "S"}}
@@ -156,6 +169,11 @@ def main() -> None:
     parser.add_argument("--fim", type=parse_ano_mes, required=True, help="Mês final (AAAA-MM)")
     parser.add_argument("--origem", type=Path, default=ORIGEM_PADRAO, help="Pasta tmp das coletas")
     parser.add_argument("--saida", type=Path, default=SAIDA_PADRAO, help="Pasta de saída")
+    parser.add_argument(
+        "--deduplicar",
+        action="store_true",
+        help="Mantém só a versão mais recente de cada item no período",
+    )
     args = parser.parse_args()
 
     if args.inicio > args.fim:
@@ -173,6 +191,7 @@ def main() -> None:
         carregar_amparos(arquivos_contratacoes),
         caminhos_saida(args.saida, sufixo),
         caminhos_saida(args.saida, sufixo, "_amparos_merenda"),
+        args.deduplicar,
     )
 
 
