@@ -34,16 +34,18 @@ JANELA_PNCP = "2026-04-26 a 2026-04-30"
 
 # Os caminhos partem da raiz do repositório para evitar dependências de pastas
 # pessoais e permitir a mesma execução em outras máquinas.
-RAIZ_PROJETO = Path(__file__).resolve().parents[3]
+RAIZ_PROJETO = Path(__file__).resolve().parents[4]
 CAMINHO_ITENS = (
     RAIZ_PROJETO / "data" / "pncp" / "raw"
     / "itens_2026-04-26_a_2026-04-30.csv"
 )
+PASTA_TAREFA = Path(__file__).resolve().parents[1]
+# Referências copiadas das tarefas de taxonomia, CATSER e dicionário de termos
+# do repositório alimentacao-escolar-analises.
+PASTA_REFERENCIAS = PASTA_TAREFA / "referencias"
 CAMINHO_CATALOGO_CONSOLIDADO = (
-    RAIZ_PROJETO / "tasks" / "taxonomia_alimentacao_escolar" / "output"
-    / "catalogo_consolidado_itens_catmat_grupo_89_v0_1.csv"
+    PASTA_REFERENCIAS / "catalogo_consolidado_itens_catmat_grupo_89_v0_1.csv"
 )
-PASTA_TAREFA = RAIZ_PROJETO / "tasks" / "classificador_alimentos_pncp"
 PASTA_OUTPUT = PASTA_TAREFA / "output"
 PASTA_CACHE = PASTA_TAREFA / "cache"
 CAMINHO_CLASSE_ALIMENTOS = PASTA_OUTPUT / "classe_alimentos_catmat_v0_1.csv"

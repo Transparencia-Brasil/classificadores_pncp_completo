@@ -20,8 +20,9 @@ dist/
 .coverage.*
 htmlcov/
 
-# Saídas de dados das tasks
+# Saídas de dados e caches das tasks
 src/tasks/**/output/
+src/tasks/**/cache/
 
 # Jupyter
 .ipynb_checkpoints/

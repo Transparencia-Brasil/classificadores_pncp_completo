@@ -17,15 +17,12 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from classifica_alimentos import PASTA_CACHE, RAIZ_PROJETO
+from classifica_alimentos import PASTA_CACHE, PASTA_REFERENCIAS
 
 
 # REFERÊNCIA CATSER -----------------------------------------------------------
 
-CAMINHO_CATSER = (
-    RAIZ_PROJETO / "tasks" / "analise_catser" / "output"
-    / "catalogo_catser_2026-10-01.xlsx"
-)
+CAMINHO_CATSER = PASTA_REFERENCIAS / "catalogo_catser_2026-10-01.xlsx"
 ABA_ALIMENTACAO = "Alimentação escolar"
 # As três primeiras linhas da aba guardam título e observações.
 LINHA_CABECALHO_CATSER = 3

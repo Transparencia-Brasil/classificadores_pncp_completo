@@ -68,7 +68,7 @@ from classifica_alimentos import (
     JANELA_PNCP,
     MODELO_PADRAO,
     PASTA_OUTPUT,
-    PASTA_TAREFA,
+    PASTA_REFERENCIAS,
     RAIZ_PROJETO,
     carregar_itens,
     carregar_modelo,
@@ -127,7 +127,7 @@ ID_CATALOGO_COMPRAS = 1
 
 # O dicionário da versão melhoria continua intacto. Este acrescenta o grupo
 # escolar função e retira "merendeir" do grupo escolar forte.
-CAMINHO_TERMOS = PASTA_TAREFA / "referencias" / "termos_contexto_new_pipeline.csv"
+CAMINHO_TERMOS = PASTA_REFERENCIAS / "termos_contexto_new_pipeline.csv"
 # Grupos na ordem das colunas de termos do resultado. A exclusão fica por último
 # porque é aplicada antes dos demais.
 GRUPOS_TERMOS = [
