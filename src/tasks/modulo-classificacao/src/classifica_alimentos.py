@@ -228,7 +228,10 @@ def padronizar_textos_exportados(tabela: pd.DataFrame) -> pd.DataFrame:
     resultado = tabela.copy()
     colunas_texto = resultado.select_dtypes(include=["object", "string"]).columns
     for coluna in colunas_texto:
-        resultado[coluna] = resultado[coluna].str.replace("\u2014", "-", regex=False)
+        # Colunas como catalogo.statusAtivo misturam True e vazio, sem texto para o .str.
+        resultado[coluna] = resultado[coluna].map(
+            lambda valor: valor.replace("\u2014", "-") if isinstance(valor, str) else valor
+        )
     return resultado
 
 
