@@ -1,8 +1,8 @@
 """Novo pipeline do classificador de serviços ligados à alimentação escolar.
 
-O fluxo segue o desenho `pipeline_servicos_completo.excalidraw` e é
-construído passo a passo. Os resultados levam o sufixo `_new_pipeline` para
-que as versões anteriores continuem disponíveis para comparação.
+O fluxo segue o desenho `pipeline_servicos_completo.excalidraw` do repositório
+alimentacao-escolar-analises. O lote PNCP (itens e contratações) e o sufixo dos
+arquivos de saída são informados na execução.
 
 Passo 1: a tabela de contratações recebe a coluna `servico_alimentacao_escolar`.
 Os amparos legais 138 e 139 são os dois artigos da Lei 11.947/2009 (PNAE)
@@ -64,18 +64,15 @@ import numpy as np
 import pandas as pd
 
 from classifica_alimentos import (
-    CAMINHO_ITENS,
-    JANELA_PNCP,
     MODELO_PADRAO,
+    PASTA_CACHE,
     PASTA_OUTPUT,
     PASTA_REFERENCIAS,
-    RAIZ_PROJETO,
     carregar_itens,
     carregar_modelo,
     corrigir_codificacao,
 )
 from utils_servicos import (
-    CAMINHO_CACHE_CONSULTAS,
     CAMINHO_CATSER,
     DATA_REFERENCIA_CATSER,
     LIMITE_TOKENS_CONSULTAS,
@@ -89,10 +86,6 @@ from utils_servicos import (
     preparar_referencia,
 )
 
-
-CAMINHO_CONTRATACOES = (
-    RAIZ_PROJETO / "data" / "pncp" / "raw" / "contratacoes_2026-04-26_a_2026-04-30.csv"
-)
 
 # Campos da contratação levados aos itens. Os nomes seguem o PNCP sem o prefixo
 # "data.", como nas colunas dos itens (catalogo.id, catalogo.nome).
@@ -142,7 +135,7 @@ GRUPOS_TERMOS = [
 GRUPOS_CONTEXTO_ALIMENTAR = ["alimentar", "escolar_forte", "escolar_funcao"]
 METODO_SEM_CONTEXTO = "sem contexto alimentar"
 
-CAMINHO_REFERENCIA = PASTA_OUTPUT / "referencia_servicos_alimentacao_catser_new_pipeline.csv"
+CAMINHO_REFERENCIA = PASTA_OUTPUT / "referencia_servicos_alimentacao_catser.csv"
 LIMITE_PADRAO = 0.5
 LIMITE_RESGATE_PADRAO = 0.4
 # Métodos atribuídos no passo 4, na ordem do desenho.
@@ -154,16 +147,19 @@ METODO_FAIXA_SEM_TERMOS = "faixa 0,4 a 0,5 sem termos"
 METODO_RESGATE_FUNCAO = "resgate por função"
 METODO_ABAIXO_SEM_FUNCAO = "abaixo de 0,4 sem função"
 
-CAMINHO_TRUE = (
-    PASTA_OUTPUT
-    / "servicos_alimentacao_escolar_true_pncp_2026-04-26_a_2026-04-30_new_pipeline.csv"
-)
-# Quase todos os serviços terminam como False. O arquivo é compactado, como o
-# diagnóstico das versões anteriores.
-CAMINHO_FALSE = (
-    PASTA_OUTPUT
-    / "servicos_alimentacao_escolar_false_pncp_2026-04-26_a_2026-04-30_new_pipeline.csv.gz"
-)
+
+
+def caminhos_lote(sufixo: str, pasta_saida: Path = PASTA_OUTPUT) -> dict[str, Path]:
+    """Caminhos dos resultados e do cache de consultas de um lote do PNCP."""
+    # Quase todos os serviços terminam como False. O arquivo é compactado, como o
+    # diagnóstico das versões anteriores.
+    return {
+        "true": pasta_saida / f"servicos_alimentacao_escolar_true_pncp_{sufixo}.csv",
+        "false": pasta_saida / f"servicos_alimentacao_escolar_false_pncp_{sufixo}.csv.gz",
+        "cache_consultas": PASTA_CACHE / sufixo / "consultas_servicos_pncp_vetorizadas.npy",
+    }
+
+
 # Colunas acrescentadas às do item, na ordem dos passos.
 COLUNAS_RESULTADO = [
     "descricao_corrigida",
@@ -190,7 +186,7 @@ COLUNAS_RESULTADO = [
 
 # PASSO 1 · CONTRATAÇÕES ------------------------------------------------------
 
-def preparar_contratacoes(caminho: Path = CAMINHO_CONTRATACOES) -> pd.DataFrame:
+def preparar_contratacoes(caminho: Path) -> pd.DataFrame:
     """Lê as contratações e marca as que têm amparo legal do PNAE."""
     contratacoes = pd.read_csv(
         caminho, usecols=list(COLUNAS_CONTRATACOES), dtype=str
@@ -313,7 +309,7 @@ def parear_catser(
     modelo,
     nome_modelo: str,
     batch_size: int,
-    caminho_cache_consultas: Path = CAMINHO_CACHE_CONSULTAS,
+    caminho_cache_consultas: Path,
 ) -> pd.DataFrame:
     """Associa cada descrição ao serviço CATSER de referência mais semelhante."""
     # A referência é pequena e não precisa de cache.
@@ -451,14 +447,15 @@ def aplicar_regras_semanticas(
 # PASSO 5 · SAÍDAS ------------------------------------------------------------
 
 def executar_classificacao(
-    caminho_itens: Path = CAMINHO_ITENS,
-    caminho_contratacoes: Path = CAMINHO_CONTRATACOES,
+    caminho_itens: Path,
+    caminho_contratacoes: Path,
+    caminho_true: Path,
+    caminho_false: Path,
+    caminho_cache_consultas: Path,
+    janela: str,
     caminho_catser: Path = CAMINHO_CATSER,
     caminho_termos: Path = CAMINHO_TERMOS,
     caminho_referencia: Path = CAMINHO_REFERENCIA,
-    caminho_true: Path = CAMINHO_TRUE,
-    caminho_false: Path = CAMINHO_FALSE,
-    caminho_cache_consultas: Path = CAMINHO_CACHE_CONSULTAS,
     nome_modelo: str = MODELO_PADRAO,
     limite: float = LIMITE_PADRAO,
     limite_resgate: float = LIMITE_RESGATE_PADRAO,
@@ -483,7 +480,7 @@ def executar_classificacao(
     resultado = buscar_termos_objeto(resultado, padroes)
     resultado = aplicar_regras_semanticas(resultado, limite, limite_resgate)
     resultado["data_referencia_catser"] = DATA_REFERENCIA_CATSER
-    resultado["janela_referencia_pncp"] = JANELA_PNCP
+    resultado["janela_referencia_pncp"] = janela
 
     # Passo 5.
     colunas_saida = itens.columns.tolist() + COLUNAS_RESULTADO
@@ -516,10 +513,21 @@ def executar_classificacao(
 def criar_parser() -> argparse.ArgumentParser:
     """Define os argumentos da execução por linha de comando."""
     parser = argparse.ArgumentParser(
-        description="Classifica serviços PNCP ligados à alimentação escolar (novo pipeline)."
+        description="Classifica serviços PNCP ligados à alimentação escolar."
     )
-    parser.add_argument("--itens", type=Path, default=CAMINHO_ITENS)
-    parser.add_argument("--contratacoes", type=Path, default=CAMINHO_CONTRATACOES)
+    parser.add_argument("--itens", type=Path, required=True, help="CSV de itens do lote PNCP")
+    parser.add_argument(
+        "--contratacoes", type=Path, required=True, help="CSV de contratações do mesmo lote"
+    )
+    parser.add_argument(
+        "--sufixo",
+        required=True,
+        help="Identifica o lote nos nomes de saída e no cache (ex.: 2025-01_a_2025-01)",
+    )
+    parser.add_argument(
+        "--janela", help="Período gravado em janela_referencia_pncp (padrão: o sufixo)"
+    )
+    parser.add_argument("--saida", type=Path, default=PASTA_OUTPUT, help="Pasta de saída")
     parser.add_argument("--catser", type=Path, default=CAMINHO_CATSER)
     parser.add_argument("--termos", type=Path, default=CAMINHO_TERMOS)
     parser.add_argument("--modelo", default=MODELO_PADRAO)
@@ -530,11 +538,16 @@ def criar_parser() -> argparse.ArgumentParser:
 
 
 def main() -> None:
-    """Executa o novo pipeline com os caminhos padrão do projeto."""
+    """Executa o classificador sobre o lote informado."""
     argumentos = criar_parser().parse_args()
+    caminhos = caminhos_lote(argumentos.sufixo, argumentos.saida)
     resultado = executar_classificacao(
         caminho_itens=argumentos.itens,
         caminho_contratacoes=argumentos.contratacoes,
+        caminho_true=caminhos["true"],
+        caminho_false=caminhos["false"],
+        caminho_cache_consultas=caminhos["cache_consultas"],
+        janela=argumentos.janela or argumentos.sufixo,
         caminho_catser=argumentos.catser,
         caminho_termos=argumentos.termos,
         nome_modelo=argumentos.modelo,

@@ -30,15 +30,10 @@ LIMITE_PADRAO = 0.5
 # 32 tokens, e a descrição original permanece completa nos resultados.
 LIMITE_TOKENS_DOCUMENTOS = 8192
 LIMITE_TOKENS_MODELO = 32
-JANELA_PNCP = "2026-04-26 a 2026-04-30"
 
-# Os caminhos partem da raiz do repositório para evitar dependências de pastas
-# pessoais e permitir a mesma execução em outras máquinas.
-RAIZ_PROJETO = Path(__file__).resolve().parents[4]
-CAMINHO_ITENS = (
-    RAIZ_PROJETO / "data" / "pncp" / "raw"
-    / "itens_2026-04-26_a_2026-04-30.csv"
-)
+# Os caminhos partem da pasta do módulo para evitar dependências de pastas
+# pessoais e permitir a mesma execução em outras máquinas. O lote PNCP de
+# entrada é sempre informado na execução.
 PASTA_TAREFA = Path(__file__).resolve().parents[1]
 # Referências copiadas das tarefas de taxonomia, CATSER e dicionário de termos
 # do repositório alimentacao-escolar-analises.
@@ -48,14 +43,20 @@ CAMINHO_CATALOGO_CONSOLIDADO = (
 )
 PASTA_OUTPUT = PASTA_TAREFA / "output"
 PASTA_CACHE = PASTA_TAREFA / "cache"
+# O catálogo é o mesmo para todos os lotes, então seus vetores ficam num cache
+# único. As consultas mudam a cada lote e têm cache próprio (ver caminhos_lote).
 CAMINHO_CLASSE_ALIMENTOS = PASTA_OUTPUT / "classe_alimentos_catmat_v0_1.csv"
-CAMINHO_ALIMENTOS = (
-    PASTA_OUTPUT / "alimentos_candidatos_pncp_2026-04-26_a_2026-04-30.csv"
-)
-CAMINHO_DIAGNOSTICO = PASTA_OUTPUT / "diagnostico_pareamentos_pncp_catmat.csv.gz"
-CAMINHO_RESUMO_EXCEL = PASTA_OUTPUT / "resumo_classificacao_alimentos_pncp.xlsx"
 CAMINHO_CACHE = PASTA_CACHE / "catalogo_alimentos_vetorizado.npz"
-CAMINHO_CACHE_CONSULTAS = PASTA_CACHE / "consultas_pncp_vetorizadas.npy"
+
+
+def caminhos_lote(sufixo: str, pasta_saida: Path = PASTA_OUTPUT) -> dict[str, Path]:
+    """Caminhos dos resultados e do cache de consultas de um lote do PNCP."""
+    return {
+        "alimentos": pasta_saida / f"alimentos_candidatos_pncp_{sufixo}.csv",
+        "diagnostico": pasta_saida / f"diagnostico_pareamentos_pncp_catmat_{sufixo}.csv.gz",
+        "resumo_excel": pasta_saida / f"resumo_classificacao_alimentos_pncp_{sufixo}.xlsx",
+        "cache_consultas": PASTA_CACHE / sufixo / "consultas_pncp_vetorizadas.npy",
+    }
 
 
 # Somente estes campos formam a referência alimentar usada no pareamento.
@@ -472,6 +473,7 @@ def encontrar_itens_similares(
     limite: float,
     batch_size: int,
     caminho_cache_consultas: Path,
+    janela: str,
 ) -> pd.DataFrame:
     """Compara cada descrição apenas aos itens CATMAT do PDM detectado."""
 
@@ -540,7 +542,7 @@ def encontrar_itens_similares(
     consultas["modelo_embedding"] = nome_modelo
     consultas["limite_tokens_modelo"] = LIMITE_TOKENS_MODELO
     consultas["limite_operacional"] = limite
-    consultas["janela_referencia_pncp"] = JANELA_PNCP
+    consultas["janela_referencia_pncp"] = janela
     consultas = consultas.drop(columns="indice_catalogo")
 
     resultado = candidatos.merge(consultas, on=chaves, how="inner", validate="many_to_one")
@@ -548,13 +550,14 @@ def encontrar_itens_similares(
 
 
 def executar_classificacao(
-    caminho_itens: Path = CAMINHO_ITENS,
+    caminho_itens: Path,
+    caminho_alimentos: Path,
+    caminho_diagnostico: Path,
+    caminho_cache_consultas: Path,
+    janela: str,
     caminho_catalogo_consolidado: Path = CAMINHO_CATALOGO_CONSOLIDADO,
     caminho_classe_alimentos: Path = CAMINHO_CLASSE_ALIMENTOS,
-    caminho_alimentos: Path = CAMINHO_ALIMENTOS,
-    caminho_diagnostico: Path = CAMINHO_DIAGNOSTICO,
     caminho_cache: Path = CAMINHO_CACHE,
-    caminho_cache_consultas: Path = CAMINHO_CACHE_CONSULTAS,
     nome_modelo: str = MODELO_PADRAO,
     limite: float = LIMITE_PADRAO,
     batch_size: int = 128,
@@ -587,6 +590,7 @@ def executar_classificacao(
         limite,
         batch_size,
         caminho_cache_consultas,
+        janela,
     )
 
     colunas_originais = itens.columns.tolist()
@@ -868,7 +872,7 @@ def gerar_planilha_resumo(
     catalogo: pd.DataFrame,
     diagnostico: pd.DataFrame,
     alimentos: pd.DataFrame,
-    caminho_saida: Path = CAMINHO_RESUMO_EXCEL,
+    caminho_saida: Path,
 ) -> dict[str, pd.DataFrame]:
     """Gera a planilha de leitura com filtros, cabeçalhos e larguras estáveis."""
     from openpyxl import load_workbook
@@ -911,7 +915,16 @@ def criar_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Classifica itens PNCP como candidatos a alimentos."
     )
-    parser.add_argument("--itens", type=Path, default=CAMINHO_ITENS)
+    parser.add_argument("--itens", type=Path, required=True, help="CSV de itens do lote PNCP")
+    parser.add_argument(
+        "--sufixo",
+        required=True,
+        help="Identifica o lote nos nomes de saída e no cache (ex.: 2025-01_a_2025-01)",
+    )
+    parser.add_argument(
+        "--janela", help="Período gravado em janela_referencia_pncp (padrão: o sufixo)"
+    )
+    parser.add_argument("--saida", type=Path, default=PASTA_OUTPUT, help="Pasta de saída")
     parser.add_argument(
         "--catalogo-consolidado", type=Path, default=CAMINHO_CATALOGO_CONSOLIDADO
     )
@@ -922,10 +935,15 @@ def criar_parser() -> argparse.ArgumentParser:
 
 
 def main() -> None:
-    """Executa o classificador com os caminhos padrão do projeto."""
+    """Executa o classificador sobre o lote informado."""
     argumentos = criar_parser().parse_args()
+    caminhos = caminhos_lote(argumentos.sufixo, argumentos.saida)
     resultado = executar_classificacao(
         caminho_itens=argumentos.itens,
+        caminho_alimentos=caminhos["alimentos"],
+        caminho_diagnostico=caminhos["diagnostico"],
+        caminho_cache_consultas=caminhos["cache_consultas"],
+        janela=argumentos.janela or argumentos.sufixo,
         caminho_catalogo_consolidado=argumentos.catalogo_consolidado,
         nome_modelo=argumentos.modelo,
         limite=argumentos.limite,
@@ -936,6 +954,7 @@ def main() -> None:
         resultado["catalogo"],
         resultado["diagnostico"],
         resultado["alimentos"],
+        caminhos["resumo_excel"],
     )
     print(json.dumps(resultado["contagens"], ensure_ascii=False, indent=2))
 

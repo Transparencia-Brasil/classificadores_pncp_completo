@@ -17,7 +17,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from classifica_alimentos import PASTA_CACHE, PASTA_REFERENCIAS
+from classifica_alimentos import PASTA_REFERENCIAS
 
 
 # REFERÊNCIA CATSER -----------------------------------------------------------
@@ -78,8 +78,6 @@ def preparar_referencia(caminho_fonte: Path, caminho_saida: Path) -> pd.DataFram
 # de empresa especializada para..."). Com 32 tokens, o objeto do serviço
 # frequentemente ficaria fora do texto lido pelo modelo.
 LIMITE_TOKENS_CONSULTAS = 128
-# As versões vetorizam as mesmas descrições e dividem o cache.
-CAMINHO_CACHE_CONSULTAS = PASTA_CACHE / "consultas_servicos_pncp_vetorizadas.npy"
 
 
 def obter_embeddings_consultas(
