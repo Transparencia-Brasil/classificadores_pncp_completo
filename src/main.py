@@ -5,8 +5,9 @@ Para cada mês do período, o pipeline constrói a base de contratações e de i
 candidatos a alimentos (CATMAT) e os serviços ligados à alimentação escolar
 (CATSER). No fim, junta os resultados dos meses em arquivos do período.
 
-Cada etapa concluída deixa um marcador em ``output/progresso``. Uma nova execução
-pula as etapas já feitas, a menos que se use ``--refazer``.
+Cada etapa concluída deixa um marcador em ``output/progresso`` com a duração da
+etapa em segundos. Uma nova execução pula as etapas já feitas, a menos que se use
+``--refazer``. O resumo do período é gerado à parte por ``src/resumo.py``.
 
 Exemplo:
     python -m src.main --inicio 2025-01 --fim 2025-06
@@ -15,6 +16,7 @@ Exemplo:
 import argparse
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 import pandas as pd
@@ -58,17 +60,23 @@ def sufixo_periodo(inicio: tuple[int, int], fim: tuple[int, int]) -> str:
     return f"{inicio[0]}-{inicio[1]:02d}_a_{fim[0]}-{fim[1]:02d}"
 
 
+def marcador_etapa(sufixo: str, nome: str) -> Path:
+    """Arquivo que marca a etapa como concluída e guarda sua duração em segundos."""
+    return PASTA_PROGRESSO / f"{sufixo}_{nome}.ok"
+
+
 def executar_etapa(nome: str, sufixo: str, comando: list[str], refazer: bool) -> None:
     """Roda um script e registra a conclusão, ou pula se já foi concluído."""
-    marcador = PASTA_PROGRESSO / f"{sufixo}_{nome}.ok"
+    marcador = marcador_etapa(sufixo, nome)
     if marcador.exists() and not refazer:
         print(f"[{sufixo}] {nome}: já concluída, pulando")
         return
 
     print(f"\n[{sufixo}] {nome}: {' '.join(comando)}", flush=True)
+    inicio = time.perf_counter()
     subprocess.run([sys.executable, *comando], check=True)
     PASTA_PROGRESSO.mkdir(parents=True, exist_ok=True)
-    marcador.touch()
+    marcador.write_text(f"{time.perf_counter() - inicio:.0f}", encoding="utf-8")
 
 
 def processar_mes(mes: tuple[int, int], origem: Path, refazer: bool) -> str:
