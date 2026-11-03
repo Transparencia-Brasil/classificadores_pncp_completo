@@ -1,0 +1,229 @@
+<title>Classificação PNCP jan–mar/2025</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Relatório em coluna única: resumo e achados primeiro, depois uma seção por análise. */
+:root {
+  --bg: #f6f7f9; --surface: #ffffff; --ink: #121821; --ink-2: #48525f; --muted: #6f7a88;
+  --rule: #dfe3e9; --axis: #b9c0ca; --accent: #2a78d6; --accent-soft: #86b6ef;
+  --track: #eceff3; --proib: #b3261e; --proib-bg: #fbe9e7; --rest: #8a5a00; --rest-bg: #fdf1d8;
+  --f-texto: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-dado: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f1216; --surface: #171b21; --ink: #eef1f5; --ink-2: #b8c0cb; --muted: #8b95a2;
+  --rule: #2a3039; --axis: #3c4450; --accent: #3987e5; --accent-soft: #1c5cab;
+  --track: #232933; --proib: #f2a49c; --proib-bg: #3a1d1b; --rest: #f0c46b; --rest-bg: #33280f;
+  color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0f1216; --surface: #171b21; --ink: #eef1f5; --ink-2: #b8c0cb; --muted: #8b95a2;
+  --rule: #2a3039; --axis: #3c4450; --accent: #3987e5; --accent-soft: #1c5cab;
+  --track: #232933; --proib: #f2a49c; --proib-bg: #3a1d1b; --rest: #f0c46b; --rest-bg: #33280f;
+  color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 400 15px/1.6 var(--f-texto); }
+.pagina { max-width: 1040px; margin: 0 auto; padding-block: 40px 72px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 48px; }
+header { display: grid; gap: 14px; }
+.sobre { font: 500 12px/1.4 var(--f-dado); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+h1 { font-size: clamp(28px, 4.4vw, 40px); line-height: 1.12; font-weight: 700; margin: 0; text-wrap: balance; letter-spacing: -.01em; }
+h2 { font-size: 22px; line-height: 1.25; margin: 0; font-weight: 700; text-wrap: balance; }
+h3 { font-size: 15px; margin: 0; font-weight: 600; }
+p { margin: 0; max-width: 68ch; }
+.lead { font-size: 17px; color: var(--ink-2); }
+code, .cod, .dado { font-family: var(--f-dado); font-size: .86em; }
+code { background: var(--track); padding: 1px 5px; border-radius: 4px; }
+nav ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px 18px; }
+nav a { color: var(--ink-2); text-decoration: none; border-bottom: 1px solid var(--rule); font-size: 14px; }
+nav a:hover, nav a:focus-visible { color: var(--accent); border-color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.numeros { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--rule);
+  border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
+.numeros > div { background: var(--surface); padding: 18px 20px; display: grid; gap: 4px; align-content: start; }
+.numeros .rot { font-size: 13px; color: var(--ink-2); }
+.numeros .val { font-size: 30px; font-weight: 700; line-height: 1.1; letter-spacing: -.01em; }
+.numeros .det { font-size: 13px; color: var(--muted); }
+.numeros .val.destaque { color: var(--accent); }
+section { display: grid; gap: 18px; scroll-margin-top: 16px; }
+section > header { gap: 6px; border-top: 2px solid var(--ink); padding-top: 14px; }
+.achados { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; counter-reset: a; }
+.achados li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 10px; max-width: 80ch; }
+.achados li::before { counter-increment: a; content: counter(a); font: 500 13px/1.75 var(--f-dado); color: var(--accent); }
+.cartao { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 18px 20px; display: grid; gap: 12px; min-width: 0; }
+.duas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.legenda { font-size: 13px; color: var(--muted); max-width: 90ch; }
+.colunas { width: 100%; height: auto; display: block; }
+.colunas .col { fill: var(--accent); } .colunas .col-clara { fill: var(--accent-soft); }
+.colunas .col:hover, .colunas .col-clara:hover { opacity: .82; }
+.colunas .eixo { stroke: var(--axis); stroke-width: 1; }
+.colunas text { text-anchor: middle; fill: var(--ink); font-family: var(--f-texto); }
+.colunas .v { font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.colunas .r { font-size: 13px; } .colunas .s { font-size: 11.5px; fill: var(--muted); }
+.rolagem { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { padding: 7px 10px; text-align: left; border-bottom: 1px solid var(--rule); vertical-align: middle; }
+thead th { font-size: 12px; font-weight: 600; color: var(--ink-2); border-bottom: 1px solid var(--axis); white-space: nowrap; }
+tbody th { font-weight: 400; }
+tfoot th, tfoot td { font-weight: 600; border-bottom: 0; border-top: 1px solid var(--axis); }
+.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pct { color: var(--ink-2); } .forte { font-weight: 600; }
+.tb { min-width: 720px; } .tb .c-rot { width: 34%; } .tb .c-bar { width: 13%; }
+.barra { padding-left: 4px; }
+.barra span { display: block; height: 10px; min-width: 2px; background: var(--accent); border-radius: 0 3px 3px 0; }
+.cod { display: inline-block; min-width: 3.2em; color: var(--muted); }
+.lb { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.lb li { display: grid; grid-template-columns: minmax(0, 15em) minmax(0, 1fr) 4.6em 3.6em; gap: 10px; align-items: center; font-size: 14px; }
+.lb-nome { overflow-wrap: anywhere; }
+.lb-trilho { background: var(--track); height: 10px; border-radius: 0 3px 3px 0; }
+.lb-trilho span { display: block; height: 100%; min-width: 2px; background: var(--accent); border-radius: 0 3px 3px 0; }
+.lb-valor, .lb-pct { text-align: right; font-variant-numeric: tabular-nums; }
+.lb-pct { color: var(--ink-2); }
+.selo { display: inline-block; font-size: 12px; font-weight: 600; padding: 1px 8px; border-radius: 999px; }
+.selo-proibido { color: var(--proib); background: var(--proib-bg); }
+.selo-restrito { color: var(--rest); background: var(--rest-bg); }
+.aviso { border-left: 3px solid var(--rest); background: var(--rest-bg); padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: 14px; max-width: 90ch; }
+.pendencias { display: grid; gap: 0; }
+.pendencias > div { display: grid; grid-template-columns: 11em minmax(0, 1fr); gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+.pendencias dt { font-weight: 600; } .pendencias dd { margin: 0; color: var(--ink-2); }
+footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 16px; display: grid; gap: 6px; }
+@media (max-width: 760px) {
+  .numeros { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .duas { grid-template-columns: minmax(0, 1fr); }
+  .lb li { grid-template-columns: minmax(0, 1fr) 4.4em 3.6em; }
+  .lb-trilho { grid-column: 1 / -1; grid-row: 2; }
+  .pendencias > div { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="pagina">
+<header>
+  <p class="sobre">PNCP · alimentação escolar · coletas de jan a mar/2025</p>
+  <h1>Resultados da classificação de itens do PNCP, janeiro a março de 2025</h1>
+  <p class="lead">Materiais comparados ao catálogo CATMAT de alimentos e serviços comparados ao CATSER
+  de alimentação escolar, em todas as compras publicadas ou atualizadas no PNCP nas coletas do período.
+  Os resultados ainda não passaram pela validação manual.</p>
+  <div class="numeros">
+    <div><span class="rot">Materiais analisados</span><span class="val">1.245.354</span><span class="det">itens distintos</span></div>
+    <div><span class="rot">Alimentos candidatos</span><span class="val destaque">66.475</span><span class="det">5,3% dos materiais</span></div>
+    <div><span class="rot">Serviços analisados</span><span class="val">418.279</span><span class="det">itens distintos</span></div>
+    <div><span class="rot">Serviços de alimentação escolar</span><span class="val destaque">8.499</span><span class="det">2,0% dos serviços</span></div>
+  </div>
+  <nav aria-label="Seções"><ul>
+    <li><a href="#achados">Principais achados</a></li><li><a href="#coleta">Mês de coleta</a></li>
+    <li><a href="#publicacao">Mês de publicação</a></li><li><a href="#grupos">Grupos</a></li>
+    <li><a href="#esfera">Esfera</a></li><li><a href="#amparo">Amparo legal</a></li>
+    <li><a href="#modalidade">Modalidade</a></li><li><a href="#pnae">Aplicabilidade ao PNAE</a></li>
+    <li><a href="#limites">Limites e pendências</a></li><li><a href="#metodo">Método e execução</a></li>
+  </ul></nav>
+</header>
+
+<section id="achados">
+  <header><h2>Principais achados</h2></header>
+  <ol class="achados">
+    <li><p><strong>5,3% dos materiais</strong> foram classificados como alimentos candidatos e <strong>2,0% dos serviços</strong> como serviços de alimentação escolar.</p></li>
+    <li><p><strong>Mais da metade dos resultados vem de compras antigas.</strong> 52% dos alimentos e 69% dos serviços são de contratações publicadas antes de 2025 e atualizadas nas coletas do período, quase todas de 2024.</p></li>
+    <li><p><strong>O pico de março vem dessas atualizações.</strong> A coleta de março trouxe 58% dos alimentos, mas só 9.161 foram publicados em março. Pela data de publicação, os três meses ficam entre 9.161 e 12.560 alimentos.</p></li>
+    <li><p><strong>Municípios compram a maior parte dos alimentos</strong> (50%), enquanto <strong>o governo federal lidera nos serviços</strong> (44%).</p></li>
+    <li><p><strong>O pregão eletrônico domina</strong> (70% dos alimentos e 67% dos serviços). A dispensa vem em seguida, e quase dois terços das dispensas de alimentos tiveram disputa.</p></li>
+    <li><p><strong>Poucas compras usam os amparos do PNAE</strong> (138 e 139, Lei 11.947/2009): 1.048 alimentos e 60 serviços. A maior parte dos resultados é de compras de órgãos que não seguem as regras do programa.</p></li>
+  </ol>
+</section>
+
+<section id="coleta">
+  <header><h2>Por mês de coleta</h2>
+  <p>Mês da coleta quinzenal em que o item apareceu. Um item atualizado em mais de um mês conta uma vez, na coleta mais recente.</p></header>
+  <div class="duas">
+    <div class="cartao"><h3>Alimentos candidatos</h3><svg class="colunas" viewBox="0 0 440 230" role="img" aria-label="jan/2025: 10.553, fev/2025: 17.296, mar/2025: 38.626"><line class="eixo" x1="10" x2="430" y1="178" y2="178"/><path class="col" d="M48.0,178 V142.7 Q48.0,138.7 52.0,138.7 H108.0 Q112.0,138.7 112.0,142.7 V178 Z"><title>jan/2025: 10.553 (5,0% de 211 mil)</title></path><text class="v" x="80.0" y="130.7">10.553</text><text class="r" x="80.0" y="198">jan/2025</text><text class="s" x="80.0" y="216">5,0% de 211 mil</text><path class="col" d="M188.0,178 V117.5 Q188.0,113.5 192.0,113.5 H248.0 Q252.0,113.5 252.0,117.5 V178 Z"><title>fev/2025: 17.296 (5,3% de 327 mil)</title></path><text class="v" x="220.0" y="105.5">17.296</text><text class="r" x="220.0" y="198">fev/2025</text><text class="s" x="220.0" y="216">5,3% de 327 mil</text><path class="col" d="M328.0,178 V38.0 Q328.0,34.0 332.0,34.0 H388.0 Q392.0,34.0 392.0,38.0 V178 Z"><title>mar/2025: 38.626 (5,5% de 707 mil)</title></path><text class="v" x="360.0" y="26.0">38.626</text><text class="r" x="360.0" y="198">mar/2025</text><text class="s" x="360.0" y="216">5,5% de 707 mil</text></svg></div>
+    <div class="cartao"><h3>Serviços de alimentação escolar</h3><svg class="colunas" viewBox="0 0 440 230" role="img" aria-label="jan/2025: 900, fev/2025: 1.633, mar/2025: 5.966"><line class="eixo" x1="10" x2="430" y1="178" y2="178"/><path class="col" d="M48.0,178 V160.3 Q48.0,156.3 52.0,156.3 H108.0 Q112.0,156.3 112.0,160.3 V178 Z"><title>jan/2025: 900 (1,1% de 80 mil)</title></path><text class="v" x="80.0" y="148.3">900</text><text class="r" x="80.0" y="198">jan/2025</text><text class="s" x="80.0" y="216">1,1% de 80 mil</text><path class="col" d="M188.0,178 V142.6 Q188.0,138.6 192.0,138.6 H248.0 Q252.0,138.6 252.0,142.6 V178 Z"><title>fev/2025: 1.633 (1,3% de 122 mil)</title></path><text class="v" x="220.0" y="130.6">1.633</text><text class="r" x="220.0" y="198">fev/2025</text><text class="s" x="220.0" y="216">1,3% de 122 mil</text><path class="col" d="M328.0,178 V38.0 Q328.0,34.0 332.0,34.0 H388.0 Q392.0,34.0 392.0,38.0 V178 Z"><title>mar/2025: 5.966 (2,8% de 216 mil)</title></path><text class="v" x="360.0" y="26.0">5.966</text><text class="r" x="360.0" y="198">mar/2025</text><text class="s" x="360.0" y="216">2,8% de 216 mil</text></svg></div>
+  </div>
+  <p class="legenda">Abaixo de cada mês: classificados sobre todos os itens do tipo naquela coleta.</p>
+</section>
+
+<section id="publicacao">
+  <header><h2>Por mês de publicação</h2>
+  <p>Os mesmos resultados agrupados pela data em que a contratação foi publicada no PNCP (<code>dataPublicacaoPncp</code>).</p></header>
+  <div class="duas">
+    <div class="cartao"><h3>Alimentos candidatos</h3><svg class="colunas" viewBox="0 0 440 230" role="img" aria-label="antes de 2025: 34.279, jan/2025: 10.472, fev/2025: 12.560, mar/2025: 9.161"><line class="eixo" x1="10" x2="430" y1="178" y2="178"/><path class="col-clara" d="M33.1,178 V38.0 Q33.1,34.0 37.1,34.0 H87.9 Q91.9,34.0 91.9,38.0 V178 Z"><title>antes de 2025: 34.279 (5,6% de 610 mil)</title></path><text class="v" x="62.5" y="26.0">34.279</text><text class="r" x="62.5" y="198">antes de 2025</text><text class="s" x="62.5" y="216">5,6% de 610 mil</text><path class="col" d="M138.1,178 V138.0 Q138.1,134.0 142.1,134.0 H192.9 Q196.9,134.0 196.9,138.0 V178 Z"><title>jan/2025: 10.472 (6,0% de 175 mil)</title></path><text class="v" x="167.5" y="126.0">10.472</text><text class="r" x="167.5" y="198">jan/2025</text><text class="s" x="167.5" y="216">6,0% de 175 mil</text><path class="col" d="M243.1,178 V129.2 Q243.1,125.2 247.1,125.2 H297.9 Q301.9,125.2 301.9,129.2 V178 Z"><title>fev/2025: 12.560 (5,1% de 247 mil)</title></path><text class="v" x="272.5" y="117.2">12.560</text><text class="r" x="272.5" y="198">fev/2025</text><text class="s" x="272.5" y="216">5,1% de 247 mil</text><path class="col" d="M348.1,178 V143.5 Q348.1,139.5 352.1,139.5 H402.9 Q406.9,139.5 406.9,143.5 V178 Z"><title>mar/2025: 9.161 (4,3% de 213 mil)</title></path><text class="v" x="377.5" y="131.5">9.161</text><text class="r" x="377.5" y="198">mar/2025</text><text class="s" x="377.5" y="216">4,3% de 213 mil</text></svg></div>
+    <div class="cartao"><h3>Serviços de alimentação escolar</h3><svg class="colunas" viewBox="0 0 440 230" role="img" aria-label="antes de 2025: 5.868, jan/2025: 751, fev/2025: 986, mar/2025: 894"><line class="eixo" x1="10" x2="430" y1="178" y2="178"/><path class="col-clara" d="M33.1,178 V38.0 Q33.1,34.0 37.1,34.0 H87.9 Q91.9,34.0 91.9,38.0 V178 Z"><title>antes de 2025: 5.868 (3,7% de 157 mil)</title></path><text class="v" x="62.5" y="26.0">5.868</text><text class="r" x="62.5" y="198">antes de 2025</text><text class="s" x="62.5" y="216">3,7% de 157 mil</text><path class="col" d="M138.1,178 V163.6 Q138.1,159.6 142.1,159.6 H192.9 Q196.9,159.6 196.9,163.6 V178 Z"><title>jan/2025: 751 (1,0% de 73 mil)</title></path><text class="v" x="167.5" y="151.6">751</text><text class="r" x="167.5" y="198">jan/2025</text><text class="s" x="167.5" y="216">1,0% de 73 mil</text><path class="col" d="M243.1,178 V157.8 Q243.1,153.8 247.1,153.8 H297.9 Q301.9,153.8 301.9,157.8 V178 Z"><title>fev/2025: 986 (0,9% de 104 mil)</title></path><text class="v" x="272.5" y="145.8">986</text><text class="r" x="272.5" y="198">fev/2025</text><text class="s" x="272.5" y="216">0,9% de 104 mil</text><path class="col" d="M348.1,178 V160.1 Q348.1,156.1 352.1,156.1 H402.9 Q406.9,156.1 406.9,160.1 V178 Z"><title>mar/2025: 894 (1,1% de 85 mil)</title></path><text class="v" x="377.5" y="148.1">894</text><text class="r" x="377.5" y="198">mar/2025</text><text class="s" x="377.5" y="216">1,1% de 85 mil</text></svg></div>
+  </div>
+  <p class="legenda">A coluna clara reúne contratações publicadas antes de 2025 que as coletas do período trouxeram por terem sido atualizadas. Não é o total desses anos.
+  Por ano de publicação: alimentos 2024: 27.822, 2023: 6.439, 2022: 18; serviços 2024: 4.353, 2023: 1.513, 2022: 2.
+  Em 28.315 contratações da coleta de fev/2025 (2ª quinzena), as colunas estão deslocadas e a data foi lida de <code>data.processo</code>.</p>
+</section>
+
+<section id="grupos">
+  <header><h2>Grupos</h2>
+  <p>Grupo taxonômico do item CATMAT pareado, para alimentos, e grupo proposto do CATSER, para serviços.</p></header>
+  <div class="duas">
+    <div class="cartao"><h3>Alimentos candidatos por grupo</h3><ul class="lb"><li><span class="lb-nome">Bebidas</span><span class="lb-trilho"><span style="width:100.00%" title="Bebidas: 16.089 itens"></span></span><span class="lb-valor">16.089</span><span class="lb-pct">24,2%</span></li><li><span class="lb-nome">Preparações e produtos alimentícios compostos</span><span class="lb-trilho"><span style="width:81.07%" title="Preparações e produtos alimentícios compostos: 13.043 itens"></span></span><span class="lb-valor">13.043</span><span class="lb-pct">19,6%</span></li><li><span class="lb-nome">Carnes e aves</span><span class="lb-trilho"><span style="width:68.59%" title="Carnes e aves: 11.035 itens"></span></span><span class="lb-valor">11.035</span><span class="lb-pct">16,6%</span></li><li><span class="lb-nome">Cereais</span><span class="lb-trilho"><span style="width:45.07%" title="Cereais: 7.251 itens"></span></span><span class="lb-valor">7.251</span><span class="lb-pct">10,9%</span></li><li><span class="lb-nome">Alimentos para fins especiais</span><span class="lb-trilho"><span style="width:38.33%" title="Alimentos para fins especiais: 6.167 itens"></span></span><span class="lb-valor">6.167</span><span class="lb-pct">9,3%</span></li><li><span class="lb-nome">Leite e derivados</span><span class="lb-trilho"><span style="width:22.69%" title="Leite e derivados: 3.650 itens"></span></span><span class="lb-valor">3.650</span><span class="lb-pct">5,5%</span></li><li><span class="lb-nome">Ingredientes culinários</span><span class="lb-trilho"><span style="width:21.99%" title="Ingredientes culinários: 3.538 itens"></span></span><span class="lb-valor">3.538</span><span class="lb-pct">5,3%</span></li><li><span class="lb-nome">Raízes e tubérculos</span><span class="lb-trilho"><span style="width:13.66%" title="Raízes e tubérculos: 2.198 itens"></span></span><span class="lb-valor">2.198</span><span class="lb-pct">3,3%</span></li><li><span class="lb-nome">Frutas</span><span class="lb-trilho"><span style="width:10.21%" title="Frutas: 1.643 itens"></span></span><span class="lb-valor">1.643</span><span class="lb-pct">2,5%</span></li><li><span class="lb-nome">Legumes e verduras</span><span class="lb-trilho"><span style="width:4.33%" title="Legumes e verduras: 696 itens"></span></span><span class="lb-valor">696</span><span class="lb-pct">1,0%</span></li><li><span class="lb-nome">Pescados e frutos do mar</span><span class="lb-trilho"><span style="width:4.04%" title="Pescados e frutos do mar: 650 itens"></span></span><span class="lb-valor">650</span><span class="lb-pct">1,0%</span></li><li><span class="lb-nome">Castanhas, nozes e sementes</span><span class="lb-trilho"><span style="width:2.52%" title="Castanhas, nozes e sementes: 405 itens"></span></span><span class="lb-valor">405</span><span class="lb-pct">0,6%</span></li><li><span class="lb-nome">Feijões e outras leguminosas</span><span class="lb-trilho"><span style="width:0.55%" title="Feijões e outras leguminosas: 89 itens"></span></span><span class="lb-valor">89</span><span class="lb-pct">0,1%</span></li><li><span class="lb-nome">Ovos</span><span class="lb-trilho"><span style="width:0.13%" title="Ovos: 21 itens"></span></span><span class="lb-valor">21</span><span class="lb-pct">&lt;0,1%</span></li></ul></div>
+    <div class="cartao"><h3>Serviços por grupo</h3><ul class="lb"><li><span class="lb-nome">S01 Fornecimento de refeições</span><span class="lb-trilho"><span style="width:100.00%" title="S01 Fornecimento de refeições: 5.637 itens"></span></span><span class="lb-valor">5.637</span><span class="lb-pct">66,3%</span></li><li><span class="lb-nome">S04 Infraestrutura de cozinha</span><span class="lb-trilho"><span style="width:28.63%" title="S04 Infraestrutura de cozinha: 1.614 itens"></span></span><span class="lb-valor">1.614</span><span class="lb-pct">19,0%</span></li><li><span class="lb-nome">S02 Preparo no local / mão de obra</span><span class="lb-trilho"><span style="width:14.99%" title="S02 Preparo no local / mão de obra: 845 itens"></span></span><span class="lb-valor">845</span><span class="lb-pct">9,9%</span></li><li><span class="lb-nome">S03 Logística de gêneros</span><span class="lb-trilho"><span style="width:3.21%" title="S03 Logística de gêneros: 181 itens"></span></span><span class="lb-valor">181</span><span class="lb-pct">2,1%</span></li><li><span class="lb-nome">S07 Apoio técnico e nutricional</span><span class="lb-trilho"><span style="width:3.09%" title="S07 Apoio técnico e nutricional: 174 itens"></span></span><span class="lb-valor">174</span><span class="lb-pct">2,0%</span></li><li><span class="lb-nome">S06 Controle de qualidade</span><span class="lb-trilho"><span style="width:0.57%" title="S06 Controle de qualidade: 32 itens"></span></span><span class="lb-valor">32</span><span class="lb-pct">0,4%</span></li><li><span class="lb-nome">S05 Higiene e segurança sanitária</span><span class="lb-trilho"><span style="width:0.28%" title="S05 Higiene e segurança sanitária: 16 itens"></span></span><span class="lb-valor">16</span><span class="lb-pct">0,2%</span></li></ul>
+      <p class="legenda">Método: semântica 8.302, resgate escolar 104, amparo legal 138/139 60, resgate por função 32, código CATSER informado 1.</p></div>
+  </div>
+</section>
+
+<section id="esfera">
+  <header><h2>Por esfera do órgão comprador</h2>
+  <p>Esfera do órgão que fez a compra (<code>orgaoEntidade.esferaId</code>). Cada coluna de barras tem sua própria escala.</p></header>
+  <div class="cartao"><div class="rolagem"><table class="tb"><colgroup><col class="c-rot"><col><col><col class="c-bar"><col><col><col class="c-bar"></colgroup><thead><tr><th scope="col">Esfera</th><th scope="col" class="num">Alimentos candidatos</th><th scope="col" class="num">%</th><th aria-hidden="true"></th><th scope="col" class="num">Serviços True</th><th scope="col" class="num">%</th><th aria-hidden="true"></th></tr></thead><tbody><tr><th scope="row">Municipal</th><td class="num">32.973</td><td class="num pct">49,6%</td><td class="barra"><span style="width:100.00%" title="Municipal: 32.973 (49,6%)"></span></td><td class="num">2.049</td><td class="num pct">24,1%</td><td class="barra"><span style="width:54.26%" title="Municipal: 2.049 (24,1%)"></span></td></tr><tr><th scope="row">Federal</th><td class="num">11.290</td><td class="num pct">17,0%</td><td class="barra"><span style="width:34.24%" title="Federal: 11.290 (17,0%)"></span></td><td class="num">3.776</td><td class="num pct">44,4%</td><td class="barra"><span style="width:100.00%" title="Federal: 3.776 (44,4%)"></span></td></tr><tr><th scope="row">Estadual</th><td class="num">20.163</td><td class="num pct">30,3%</td><td class="barra"><span style="width:61.15%" title="Estadual: 20.163 (30,3%)"></span></td><td class="num">2.496</td><td class="num pct">29,4%</td><td class="barra"><span style="width:66.10%" title="Estadual: 2.496 (29,4%)"></span></td></tr><tr><th scope="row">Não se aplica</th><td class="num">1.853</td><td class="num pct">2,8%</td><td class="barra"><span style="width:5.62%" title="Não se aplica: 1.853 (2,8%)"></span></td><td class="num">97</td><td class="num pct">1,1%</td><td class="barra"><span style="width:2.57%" title="Não se aplica: 97 (1,1%)"></span></td></tr><tr><th scope="row">Distrital</th><td class="num">193</td><td class="num pct">0,3%</td><td class="barra"><span style="width:0.59%" title="Distrital: 193 (0,3%)"></span></td><td class="num">81</td><td class="num pct">1,0%</td><td class="barra"><span style="width:2.15%" title="Distrital: 81 (1,0%)"></span></td></tr><tr><th scope="row">Sem contratação</th><td class="num">3</td><td class="num pct">&lt;0,1%</td><td class="barra"><span style="width:0.01%" title="Sem contratação: 3 (&lt;0,1%)"></span></td><td class="num">0</td><td class="num pct">0,0%</td><td class="barra"><span style="width:0.00%" title="Sem contratação: 0 (0,0%)"></span></td></tr></tbody><tfoot><tr><th scope="row">Total</th><td class="num">66.475</td><td class="num pct">100%</td><td></td><td class="num">8.499</td><td class="num pct">100%</td><td></td></tr></tfoot></table></div><p class="legenda">“Não se aplica” é o código N do PNCP. Sem contratação: itens cuja contratação não está na base do período.</p></div>
+</section>
+
+<section id="amparo">
+  <header><h2>Por amparo legal</h2>
+  <p>Amparo legal da contratação de cada item. Aparecem os oito amparos com maior participação média nos dois resultados, mais os dois do PNAE.</p></header>
+  <div class="cartao"><div class="rolagem"><table class="tb"><colgroup><col class="c-rot"><col><col><col class="c-bar"><col><col><col class="c-bar"></colgroup><thead><tr><th scope="col">Amparo legal</th><th scope="col" class="num">Alimentos candidatos</th><th scope="col" class="num">%</th><th aria-hidden="true"></th><th scope="col" class="num">Serviços True</th><th scope="col" class="num">%</th><th aria-hidden="true"></th></tr></thead><tbody><tr><th scope="row"><span class="cod">1</span>Lei 14.133/2021, Art. 28, I</th><td class="num">49.182</td><td class="num pct">74,0%</td><td class="barra"><span style="width:100.00%" title="Lei 14.133/2021, Art. 28, I: 49.182 (74,0%)"></span></td><td class="num">5.681</td><td class="num pct">66,8%</td><td class="barra"><span style="width:100.00%" title="Lei 14.133/2021, Art. 28, I: 5.681 (66,8%)"></span></td></tr><tr><th scope="row"><span class="cod">19</span>Lei 14.133/2021, Art. 75, II</th><td class="num">13.583</td><td class="num pct">20,4%</td><td class="barra"><span style="width:27.62%" title="Lei 14.133/2021, Art. 75, II: 13.583 (20,4%)"></span></td><td class="num">2.239</td><td class="num pct">26,3%</td><td class="barra"><span style="width:39.41%" title="Lei 14.133/2021, Art. 75, II: 2.239 (26,3%)"></span></td></tr><tr><th scope="row"><span class="cod">38</span>Lei 14.133/2021, Art. 75, VIII</th><td class="num">1.018</td><td class="num pct">1,5%</td><td class="barra"><span style="width:2.07%" title="Lei 14.133/2021, Art. 75, VIII: 1.018 (1,5%)"></span></td><td class="num">210</td><td class="num pct">2,5%</td><td class="barra"><span style="width:3.70%" title="Lei 14.133/2021, Art. 75, VIII: 210 (2,5%)"></span></td></tr><tr><th scope="row"><span class="cod">138</span>Lei 11.947/2009, Art. 14, 1º</th><td class="num">1.042</td><td class="num pct">1,6%</td><td class="barra"><span style="width:2.12%" title="Lei 11.947/2009, Art. 14, 1º: 1.042 (1,6%)"></span></td><td class="num">46</td><td class="num pct">0,5%</td><td class="barra"><span style="width:0.81%" title="Lei 11.947/2009, Art. 14, 1º: 46 (0,5%)"></span></td></tr><tr><th scope="row"><span class="cod">140</span>Lei 14.133/2021, Art. 79, I</th><td class="num">421</td><td class="num pct">0,6%</td><td class="barra"><span style="width:0.86%" title="Lei 14.133/2021, Art. 79, I: 421 (0,6%)"></span></td><td class="num">66</td><td class="num pct">0,8%</td><td class="barra"><span style="width:1.16%" title="Lei 14.133/2021, Art. 79, I: 66 (0,8%)"></span></td></tr><tr><th scope="row"><span class="cod">18</span>Lei 14.133/2021, Art. 75, I</th><td class="num">170</td><td class="num pct">0,3%</td><td class="barra"><span style="width:0.35%" title="Lei 14.133/2021, Art. 75, I: 170 (0,3%)"></span></td><td class="num">37</td><td class="num pct">0,4%</td><td class="barra"><span style="width:0.65%" title="Lei 14.133/2021, Art. 75, I: 37 (0,4%)"></span></td></tr><tr><th scope="row"><span class="cod">50</span>Lei 14.133/2021, Art. 74, caput</th><td class="num">18</td><td class="num pct">&lt;0,1%</td><td class="barra"><span style="width:0.04%" title="Lei 14.133/2021, Art. 74, caput: 18 (&lt;0,1%)"></span></td><td class="num">47</td><td class="num pct">0,6%</td><td class="barra"><span style="width:0.83%" title="Lei 14.133/2021, Art. 74, caput: 47 (0,6%)"></span></td></tr><tr><th scope="row"><span class="cod">20</span>Lei 14.133/2021, Art. 75, III, a</th><td class="num">153</td><td class="num pct">0,2%</td><td class="barra"><span style="width:0.31%" title="Lei 14.133/2021, Art. 75, III, a: 153 (0,2%)"></span></td><td class="num">20</td><td class="num pct">0,2%</td><td class="barra"><span style="width:0.35%" title="Lei 14.133/2021, Art. 75, III, a: 20 (0,2%)"></span></td></tr><tr><th scope="row"><span class="cod">139</span>Lei 11.947/2009, Art. 21</th><td class="num">6</td><td class="num pct">&lt;0,1%</td><td class="barra"><span style="width:0.01%" title="Lei 11.947/2009, Art. 21: 6 (&lt;0,1%)"></span></td><td class="num">14</td><td class="num pct">0,2%</td><td class="barra"><span style="width:0.25%" title="Lei 11.947/2009, Art. 21: 14 (0,2%)"></span></td></tr><tr><th scope="row">Outros (35 amparos)</th><td class="num">879</td><td class="num pct">1,3%</td><td class="barra"><span style="width:1.79%" title="Outros (35 amparos): 879 (1,3%)"></span></td><td class="num">139</td><td class="num pct">1,6%</td><td class="barra"><span style="width:2.45%" title="Outros (35 amparos): 139 (1,6%)"></span></td></tr><tr><th scope="row">Sem contratação</th><td class="num">3</td><td class="num pct">&lt;0,1%</td><td class="barra"><span style="width:0.01%" title="Sem contratação: 3 (&lt;0,1%)"></span></td><td class="num">0</td><td class="num pct">0,0%</td><td class="barra"><span style="width:0.00%" title="Sem contratação: 0 (0,0%)"></span></td></tr></tbody><tfoot><tr><th scope="row">Total</th><td class="num">66.475</td><td class="num pct">100%</td><td></td><td class="num">8.499</td><td class="num pct">100%</td><td></td></tr></tfoot></table></div><p class="legenda">Amparos distintos: 39 entre os alimentos e 30 entre os serviços. Nos serviços, os itens com amparo 138 ou 139 são marcados como alimentação escolar por essa regra, antes da busca semântica.</p></div>
+</section>
+
+<section id="modalidade">
+  <header><h2>Por modalidade de contratação</h2>
+  <p>Modalidade da contratação de cada item (<code>modalidadeNome</code>). A modalidade acompanha o amparo: pregão tem amparo 1 e dispensa por valor tem amparo 19.</p></header>
+  <div class="cartao"><div class="rolagem"><table class="tb"><colgroup><col class="c-rot"><col><col><col class="c-bar"><col><col><col class="c-bar"></colgroup><thead><tr><th scope="col">Modalidade</th><th scope="col" class="num">Alimentos candidatos</th><th scope="col" class="num">%</th><th aria-hidden="true"></th><th scope="col" class="num">Serviços True</th><th scope="col" class="num">%</th><th aria-hidden="true"></th></tr></thead><tbody><tr><th scope="row">Pregão - Eletrônico</th><td class="num">46.246</td><td class="num pct">69,6%</td><td class="barra"><span style="width:100.00%" title="Pregão - Eletrônico: 46.246 (69,6%)"></span></td><td class="num">5.667</td><td class="num pct">66,7%</td><td class="barra"><span style="width:100.00%" title="Pregão - Eletrônico: 5.667 (66,7%)"></span></td></tr><tr><th scope="row">Dispensa</th><td class="num">16.364</td><td class="num pct">24,6%</td><td class="barra"><span style="width:35.38%" title="Dispensa: 16.364 (24,6%)"></span></td><td class="num">2.591</td><td class="num pct">30,5%</td><td class="barra"><span style="width:45.72%" title="Dispensa: 2.591 (30,5%)"></span></td></tr><tr><th scope="row">Pregão - Presencial</th><td class="num">3.045</td><td class="num pct">4,6%</td><td class="barra"><span style="width:6.58%" title="Pregão - Presencial: 3.045 (4,6%)"></span></td><td class="num">15</td><td class="num pct">0,2%</td><td class="barra"><span style="width:0.26%" title="Pregão - Presencial: 15 (0,2%)"></span></td></tr><tr><th scope="row">Credenciamento</th><td class="num">549</td><td class="num pct">0,8%</td><td class="barra"><span style="width:1.19%" title="Credenciamento: 549 (0,8%)"></span></td><td class="num">116</td><td class="num pct">1,4%</td><td class="barra"><span style="width:2.05%" title="Credenciamento: 116 (1,4%)"></span></td></tr><tr><th scope="row">Inexigibilidade</th><td class="num">220</td><td class="num pct">0,3%</td><td class="barra"><span style="width:0.48%" title="Inexigibilidade: 220 (0,3%)"></span></td><td class="num">101</td><td class="num pct">1,2%</td><td class="barra"><span style="width:1.78%" title="Inexigibilidade: 101 (1,2%)"></span></td></tr><tr><th scope="row">Concorrência - Eletrônica</th><td class="num">4</td><td class="num pct">&lt;0,1%</td><td class="barra"><span style="width:0.01%" title="Concorrência - Eletrônica: 4 (&lt;0,1%)"></span></td><td class="num">8</td><td class="num pct">&lt;0,1%</td><td class="barra"><span style="width:0.14%" title="Concorrência - Eletrônica: 8 (&lt;0,1%)"></span></td></tr><tr><th scope="row">Pré-qualificação</th><td class="num">33</td><td class="num pct">&lt;0,1%</td><td class="barra"><span style="width:0.07%" title="Pré-qualificação: 33 (&lt;0,1%)"></span></td><td class="num">0</td><td class="num pct">0,0%</td><td class="barra"><span style="width:0.00%" title="Pré-qualificação: 0 (0,0%)"></span></td></tr><tr><th scope="row">Concorrência - Presencial</th><td class="num">5</td><td class="num pct">&lt;0,1%</td><td class="barra"><span style="width:0.01%" title="Concorrência - Presencial: 5 (&lt;0,1%)"></span></td><td class="num">1</td><td class="num pct">&lt;0,1%</td><td class="barra"><span style="width:0.02%" title="Concorrência - Presencial: 1 (&lt;0,1%)"></span></td></tr><tr><th scope="row">Manifestação de Interesse</th><td class="num">6</td><td class="num pct">&lt;0,1%</td><td class="barra"><span style="width:0.01%" title="Manifestação de Interesse: 6 (&lt;0,1%)"></span></td><td class="num">0</td><td class="num pct">0,0%</td><td class="barra"><span style="width:0.00%" title="Manifestação de Interesse: 0 (0,0%)"></span></td></tr><tr><th scope="row">Sem contratação</th><td class="num">3</td><td class="num pct">&lt;0,1%</td><td class="barra"><span style="width:0.01%" title="Sem contratação: 3 (&lt;0,1%)"></span></td><td class="num">0</td><td class="num pct">0,0%</td><td class="barra"><span style="width:0.00%" title="Sem contratação: 0 (0,0%)"></span></td></tr></tbody><tfoot><tr><th scope="row">Total</th><td class="num">66.475</td><td class="num pct">100%</td><td></td><td class="num">8.499</td><td class="num pct">100%</td><td></td></tr></tfoot></table></div></div>
+  <div class="cartao"><h3>Dispensas por modo de disputa</h3><div class="rolagem"><table class="tb"><colgroup><col class="c-rot"><col><col><col class="c-bar"><col><col><col class="c-bar"></colgroup><thead><tr><th scope="col">Modo de disputa</th><th scope="col" class="num">Alimentos candidatos</th><th scope="col" class="num">%</th><th aria-hidden="true"></th><th scope="col" class="num">Serviços True</th><th scope="col" class="num">%</th><th aria-hidden="true"></th></tr></thead><tbody><tr><th scope="row">Com disputa</th><td class="num">10.368</td><td class="num pct">63,4%</td><td class="barra"><span style="width:100.00%" title="Com disputa: 10.368 (63,4%)"></span></td><td class="num">1.929</td><td class="num pct">74,5%</td><td class="barra"><span style="width:100.00%" title="Com disputa: 1.929 (74,5%)"></span></td></tr><tr><th scope="row">Sem disputa</th><td class="num">5.973</td><td class="num pct">36,5%</td><td class="barra"><span style="width:57.61%" title="Sem disputa: 5.973 (36,5%)"></span></td><td class="num">662</td><td class="num pct">25,5%</td><td class="barra"><span style="width:34.32%" title="Sem disputa: 662 (25,5%)"></span></td></tr><tr><th scope="row">Outro modo</th><td class="num">23</td><td class="num pct">0,1%</td><td class="barra"><span style="width:0.22%" title="Outro modo: 23 (0,1%)"></span></td><td class="num">0</td><td class="num pct">0,0%</td><td class="barra"><span style="width:0.00%" title="Outro modo: 0 (0,0%)"></span></td></tr></tbody><tfoot><tr><th scope="row">Total</th><td class="num">16.364</td><td class="num pct">100%</td><td></td><td class="num">2.591</td><td class="num pct">100%</td><td></td></tr></tfoot></table></div><p class="legenda">Sem disputa: modo “Não se aplica”. Outro modo: dispensas registradas com modo de pregão (aberto, fechado).</p></div>
+  <p class="legenda">A chamada pública da agricultura familiar (amparo 138) não é uma modalidade no PNCP. Ela aparece como Dispensa (955 alimentos, 24 serviços) ou Credenciamento (87 alimentos, 22 serviços).</p>
+</section>
+
+<section id="pnae">
+  <header><h2>Aplicabilidade ao PNAE</h2>
+  <p>Se cada item CATMAT poderia ser comprado com recursos do PNAE. É uma característica do item, não da compra: a maioria das compras classificadas não usa recursos do programa.</p></header>
+  <p class="aviso">Análise preliminar. A coluna <code>aplicabilidade_pnae</code> do catálogo vale “candidata” para todos os resultados e não aplica as regras do FNDE. A triagem abaixo usa palavras-chave sobre a lista de proibidos e restritos da Resolução CD/FNDE nº 06/2020, sem validação e sem conferir alterações posteriores da norma.</p>
+  <div class="duas">
+    <div class="cartao"><h3>Triagem por palavra-chave</h3>
+      <div class="rolagem"><table><thead><tr><th scope="col">Situação</th><th scope="col">Categoria</th><th scope="col" class="num">Itens CATMAT</th><th scope="col" class="num">Itens PNCP</th></tr></thead>
+      <tbody><tr><td><span class="selo selo-proibido">Proibido</span></td><th scope="row">Biscoito ou bolacha recheada</th><td class="num">102</td><td class="num">2.331</td></tr><tr><td><span class="selo selo-proibido">Proibido</span></td><th scope="row">Refrigerante</th><td class="num">23</td><td class="num">903</td></tr><tr><td><span class="selo selo-proibido">Proibido</span></td><th scope="row">Bolo com cobertura ou recheio</th><td class="num">53</td><td class="num">629</td></tr><tr><td><span class="selo selo-proibido">Proibido</span></td><th scope="row">Gelatina</th><td class="num">50</td><td class="num">111</td></tr><tr><td><span class="selo selo-proibido">Proibido</span></td><th scope="row">Bala, pirulito e goma de mascar</th><td class="num">11</td><td class="num">101</td></tr><tr><td><span class="selo selo-proibido">Proibido</span></td><th scope="row">Refresco e pó para reconstituir</th><td class="num">22</td><td class="num">46</td></tr><tr><td><span class="selo selo-proibido">Proibido</span></td><th scope="row">Gelado comestível</th><td class="num">31</td><td class="num">27</td></tr><tr><td><span class="selo selo-proibido">Proibido</span></td><th scope="row">Maionese e temperos com glutamato</th><td class="num">16</td><td class="num">5</td></tr><tr><td><span class="selo selo-proibido">Proibido</span></td><th scope="row">Xarope de guaraná ou groselha</th><td class="num">5</td><td class="num">0</td></tr><tr><td><span class="selo selo-restrito">Restrito</span></td><th scope="row">Doces e achocolatados</th><td class="num">324</td><td class="num">4.479</td></tr><tr><td><span class="selo selo-restrito">Restrito</span></td><th scope="row">Enlatados e conservas</th><td class="num">76</td><td class="num">1.953</td></tr><tr><td><span class="selo selo-restrito">Restrito</span></td><th scope="row">Embutidos e frios</th><td class="num">107</td><td class="num">658</td></tr></tbody>
+      <tfoot><tr><td></td><th scope="row">Proibidos</th><td class="num">313</td><td class="num">4.153</td></tr>
+      <tr><td></td><th scope="row">Restritos</th><td class="num">507</td><td class="num">7.090</td></tr></tfoot></table></div>
+      <p class="legenda">Cada item CATMAT conta numa categoria só. Há falsos positivos conhecidos, como gelatina sem sabor e “doce” em descrições amplas.</p></div>
+    <div class="cartao"><h3>Alimentos candidatos por grau de processamento</h3><ul class="lb"><li><span class="lb-nome">in natura</span><span class="lb-trilho"><span style="width:23.33%" title="in natura: 9.370 itens"></span></span><span class="lb-valor">9.370</span><span class="lb-pct">14,1%</span></li><li><span class="lb-nome">minimamente processado</span><span class="lb-trilho"><span style="width:21.18%" title="minimamente processado: 8.505 itens"></span></span><span class="lb-valor">8.505</span><span class="lb-pct">12,8%</span></li><li><span class="lb-nome">ingrediente culinário processado</span><span class="lb-trilho"><span style="width:8.13%" title="ingrediente culinário processado: 3.263 itens"></span></span><span class="lb-valor">3.263</span><span class="lb-pct">4,9%</span></li><li><span class="lb-nome">processado</span><span class="lb-trilho"><span style="width:10.08%" title="processado: 4.049 itens"></span></span><span class="lb-valor">4.049</span><span class="lb-pct">6,1%</span></li><li><span class="lb-nome">ultraprocessado</span><span class="lb-trilho"><span style="width:2.81%" title="ultraprocessado: 1.129 itens"></span></span><span class="lb-valor">1.129</span><span class="lb-pct">1,7%</span></li><li><span class="lb-nome">indeterminado</span><span class="lb-trilho"><span style="width:100.00%" title="indeterminado: 40.159 itens"></span></span><span class="lb-valor">40.159</span><span class="lb-pct">60,4%</span></li></ul>
+      <p class="legenda">O grau vem do catálogo. Com 60% indeterminado, não dá para medir os limites de gasto por grau de processamento. Além disso, esses limites são sobre valor, e o preço homologado não foi coletado.</p></div>
+  </div>
+</section>
+
+<section id="limites">
+  <header><h2>Limites e pendências</h2></header>
+  <dl class="pendencias">
+    <div><dt>Validação manual</dt><dd>Amostras aleatórias de 200 alimentos candidatos e 200 serviços (semente 42) estão em <code>amostra_validacao_2025-01_a_2025-03.xlsx</code>. Até a revisão, os números são de candidatos, não de compras confirmadas.</dd></div>
+    <div><dt>Fornecedores e preço homologado</dt><dd>Dependem do endpoint de resultados de cada item (<code>/itens/{n}/resultados</code>), que não foi coletado para alimentos. São cerca de 50,7 mil itens com resultado.</dd></div>
+    <div><dt>Aplicabilidade ao PNAE</dt><dd>Precisa de uma tabela de regras por item CATMAT, validada por PDM, e da versão vigente da resolução do FNDE.</dd></div>
+    <div><dt>Colunas deslocadas</dt><dd>28.315 contratações da coleta de fev/2025 (2ª quinzena) têm as colunas deslocadas a partir de <code>dataInclusao</code>. As colunas usadas na classificação estão corretas. A origem está nos arquivos da coleta.</dd></div>
+    <div><dt>Itens repetidos</dt><dd>Um item atualizado em mais de uma coleta conta uma vez, na coleta mais recente, tanto entre os analisados quanto entre os classificados.</dd></div>
+  </dl>
+</section>
+
+<section id="metodo">
+  <header><h2>Método e execução</h2></header>
+  <p>Para cada mês, o pipeline (<code>src/main.py</code>) monta a base de contratações, consolida os itens e separa materiais de serviços. Depois roda dois classificadores. Para materiais, <code>classifica_alimentos.py</code> detecta o PDM no texto e compara a descrição com os itens CATMAT desse PDM por embeddings, com similaridade mínima de 0,5. Para serviços, <code>classifica_alimentos_servicos.py</code> marca os amparos 138 e 139 e compara o restante com o CATSER por busca semântica. Os resultados mensais são juntados num arquivo por período.</p>
+  <div class="cartao"><h3>Tempo de execução por etapa</h3>
+    <div class="rolagem"><table><thead><tr><th scope="col">Mês</th><th scope="col" class="num">Contratações</th><th scope="col" class="num">Itens</th><th scope="col" class="num">Alimentos</th><th scope="col" class="num">Serviços</th><th scope="col" class="num">Total</th></tr></thead>
+    <tbody><tr><th scope="row">jan/2025</th><td class="num">7 s</td><td class="num">20 s</td><td class="num">30 min 22 s</td><td class="num">1 h 34 min</td><td class="num forte">2 h 05 min</td></tr><tr><th scope="row">fev/2025</th><td class="num">12 s</td><td class="num">31 s</td><td class="num">33 min 47 s</td><td class="num">1 h 46 min</td><td class="num forte">2 h 20 min</td></tr><tr><th scope="row">mar/2025</th><td class="num">22 s</td><td class="num">59 s</td><td class="num">36 min 23 s</td><td class="num">1 h 53 min</td><td class="num forte">2 h 30 min</td></tr></tbody>
+    <tfoot><tr><th scope="row">Período</th><td class="num">41 s</td><td class="num">1 min 50 s</td><td class="num">1 h 40 min</td><td class="num">5 h 13 min</td><td class="num">6 h 57 min</td></tr></tfoot></table></div>
+    <p class="legenda">Duração gravada nos marcadores <code>output/progresso/*.ok</code> na última execução completa, com <code>--refazer</code>.</p></div>
+</section>
+
+<footer>
+  <p>Fontes: <code>alimentos_candidatos_pncp_2025-01_a_2025-03.csv</code>, <code>servicos_alimentacao_escolar_pncp_2025-01_a_2025-03.csv</code>, bases mensais de contratações e itens (<code>modulo-construcao-da-base/output</code>) e catálogo CATMAT do grupo 89 (taxonomia v0.1).</p>
+  <p>Repositório <code>classificadores_pncp_completo</code>, branch <code>pipeline-classificacao</code>.</p>
+</footer>
+</div>
