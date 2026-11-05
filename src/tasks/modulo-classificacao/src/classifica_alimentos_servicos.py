@@ -21,22 +21,29 @@ similaridade. Só vale o código informado no catálogo do Compras.gov.br; no
 catálogo "Outros" o número é do próprio órgão e não identifica o CATSER.
 
 Passo 3: o dicionário `referencias/termos_contexto_new_pipeline.csv` é aplicado
-à descrição do item. Ele parte do dicionário da versão melhoria e acrescenta o
-grupo escolar função (merendeira e preparo da alimentação escolar ou da
-merenda), que descreve o trabalho contratado. Os trechos de exclusão são
-apagados antes da busca dos demais grupos. A busca funciona como filtro: um
-serviço ainda False sem termo alimentar, escolar forte ou de função na
-descrição termina como False, com o método "sem contexto alimentar", e não
-segue para a busca semântica. Os termos de todos os grupos ficam no resultado
-para auditoria.
+à descrição do item e ao objeto da compra. Ele parte do dicionário da versão
+melhoria e acrescenta o grupo escolar função (merendeira e preparo da
+alimentação escolar ou da merenda), que descreve o trabalho contratado. Os
+trechos de exclusão são apagados antes da busca dos demais grupos. A busca
+funciona como filtro, em duas etapas, para os serviços ainda False:
+- 3a: sem termo alimentar, escolar forte ou de função na descrição, o serviço
+  termina como False, com o método "sem contexto alimentar";
+- 3b: sem contexto escolar na descrição ou no objeto da compra, termina como
+  False, com o método "sem contexto escolar". O contexto escolar é um termo
+  escolar forte ou de função, ou um termo escolar fraco sem termo de outro
+  contexto. A descrição costuma repetir o nome genérico do CATSER ("Refeições
+  Industriais"), e é o objeto que diz se a compra é de escola, tribunal ou
+  presídio.
+Os serviços barrados não seguem para a busca semântica. Os termos de todos os
+grupos ficam no resultado para auditoria.
 
 Passo 4: a descrição é comparada por embeddings com os 29 serviços CATSER da
 aba "Alimentação escolar", e cada serviço conserva o mais semelhante e o grupo
 proposto (S01 a S07) dele. Todas as descrições são vetorizadas para reaproveitar
 o cache das versões anteriores, mas as regras só valem para os serviços que
 chegam a este passo. Os serviços do amparo 138/139 e os do vínculo direto pelo
-código apenas registram a similaridade e continuam True. Para os que vieram do
-filtro do passo 3:
+código apenas registram a similaridade e continuam True. Para os que vieram dos
+filtros do passo 3:
 - similaridade de 0,5 ou mais: True, pela semântica;
 - de 0,4 a 0,5 (resgate escolar): True com termo alimentar na descrição e
   termo escolar forte ou de função na descrição ou no objeto da compra;
@@ -134,9 +141,13 @@ GRUPOS_TERMOS = [
     "outro_contexto",
     "exclusao",
 ]
-# Um destes grupos na descrição leva o serviço à busca semântica.
+# Um destes grupos na descrição leva o serviço ao filtro de contexto escolar.
 GRUPOS_CONTEXTO_ALIMENTAR = ["alimentar", "escolar_forte", "escolar_funcao"]
 METODO_SEM_CONTEXTO = "sem contexto alimentar"
+# Um destes grupos na descrição ou no objeto basta como contexto escolar. O
+# escolar fraco só vale sem termo de outro contexto.
+GRUPOS_CONTEXTO_ESCOLAR = ["escolar_forte", "escolar_funcao"]
+METODO_SEM_CONTEXTO_ESCOLAR = "sem contexto escolar"
 
 CAMINHO_REFERENCIA = PASTA_OUTPUT / "referencia_servicos_alimentacao_catser.csv"
 LIMITE_PADRAO = 0.5
@@ -173,6 +184,7 @@ COLUNAS_RESULTADO = [
     *[f"termos_{grupo}_descricao" for grupo in GRUPOS_TERMOS],
     "contexto_alimentar",
     *[f"termos_{grupo}_objeto" for grupo in GRUPOS_TERMOS],
+    "contexto_escolar",
     "codigo_servico_catser",
     "nome_servico_catser",
     "grupo_proposto",
@@ -317,6 +329,49 @@ def filtrar_contexto_alimentar(
     return resultado
 
 
+def buscar_termos_objeto(
+    servicos: pd.DataFrame, padroes: dict[str, re.Pattern]
+) -> pd.DataFrame:
+    """Aplica o dicionário ao objeto da compra, usado no contexto escolar e no resgate."""
+    resultado = servicos.copy()
+    # Cada objeto é analisado uma vez, mesmo que a compra tenha vários itens.
+    objetos = resultado["objetoCompra"].dropna().drop_duplicates()
+    termos = pd.DataFrame(
+        objetos.map(
+            lambda texto: buscar_termos(normalizar_busca(corrigir_codificacao(texto)[0]), padroes)
+        ).tolist(),
+        index=objetos.values,
+    )
+    for grupo in GRUPOS_TERMOS:
+        resultado[f"termos_{grupo}_objeto"] = (
+            resultado["objetoCompra"].map(termos[grupo]).fillna("")
+        )
+    return resultado
+
+
+def filtrar_contexto_escolar(servicos: pd.DataFrame) -> pd.DataFrame:
+    """Encerra os serviços com contexto alimentar, mas sem contexto escolar."""
+    resultado = servicos.copy()
+
+    def tem(grupos: list[str]) -> pd.Series:
+        colunas = [f"termos_{grupo}_{local}" for grupo in grupos for local in ["descricao", "objeto"]]
+        return resultado[colunas].ne("").any(axis=1)
+
+    # O termo fraco (escola, aluno, educação) também aparece em eventos,
+    # hospitais e presídios. Nesses casos só o termo forte ou de função vale.
+    resultado["contexto_escolar"] = tem(GRUPOS_CONTEXTO_ESCOLAR) | (
+        tem(["escolar_fraco"]) & ~tem(["outro_contexto"])
+    )
+    sem_contexto = (
+        ~resultado["servico_alimentacao_escolar"]
+        & ~resultado["codigo_catser_informado"]
+        & resultado["contexto_alimentar"]
+        & ~resultado["contexto_escolar"]
+    )
+    resultado.loc[sem_contexto, "metodo_classificacao"] = METODO_SEM_CONTEXTO_ESCOLAR
+    return resultado
+
+
 # PASSO 4 · BUSCA SEMÂNTICA E RESGATES ----------------------------------------
 
 def parear_catser(
@@ -369,26 +424,6 @@ def parear_catser(
     return resultado
 
 
-def buscar_termos_objeto(
-    servicos: pd.DataFrame, padroes: dict[str, re.Pattern]
-) -> pd.DataFrame:
-    """Aplica o dicionário ao objeto da compra, usado no resgate escolar."""
-    resultado = servicos.copy()
-    # Cada objeto é analisado uma vez, mesmo que a compra tenha vários itens.
-    objetos = resultado["objetoCompra"].dropna().drop_duplicates()
-    termos = pd.DataFrame(
-        objetos.map(
-            lambda texto: buscar_termos(normalizar_busca(corrigir_codificacao(texto)[0]), padroes)
-        ).tolist(),
-        index=objetos.values,
-    )
-    for grupo in GRUPOS_TERMOS:
-        resultado[f"termos_{grupo}_objeto"] = (
-            resultado["objetoCompra"].map(termos[grupo]).fillna("")
-        )
-    return resultado
-
-
 def aplicar_regras_semanticas(
     servicos: pd.DataFrame,
     limite: float = LIMITE_PADRAO,
@@ -410,8 +445,10 @@ def aplicar_regras_semanticas(
 
     amparo = resultado["servico_alimentacao_escolar"]
     codigo = ~amparo & resultado["codigo_catser_informado"]
-    # Os serviços sem contexto alimentar já foram encerrados no passo 3.
-    filtrados = ~amparo & ~codigo & resultado["contexto_alimentar"]
+    # Os serviços sem contexto alimentar ou escolar já foram encerrados no passo 3.
+    filtrados = (
+        ~amparo & ~codigo & resultado["contexto_alimentar"] & resultado["contexto_escolar"]
+    )
     semantica = filtrados & similaridade.ge(limite)
     faixa = filtrados & similaridade.ge(limite_resgate) & similaridade.lt(limite)
     abaixo = filtrados & similaridade.lt(limite_resgate)
@@ -488,13 +525,14 @@ def executar_classificacao(
     servicos = ligar_contratacoes(servicos_com_descricao, contratacoes)
     servicos = marcar_codigo_catser(servicos, referencia)
     servicos = filtrar_contexto_alimentar(servicos, padroes)
+    servicos = buscar_termos_objeto(servicos, padroes)
+    servicos = filtrar_contexto_escolar(servicos)
 
     # Passo 4.
     modelo = carregar_modelo(nome_modelo)
     resultado = parear_catser(
         servicos, referencia, modelo, nome_modelo, batch_size, caminho_cache_consultas
     )
-    resultado = buscar_termos_objeto(resultado, padroes)
     resultado = aplicar_regras_semanticas(resultado, limite, limite_resgate)
     resultado["data_referencia_catser"] = DATA_REFERENCIA_CATSER
     resultado["janela_referencia_pncp"] = janela
