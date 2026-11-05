@@ -4,12 +4,137 @@
   "source": "https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor",
   "elements": [
     {
+      "id": "-47cd3wwXPMK-PVfxsNIi",
+      "type": "rectangle",
+      "x": 24.977703518337364,
+      "y": 92.38887447781181,
+      "width": 982.8889211018883,
+      "height": 128.8888888888888,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#a5d8ff",
+      "fillStyle": "hachure",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 40,
+      "groupIds": [],
+      "frameId": null,
+      "index": "Zw",
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1452993125,
+      "version": 295,
+      "versionNonce": 1421764235,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1793194818380,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "YZAuS1xZGwnHBSasoBKfC",
+      "type": "rectangle",
+      "x": 26.31110975477452,
+      "y": 292.8332591586658,
+      "width": 1237.3332044813367,
+      "height": 297.3333740234374,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#ffec99",
+      "fillStyle": "hachure",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 40,
+      "groupIds": [],
+      "frameId": null,
+      "index": "Zx",
+      "roundness": {
+        "type": 3
+      },
+      "seed": 301966789,
+      "version": 154,
+      "versionNonce": 1182163397,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1793194825270,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "DFmuYG-qUesOkA5MXvLTZ",
+      "type": "rectangle",
+      "x": 15.866485595703125,
+      "y": 1347.2776493496372,
+      "width": 1247.7777269151475,
+      "height": 213.11109754774319,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#b2f2bb",
+      "fillStyle": "hachure",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 40,
+      "groupIds": [],
+      "frameId": null,
+      "index": "Zy",
+      "roundness": {
+        "type": 3
+      },
+      "seed": 52253291,
+      "version": 222,
+      "versionNonce": 120437824,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "id": "e84",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1793194902728,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "Zuj6PyZNH1BwsZC9aFvfF",
+      "type": "rectangle",
+      "x": 11.644454956054673,
+      "y": 663.499937905206,
+      "width": 1260.2222781711155,
+      "height": 596.0000237358939,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#b2f2bb",
+      "fillStyle": "hachure",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 40,
+      "groupIds": [],
+      "frameId": null,
+      "index": "Zz",
+      "roundness": {
+        "type": 3
+      },
+      "seed": 229725451,
+      "version": 251,
+      "versionNonce": 766094999,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1793194654543,
+      "link": null,
+      "locked": false
+    },
+    {
       "id": "e0",
       "type": "text",
       "x": 40,
       "y": 20,
-      "width": 880.0000000000001,
-      "height": 40.0,
+      "width": 1021.9999864366321,
+      "height": 40,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -22,11 +147,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 1373158607,
-      "version": 1,
-      "versionNonce": 239081664,
+      "version": 60,
+      "versionNonce": 1242692261,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793194917736,
       "link": null,
       "locked": false,
       "text": "PIPELINE COMPLETO · CLASSIFICAÇÃO DE ITENS DO PNCP",
@@ -37,7 +162,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": false,
+      "index": "a0"
     },
     {
       "id": "e1",
@@ -45,7 +171,7 @@
       "x": 40,
       "y": 66,
       "width": 756.8000000000001,
-      "height": 20.0,
+      "height": 20,
       "angle": 0,
       "strokeColor": "#495057",
       "backgroundColor": "transparent",
@@ -58,11 +184,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 53710185,
-      "version": 1,
-      "versionNonce": 1592467582,
+      "version": 2,
+      "versionNonce": 57815141,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "text": "python -m src.main --inicio AAAA-MM --fim AAAA-MM · repo classificadores_pncp_completo",
@@ -73,15 +199,16 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "a1"
     },
     {
       "id": "e2",
       "type": "text",
       "x": 40,
       "y": 110,
-      "width": 187.00000000000003,
-      "height": 25.0,
+      "width": 224.3999938964844,
+      "height": 25,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -94,11 +221,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 590620972,
-      "version": 1,
-      "versionNonce": 525901257,
+      "version": 19,
+      "versionNonce": 714271531,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793193054952,
       "link": null,
       "locked": false,
       "text": "BLOCO 0 · ENTRADA",
@@ -109,7 +236,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": false,
+      "index": "a2"
     },
     {
       "id": "e3",
@@ -130,11 +258,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 479341424,
-      "version": 1,
-      "versionNonce": 299655413,
+      "version": 13,
+      "versionNonce": 44227461,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793194794595,
       "link": null,
       "locked": false,
       "text": "coletas quinzenais baixadas do Drive",
@@ -145,7 +273,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "a3"
     },
     {
       "id": "e4",
@@ -168,13 +297,14 @@
         "type": 3
       },
       "seed": 1581559893,
-      "version": 1,
-      "versionNonce": 220106708,
+      "version": 2,
+      "versionNonce": 1281847051,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
-      "locked": false
+      "locked": false,
+      "index": "a4"
     },
     {
       "id": "e5",
@@ -195,11 +325,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 1453201079,
-      "version": 1,
-      "versionNonce": 1590571866,
+      "version": 2,
+      "versionNonce": 592648997,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "text": "cesta-de-precos-pncp/tasks/analise-unidades-compradoras/tmp\nColetas - AAAA / M - Mês / QUINZENA-1 e QUINZENA-2\ncontratacoes.csv · itens.csv",
@@ -210,15 +340,16 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "a5"
     },
     {
       "id": "e6",
       "type": "text",
-      "x": 40,
-      "y": 250,
-      "width": 363.00000000000006,
-      "height": 25.0,
+      "x": 39.77776421440973,
+      "y": 243.1111314561632,
+      "width": 404.40002441406256,
+      "height": 25,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -231,11 +362,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 1915941033,
-      "version": 1,
-      "versionNonce": 1171165723,
+      "version": 48,
+      "versionNonce": 1196016363,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793194736814,
       "link": null,
       "locked": false,
       "text": "BLOCO 1 · CONSTRUIR A BASE DO MÊS",
@@ -246,13 +377,14 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": false,
+      "index": "a6"
     },
     {
       "id": "e7",
       "type": "text",
-      "x": 40,
-      "y": 278,
+      "x": 40.66663953993054,
+      "y": 271.11109754774304,
       "width": 385.00000000000006,
       "height": 17.5,
       "angle": 0,
@@ -267,11 +399,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 186699714,
-      "version": 1,
-      "versionNonce": 1268073013,
+      "version": 10,
+      "versionNonce": 2129186725,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793194739108,
       "link": null,
       "locked": false,
       "text": "src/tasks/modulo-construcao-da-base · --deduplicar",
@@ -282,7 +414,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "a7"
     },
     {
       "id": "e8",
@@ -305,13 +438,14 @@
         "type": 3
       },
       "seed": 906070221,
-      "version": 1,
-      "versionNonce": 68252794,
+      "version": 2,
+      "versionNonce": 207185995,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
-      "locked": false
+      "locked": false,
+      "index": "a8"
     },
     {
       "id": "e9",
@@ -319,7 +453,7 @@
       "x": 52,
       "y": 320,
       "width": 123.20000000000002,
-      "height": 20.0,
+      "height": 20,
       "angle": 0,
       "strokeColor": "#1971c2",
       "backgroundColor": "transparent",
@@ -332,11 +466,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 63989048,
-      "version": 1,
-      "versionNonce": 201209006,
+      "version": 2,
+      "versionNonce": 243815909,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "text": "itens_build.py",
@@ -347,13 +481,14 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "a9"
     },
     {
       "id": "e10",
       "type": "text",
       "x": 52,
-      "y": 344.0,
+      "y": 344,
       "width": 446.6,
       "height": 87.5,
       "angle": 0,
@@ -368,11 +503,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 469521478,
-      "version": 1,
-      "versionNonce": 499635469,
+      "version": 2,
+      "versionNonce": 1027352299,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "text": "junta itens.csv das duas quinzenas do mês\nmonta numeroControlePNCP a partir do endpoint\nmantém a versão mais recente de cada endpoint + numeroItem\nsepara por materialOuServico (M / S)\ntambém grava itens_<mês>.csv e as versões _amparos_merenda",
@@ -383,7 +518,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "aA"
     },
     {
       "id": "e11",
@@ -406,13 +542,14 @@
         "type": 3
       },
       "seed": 1085242217,
-      "version": 1,
-      "versionNonce": 1292825379,
+      "version": 2,
+      "versionNonce": 1630425413,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
-      "locked": false
+      "locked": false,
+      "index": "aB"
     },
     {
       "id": "e12",
@@ -420,7 +557,7 @@
       "x": 712,
       "y": 320,
       "width": 149.60000000000002,
-      "height": 20.0,
+      "height": 20,
       "angle": 0,
       "strokeColor": "#1971c2",
       "backgroundColor": "transparent",
@@ -433,11 +570,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 56985562,
-      "version": 1,
-      "versionNonce": 1205264596,
+      "version": 2,
+      "versionNonce": 1284379019,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "text": "database_build.py",
@@ -448,13 +585,14 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "aC"
     },
     {
       "id": "e13",
       "type": "text",
       "x": 712,
-      "y": 344.0,
+      "y": 344,
       "width": 369.6,
       "height": 52.5,
       "angle": 0,
@@ -469,11 +607,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 427000597,
-      "version": 1,
-      "versionNonce": 1537640409,
+      "version": 2,
+      "versionNonce": 406708389,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "text": "junta contratacoes.csv das duas quinzenas do mês\nmantém a versão mais recente de cada\nnumeroControlePNCP",
@@ -484,7 +622,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "aD"
     },
     {
       "id": "e14",
@@ -507,11 +646,11 @@
         "type": 2
       },
       "seed": 1395616197,
-      "version": 1,
-      "versionNonce": 1506083911,
+      "version": 2,
+      "versionNonce": 2072619051,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "points": [
@@ -529,7 +668,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "elbowed": false
+      "elbowed": false,
+      "index": "aE"
     },
     {
       "id": "e15",
@@ -552,11 +692,11 @@
         "type": 2
       },
       "seed": 1170252924,
-      "version": 1,
-      "versionNonce": 900911955,
+      "version": 2,
+      "versionNonce": 426017797,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "points": [
@@ -574,7 +714,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "elbowed": false
+      "elbowed": false,
+      "index": "aF"
     },
     {
       "id": "e16",
@@ -597,13 +738,14 @@
         "type": 3
       },
       "seed": 473392625,
-      "version": 1,
-      "versionNonce": 964669078,
+      "version": 2,
+      "versionNonce": 1665739,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
-      "locked": false
+      "locked": false,
+      "index": "aG"
     },
     {
       "id": "e17",
@@ -611,7 +753,7 @@
       "x": 52,
       "y": 500,
       "width": 207.9,
-      "height": 35.0,
+      "height": 35,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -624,11 +766,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 1265438423,
-      "version": 1,
-      "versionNonce": 597409993,
+      "version": 2,
+      "versionNonce": 949992293,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "text": "itens_materiais_<mês>.csv\nex. jan/2025: 210.885 itens",
@@ -639,7 +781,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "aH"
     },
     {
       "id": "e18",
@@ -662,13 +805,14 @@
         "type": 3
       },
       "seed": 1738238662,
-      "version": 1,
-      "versionNonce": 1866808230,
+      "version": 2,
+      "versionNonce": 1859639659,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
-      "locked": false
+      "locked": false,
+      "index": "aI"
     },
     {
       "id": "e19",
@@ -676,7 +820,7 @@
       "x": 382,
       "y": 500,
       "width": 200.20000000000002,
-      "height": 35.0,
+      "height": 35,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -689,11 +833,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 13955984,
-      "version": 1,
-      "versionNonce": 1629526406,
+      "version": 2,
+      "versionNonce": 1849493189,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "text": "itens_servicos_<mês>.csv\nex. jan/2025: 79.557 itens",
@@ -704,7 +848,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "aJ"
     },
     {
       "id": "e20",
@@ -727,13 +872,14 @@
         "type": 3
       },
       "seed": 1730483679,
-      "version": 1,
-      "versionNonce": 342865763,
+      "version": 2,
+      "versionNonce": 1695511563,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
-      "locked": false
+      "locked": false,
+      "index": "aK"
     },
     {
       "id": "e21",
@@ -741,7 +887,7 @@
       "x": 712,
       "y": 500,
       "width": 385.00000000000006,
-      "height": 35.0,
+      "height": 35,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -754,11 +900,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 1499242942,
-      "version": 1,
-      "versionNonce": 907557513,
+      "version": 2,
+      "versionNonce": 1289348645,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "text": "contratacoes_<mês>.csv\nex. jan/2025: 84.257 (4.065 repetidas descartadas)",
@@ -769,7 +915,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "aL"
     },
     {
       "id": "e22",
@@ -792,11 +939,11 @@
         "type": 2
       },
       "seed": 730682428,
-      "version": 1,
-      "versionNonce": 596724165,
+      "version": 2,
+      "versionNonce": 1924840107,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "points": [
@@ -814,7 +961,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "elbowed": false
+      "elbowed": false,
+      "index": "aM"
     },
     {
       "id": "e23",
@@ -837,11 +985,11 @@
         "type": 2
       },
       "seed": 333889689,
-      "version": 1,
-      "versionNonce": 462382782,
+      "version": 2,
+      "versionNonce": 929290629,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "points": [
@@ -859,7 +1007,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "elbowed": false
+      "elbowed": false,
+      "index": "aN"
     },
     {
       "id": "e24",
@@ -882,11 +1031,11 @@
         "type": 2
       },
       "seed": 2055599410,
-      "version": 1,
-      "versionNonce": 1639591160,
+      "version": 2,
+      "versionNonce": 1149513035,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "points": [
@@ -904,15 +1053,16 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "elbowed": false
+      "elbowed": false,
+      "index": "aO"
     },
     {
       "id": "e25",
       "type": "text",
-      "x": 40,
-      "y": 625,
-      "width": 231.00000000000003,
-      "height": 25.0,
+      "x": 41.333329942491275,
+      "y": 615.6666395399307,
+      "width": 253.88899739583343,
+      "height": 25,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -925,11 +1075,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 722831293,
-      "version": 1,
-      "versionNonce": 219494903,
+      "version": 35,
+      "versionNonce": 738682437,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793194629120,
       "link": null,
       "locked": false,
       "text": "BLOCO 2 · CLASSIFICAR",
@@ -940,14 +1090,15 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": false,
+      "index": "aP"
     },
     {
       "id": "e26",
       "type": "text",
-      "x": 40,
-      "y": 653,
-      "width": 231.00000000000003,
+      "x": 40.66667344835071,
+      "y": 642.5555623372396,
+      "width": 211.63778686523438,
       "height": 17.5,
       "angle": 0,
       "strokeColor": "#495057",
@@ -961,11 +1112,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 199170185,
-      "version": 1,
-      "versionNonce": 815887679,
+      "version": 14,
+      "versionNonce": 1673208037,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793194631111,
       "link": null,
       "locked": false,
       "text": "src/tasks/modulo-classificacao",
@@ -976,7 +1127,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "aQ"
     },
     {
       "id": "e27",
@@ -999,13 +1151,14 @@
         "type": 3
       },
       "seed": 207696844,
-      "version": 1,
-      "versionNonce": 770902344,
+      "version": 2,
+      "versionNonce": 1367669829,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
-      "locked": false
+      "locked": false,
+      "index": "aR"
     },
     {
       "id": "e28",
@@ -1013,7 +1166,7 @@
       "x": 52,
       "y": 700,
       "width": 387.20000000000005,
-      "height": 20.0,
+      "height": 20,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -1026,11 +1179,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 1819980298,
-      "version": 1,
-      "versionNonce": 738639289,
+      "version": 2,
+      "versionNonce": 848008843,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "text": "classifica_alimentos.py · materiais (CATMAT)",
@@ -1041,7 +1194,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "aS"
     },
     {
       "id": "e29",
@@ -1064,13 +1218,14 @@
         "type": 3
       },
       "seed": 1296491778,
-      "version": 1,
-      "versionNonce": 568054228,
+      "version": 2,
+      "versionNonce": 1049045925,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
-      "locked": false
+      "locked": false,
+      "index": "aT"
     },
     {
       "id": "e30",
@@ -1091,11 +1246,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 1733294784,
-      "version": 1,
-      "versionNonce": 93309106,
+      "version": 2,
+      "versionNonce": 831425835,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "text": "referência: taxonomia v0.1 do grupo 89 (catalogo_consolidado)\n→ classe_alimentos_catmat: 4.047 itens CATMAT\nclassificados e candidatos ao PNAE",
@@ -1106,7 +1261,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "aU"
     },
     {
       "id": "e31",
@@ -1129,13 +1285,14 @@
         "type": 3
       },
       "seed": 1567087081,
-      "version": 1,
-      "versionNonce": 986607412,
+      "version": 2,
+      "versionNonce": 1582067461,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
-      "locked": false
+      "locked": false,
+      "index": "aV"
     },
     {
       "id": "e32",
@@ -1156,11 +1313,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 1151541059,
-      "version": 1,
-      "versionNonce": 268062141,
+      "version": 2,
+      "versionNonce": 1312403403,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "text": "1. corrige a codificação e normaliza a descrição",
@@ -1171,7 +1328,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "aW"
     },
     {
       "id": "e33",
@@ -1194,13 +1352,14 @@
         "type": 3
       },
       "seed": 2089750183,
-      "version": 1,
-      "versionNonce": 1980614225,
+      "version": 2,
+      "versionNonce": 257050213,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
-      "locked": false
+      "locked": false,
+      "index": "aX"
     },
     {
       "id": "e34",
@@ -1221,11 +1380,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 812896394,
-      "version": 1,
-      "versionNonce": 169222133,
+      "version": 2,
+      "versionNonce": 2057797227,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "text": "2. detecta um único PDM pelas palavras da descrição",
@@ -1236,7 +1395,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "aY"
     },
     {
       "id": "e35",
@@ -1259,11 +1419,11 @@
         "type": 2
       },
       "seed": 1185498233,
-      "version": 1,
-      "versionNonce": 629595553,
+      "version": 2,
+      "versionNonce": 73806277,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "points": [
@@ -1281,7 +1441,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "elbowed": false
+      "elbowed": false,
+      "index": "aZ"
     },
     {
       "id": "e36",
@@ -1304,13 +1465,14 @@
         "type": 3
       },
       "seed": 1781132954,
-      "version": 1,
-      "versionNonce": 1349993688,
+      "version": 2,
+      "versionNonce": 27425035,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
-      "locked": false
+      "locked": false,
+      "index": "aa"
     },
     {
       "id": "e37",
@@ -1318,7 +1480,7 @@
       "x": 52,
       "y": 985,
       "width": 369.6,
-      "height": 35.0,
+      "height": 35,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -1331,11 +1493,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 1328261054,
-      "version": 1,
-      "versionNonce": 1901493144,
+      "version": 2,
+      "versionNonce": 983937317,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "text": "3. embeddings (até 32 tokens), comparados só com\n    os itens CATMAT do mesmo PDM",
@@ -1346,7 +1508,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "ab"
     },
     {
       "id": "e38",
@@ -1369,11 +1532,11 @@
         "type": 2
       },
       "seed": 1850501473,
-      "version": 1,
-      "versionNonce": 776605305,
+      "version": 2,
+      "versionNonce": 1889869739,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "points": [
@@ -1391,7 +1554,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "elbowed": false
+      "elbowed": false,
+      "index": "ac"
     },
     {
       "id": "e39",
@@ -1414,13 +1578,14 @@
         "type": 3
       },
       "seed": 1239854304,
-      "version": 1,
-      "versionNonce": 412936599,
+      "version": 2,
+      "versionNonce": 796804229,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
-      "locked": false
+      "locked": false,
+      "index": "ad"
     },
     {
       "id": "e40",
@@ -1441,11 +1606,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 1513056505,
-      "version": 1,
-      "versionNonce": 149368554,
+      "version": 2,
+      "versionNonce": 1104802379,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "text": "4. similaridade ≥ 0,5 → alimento candidato",
@@ -1456,7 +1621,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "ae"
     },
     {
       "id": "e41",
@@ -1479,11 +1645,11 @@
         "type": 2
       },
       "seed": 98407117,
-      "version": 1,
-      "versionNonce": 1420052173,
+      "version": 2,
+      "versionNonce": 1454205925,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "points": [
@@ -1501,13 +1667,14 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "elbowed": false
+      "elbowed": false,
+      "index": "af"
     },
     {
       "id": "e42",
       "type": "rectangle",
       "x": 40,
-      "y": 1115,
+      "y": 1167,
       "width": 540,
       "height": 80,
       "angle": 0,
@@ -1524,19 +1691,20 @@
         "type": 3
       },
       "seed": 489407816,
-      "version": 1,
-      "versionNonce": 1660151622,
+      "version": 3,
+      "versionNonce": 1452396401,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
-      "locked": false
+      "locked": false,
+      "index": "ag"
     },
     {
       "id": "e43",
       "type": "text",
       "x": 52,
-      "y": 1125,
+      "y": 1177,
       "width": 369.6,
       "height": 52.5,
       "angle": 0,
@@ -1551,11 +1719,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 621455911,
-      "version": 1,
-      "versionNonce": 2115747111,
+      "version": 3,
+      "versionNonce": 1646106823,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "text": "alimentos_candidatos_pncp_<mês>.csv\ndiagnostico_pareamentos_pncp_catmat_<mês>.csv.gz\nresumo_classificacao_alimentos_pncp_<mês>.xlsx",
@@ -1566,7 +1734,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "ah"
     },
     {
       "id": "e44",
@@ -1574,7 +1743,7 @@
       "x": 310,
       "y": 1100,
       "width": 0,
-      "height": 13,
+      "height": 65,
       "angle": 0,
       "strokeColor": "#2f9e44",
       "backgroundColor": "transparent",
@@ -1589,11 +1758,11 @@
         "type": 2
       },
       "seed": 171351961,
-      "version": 1,
-      "versionNonce": 1836780820,
+      "version": 3,
+      "versionNonce": 680008232,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "points": [
@@ -1603,7 +1772,7 @@
         ],
         [
           0,
-          13
+          65
         ]
       ],
       "lastCommittedPoint": null,
@@ -1611,7 +1780,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "elbowed": false
+      "elbowed": false,
+      "index": "ai"
     },
     {
       "id": "e45",
@@ -1634,11 +1804,11 @@
         "type": 2
       },
       "seed": 499914621,
-      "version": 1,
-      "versionNonce": 1860759514,
+      "version": 2,
+      "versionNonce": 1586853541,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "points": [
@@ -1656,7 +1826,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "elbowed": false
+      "elbowed": false,
+      "index": "aj"
     },
     {
       "id": "e46",
@@ -1679,13 +1850,14 @@
         "type": 3
       },
       "seed": 216898921,
-      "version": 1,
-      "versionNonce": 816314860,
+      "version": 2,
+      "versionNonce": 413037099,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
-      "locked": false
+      "locked": false,
+      "index": "ak"
     },
     {
       "id": "e47",
@@ -1693,7 +1865,7 @@
       "x": 632,
       "y": 700,
       "width": 457.6,
-      "height": 20.0,
+      "height": 20,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -1706,11 +1878,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 596943773,
-      "version": 1,
-      "versionNonce": 973691210,
+      "version": 2,
+      "versionNonce": 475617797,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "text": "classifica_alimentos_servicos.py · serviços (CATSER)",
@@ -1721,7 +1893,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "al"
     },
     {
       "id": "e48",
@@ -1744,13 +1917,14 @@
         "type": 3
       },
       "seed": 1365121944,
-      "version": 1,
-      "versionNonce": 1791238512,
+      "version": 2,
+      "versionNonce": 1946481867,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
-      "locked": false
+      "locked": false,
+      "index": "am"
     },
     {
       "id": "e49",
@@ -1771,11 +1945,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 783471137,
-      "version": 1,
-      "versionNonce": 349297013,
+      "version": 2,
+      "versionNonce": 1921634661,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "text": "referência: 29 serviços CATSER da aba \"Alimentação escolar\"\n(grupos propostos S01 a S07)\n+ dicionário termos_contexto_new_pipeline.csv",
@@ -1786,7 +1960,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "an"
     },
     {
       "id": "e50",
@@ -1809,13 +1984,14 @@
         "type": 3
       },
       "seed": 794957573,
-      "version": 1,
-      "versionNonce": 762938026,
+      "version": 2,
+      "versionNonce": 818029419,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
-      "locked": false
+      "locked": false,
+      "index": "ao"
     },
     {
       "id": "e51",
@@ -1836,11 +2012,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 449912920,
-      "version": 1,
-      "versionNonce": 1439190227,
+      "version": 2,
+      "versionNonce": 1316248773,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "text": "1. contratação com amparo 138/139 (Lei 11.947, PNAE) → True",
@@ -1851,7 +2027,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "ap"
     },
     {
       "id": "e52",
@@ -1874,13 +2051,14 @@
         "type": 3
       },
       "seed": 573330499,
-      "version": 1,
-      "versionNonce": 1507147648,
+      "version": 2,
+      "versionNonce": 1193311755,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
-      "locked": false
+      "locked": false,
+      "index": "aq"
     },
     {
       "id": "e53",
@@ -1888,7 +2066,7 @@
       "x": 632,
       "y": 930,
       "width": 369.6,
-      "height": 35.0,
+      "height": 35,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -1901,11 +2079,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 2011450405,
-      "version": 1,
-      "versionNonce": 1467907437,
+      "version": 2,
+      "versionNonce": 397835301,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "text": "2. liga cada serviço à contratação pelo endpoint\n    código CATSER da referência informado → True",
@@ -1916,7 +2094,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "ar"
     },
     {
       "id": "e54",
@@ -1939,11 +2118,11 @@
         "type": 2
       },
       "seed": 1391645398,
-      "version": 1,
-      "versionNonce": 153335724,
+      "version": 2,
+      "versionNonce": 1109034155,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "points": [
@@ -1961,7 +2140,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "elbowed": false
+      "elbowed": false,
+      "index": "as"
     },
     {
       "id": "e55",
@@ -1969,7 +2149,7 @@
       "x": 620,
       "y": 987,
       "width": 620,
-      "height": 52,
+      "height": 104,
       "angle": 0,
       "strokeColor": "#e8590c",
       "backgroundColor": "#ffd8a8",
@@ -1984,21 +2164,22 @@
         "type": 3
       },
       "seed": 1308098874,
-      "version": 1,
-      "versionNonce": 1363605490,
+      "version": 3,
+      "versionNonce": 2016762242,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
-      "locked": false
+      "locked": false,
+      "index": "at"
     },
     {
       "id": "e56",
       "type": "text",
       "x": 632,
       "y": 997,
-      "width": 446.6,
-      "height": 35.0,
+      "width": 539.0,
+      "height": 87.5,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -2011,22 +2192,23 @@
       "frameId": null,
       "roundness": null,
       "seed": 367517441,
-      "version": 1,
-      "versionNonce": 1147056644,
+      "version": 3,
+      "versionNonce": 1687125137,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
-      "text": "3. busca textual: sem termo alimentar, escolar forte ou de\n    função → False (sem contexto alimentar)",
-      "originalText": "3. busca textual: sem termo alimentar, escolar forte ou de\n    função → False (sem contexto alimentar)",
+      "text": "3. busca textual na descrição e no objeto da compra\n    3a. sem termo alimentar ou de função na descrição\n          → False (sem contexto alimentar)\n    3b. sem termo escolar forte ou de função, ou com termo\n          fraco junto de outro contexto → False (sem contexto escolar)",
+      "originalText": "3. busca textual na descrição e no objeto da compra\n    3a. sem termo alimentar ou de função na descrição\n          → False (sem contexto alimentar)\n    3b. sem termo escolar forte ou de função, ou com termo\n          fraco junto de outro contexto → False (sem contexto escolar)",
       "fontSize": 14,
       "fontFamily": 5,
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "au"
     },
     {
       "id": "e57",
@@ -2049,11 +2231,11 @@
         "type": 2
       },
       "seed": 1565787883,
-      "version": 1,
-      "versionNonce": 525727462,
+      "version": 2,
+      "versionNonce": 2017949413,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "points": [
@@ -2071,13 +2253,14 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "elbowed": false
+      "elbowed": false,
+      "index": "av"
     },
     {
       "id": "e58",
       "type": "rectangle",
       "x": 620,
-      "y": 1054,
+      "y": 1106,
       "width": 620,
       "height": 52,
       "angle": 0,
@@ -2094,21 +2277,22 @@
         "type": 3
       },
       "seed": 350904184,
-      "version": 1,
-      "versionNonce": 992696250,
+      "version": 3,
+      "versionNonce": 1153366659,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
-      "locked": false
+      "locked": false,
+      "index": "aw"
     },
     {
       "id": "e59",
       "type": "text",
       "x": 632,
-      "y": 1064,
+      "y": 1116,
       "width": 438.90000000000003,
-      "height": 35.0,
+      "height": 35,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -2121,11 +2305,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 814874364,
-      "version": 1,
-      "versionNonce": 579708538,
+      "version": 3,
+      "versionNonce": 301695665,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "text": "4. semântica ≥ 0,5 → True; resgates entre 0,4 e 0,5 e por\n    função escolar; o restante → False",
@@ -2136,13 +2320,14 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "ax"
     },
     {
       "id": "e60",
       "type": "arrow",
       "x": 930,
-      "y": 1039,
+      "y": 1091,
       "width": 0,
       "height": 13,
       "angle": 0,
@@ -2159,11 +2344,11 @@
         "type": 2
       },
       "seed": 2124985204,
-      "version": 1,
-      "versionNonce": 1987262418,
+      "version": 3,
+      "versionNonce": 1993502910,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "points": [
@@ -2181,13 +2366,14 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "elbowed": false
+      "elbowed": false,
+      "index": "ay"
     },
     {
       "id": "e61",
       "type": "rectangle",
       "x": 620,
-      "y": 1115,
+      "y": 1167,
       "width": 620,
       "height": 80,
       "angle": 0,
@@ -2204,21 +2390,22 @@
         "type": 3
       },
       "seed": 1374389013,
-      "version": 1,
-      "versionNonce": 1477816547,
+      "version": 3,
+      "versionNonce": 941143884,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
-      "locked": false
+      "locked": false,
+      "index": "az"
     },
     {
       "id": "e62",
       "type": "text",
       "x": 632,
-      "y": 1125,
+      "y": 1177,
       "width": 400.40000000000003,
-      "height": 35.0,
+      "height": 35,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -2231,11 +2418,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 1196040477,
-      "version": 1,
-      "versionNonce": 471619988,
+      "version": 3,
+      "versionNonce": 1149312847,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "text": "servicos_alimentacao_escolar_true_pncp_<mês>.csv\nservicos_alimentacao_escolar_false_pncp_<mês>.csv.gz",
@@ -2246,13 +2433,14 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "b00"
     },
     {
       "id": "e63",
       "type": "arrow",
       "x": 930,
-      "y": 1100,
+      "y": 1152,
       "width": 0,
       "height": 13,
       "angle": 0,
@@ -2269,11 +2457,11 @@
         "type": 2
       },
       "seed": 1470197912,
-      "version": 1,
-      "versionNonce": 696391872,
+      "version": 3,
+      "versionNonce": 534990200,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "points": [
@@ -2291,7 +2479,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "elbowed": false
+      "elbowed": false,
+      "index": "b01"
     },
     {
       "id": "e64",
@@ -2314,11 +2503,11 @@
         "type": 2
       },
       "seed": 1810010707,
-      "version": 1,
-      "versionNonce": 1649940839,
+      "version": 2,
+      "versionNonce": 1450916299,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "points": [
@@ -2336,7 +2525,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "elbowed": false
+      "elbowed": false,
+      "index": "b02"
     },
     {
       "id": "e65",
@@ -2359,11 +2549,11 @@
         "type": 2
       },
       "seed": 1666447133,
-      "version": 1,
-      "versionNonce": 120125831,
+      "version": 2,
+      "versionNonce": 1296456805,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "points": [
@@ -2381,14 +2571,15 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "elbowed": false
+      "elbowed": false,
+      "index": "b03"
     },
     {
       "id": "e66",
       "type": "text",
-      "x": 1300,
-      "y": 690,
-      "width": 284.90000000000003,
+      "x": 1464.2222086588542,
+      "y": 654.666748046875,
+      "width": 258.7477722167969,
       "height": 87.5,
       "angle": 0,
       "strokeColor": "#868e96",
@@ -2402,11 +2593,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 491876989,
-      "version": 1,
-      "versionNonce": 1764807638,
+      "version": 36,
+      "versionNonce": 50741451,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793194879227,
       "link": null,
       "locked": false,
       "text": "caches em modulo-classificacao/cache:\ncatalogo_alimentos_vetorizado.npz\n  único, o catálogo não muda\n<mês>/consultas_*.npy\n  um por mês, permite retomar",
@@ -2417,15 +2608,16 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "b04"
     },
     {
       "id": "e67",
       "type": "text",
-      "x": 40,
-      "y": 1250,
-      "width": 187.00000000000003,
-      "height": 25.0,
+      "x": 41.3333977593316,
+      "y": 1302.22223578559,
+      "width": 220.33333333333343,
+      "height": 25,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -2438,11 +2630,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 68934738,
-      "version": 1,
-      "versionNonce": 1728822696,
+      "version": 16,
+      "versionNonce": 2007787847,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793193895016,
       "link": null,
       "locked": false,
       "text": "BLOCO 3 · PERÍODO",
@@ -2453,13 +2645,14 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": false,
+      "index": "b05"
     },
     {
       "id": "e68",
       "type": "text",
       "x": 40,
-      "y": 1278,
+      "y": 1330,
       "width": 215.60000000000002,
       "height": 17.5,
       "angle": 0,
@@ -2474,11 +2667,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 677430271,
-      "version": 1,
-      "versionNonce": 861494830,
+      "version": 3,
+      "versionNonce": 2119951594,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "text": "src/main.py · juntar_periodo",
@@ -2489,13 +2682,14 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "b06"
     },
     {
       "id": "e69",
       "type": "rectangle",
       "x": 40,
-      "y": 1315,
+      "y": 1367,
       "width": 1200,
       "height": 75,
       "angle": 0,
@@ -2512,19 +2706,25 @@
         "type": 3
       },
       "seed": 574969168,
-      "version": 1,
-      "versionNonce": 142138945,
+      "version": 4,
+      "versionNonce": 2074718668,
       "isDeleted": false,
-      "boundElements": [],
-      "updated": 1793180000000,
+      "boundElements": [
+        {
+          "id": "e84",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1793194898023,
       "link": null,
-      "locked": false
+      "locked": false,
+      "index": "b07"
     },
     {
       "id": "e70",
       "type": "text",
       "x": 52,
-      "y": 1325,
+      "y": 1377,
       "width": 569.8000000000001,
       "height": 52.5,
       "angle": 0,
@@ -2539,11 +2739,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 453082199,
-      "version": 1,
-      "versionNonce": 1960944881,
+      "version": 3,
+      "versionNonce": 2115840667,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "text": "concatena os resultados dos meses em ordem cronológica\nitem que reaparece na base de um mês posterior vale pela versão desse mês,\nseja ela candidata ou não (remover_versoes_antigas)",
@@ -2554,13 +2754,14 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "b08"
     },
     {
       "id": "e71",
       "type": "arrow",
       "x": 450,
-      "y": 1195,
+      "y": 1247,
       "width": 0,
       "height": 118,
       "angle": 0,
@@ -2577,11 +2778,11 @@
         "type": 2
       },
       "seed": 2024883187,
-      "version": 1,
-      "versionNonce": 1218009888,
+      "version": 3,
+      "versionNonce": 1413610752,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "points": [
@@ -2599,13 +2800,14 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "elbowed": false
+      "elbowed": false,
+      "index": "b09"
     },
     {
       "id": "e72",
       "type": "arrow",
       "x": 930,
-      "y": 1195,
+      "y": 1247,
       "width": 0,
       "height": 118,
       "angle": 0,
@@ -2622,11 +2824,11 @@
         "type": 2
       },
       "seed": 1881985144,
-      "version": 1,
-      "versionNonce": 1541709160,
+      "version": 3,
+      "versionNonce": 156794060,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "points": [
@@ -2644,13 +2846,14 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "elbowed": false
+      "elbowed": false,
+      "index": "b0A"
     },
     {
       "id": "e73",
       "type": "rectangle",
       "x": 40,
-      "y": 1430,
+      "y": 1482,
       "width": 580,
       "height": 60,
       "angle": 0,
@@ -2667,21 +2870,22 @@
         "type": 3
       },
       "seed": 675765612,
-      "version": 1,
-      "versionNonce": 456612024,
+      "version": 3,
+      "versionNonce": 1577001439,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
-      "locked": false
+      "locked": false,
+      "index": "b0B"
     },
     {
       "id": "e74",
       "type": "text",
       "x": 52,
-      "y": 1440,
+      "y": 1492,
       "width": 300.3,
-      "height": 35.0,
+      "height": 35,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -2694,11 +2898,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 1407543819,
-      "version": 1,
-      "versionNonce": 1072090969,
+      "version": 3,
+      "versionNonce": 2057895536,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "text": "output/periodo/\nalimentos_candidatos_pncp_<período>.csv",
@@ -2709,13 +2913,14 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "b0C"
     },
     {
       "id": "e75",
       "type": "rectangle",
       "x": 660,
-      "y": 1430,
+      "y": 1482,
       "width": 580,
       "height": 60,
       "angle": 0,
@@ -2732,21 +2937,22 @@
         "type": 3
       },
       "seed": 849613033,
-      "version": 1,
-      "versionNonce": 1899842599,
+      "version": 3,
+      "versionNonce": 324980514,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
-      "locked": false
+      "locked": false,
+      "index": "b0D"
     },
     {
       "id": "e76",
       "type": "text",
       "x": 672,
-      "y": 1440,
+      "y": 1492,
       "width": 361.90000000000003,
-      "height": 35.0,
+      "height": 35,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -2759,11 +2965,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 1963975987,
-      "version": 1,
-      "versionNonce": 1380513882,
+      "version": 3,
+      "versionNonce": 2069035673,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "text": "output/periodo/\nservicos_alimentacao_escolar_pncp_<período>.csv",
@@ -2774,13 +2980,14 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "b0E"
     },
     {
       "id": "e77",
       "type": "arrow",
       "x": 310,
-      "y": 1390,
+      "y": 1442,
       "width": 0,
       "height": 38,
       "angle": 0,
@@ -2797,11 +3004,11 @@
         "type": 2
       },
       "seed": 985376853,
-      "version": 1,
-      "versionNonce": 306814402,
+      "version": 3,
+      "versionNonce": 895121028,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "points": [
@@ -2819,13 +3026,14 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "elbowed": false
+      "elbowed": false,
+      "index": "b0F"
     },
     {
       "id": "e78",
       "type": "arrow",
       "x": 930,
-      "y": 1390,
+      "y": 1442,
       "width": 0,
       "height": 38,
       "angle": 0,
@@ -2842,11 +3050,11 @@
         "type": 2
       },
       "seed": 568825840,
-      "version": 1,
-      "versionNonce": 299853839,
+      "version": 3,
+      "versionNonce": 2119945764,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793192991252,
       "link": null,
       "locked": false,
       "points": [
@@ -2864,13 +3072,14 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "elbowed": false
+      "elbowed": false,
+      "index": "b0G"
     },
     {
       "id": "e79",
       "type": "rectangle",
-      "x": 1300,
-      "y": 250,
+      "x": 1379.33342827691,
+      "y": 265.77777438693585,
       "width": 360,
       "height": 300,
       "angle": 0,
@@ -2887,21 +3096,22 @@
         "type": 3
       },
       "seed": 529628541,
-      "version": 1,
-      "versionNonce": 1599851661,
+      "version": 186,
+      "versionNonce": 1522502475,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793194868410,
       "link": null,
-      "locked": false
+      "locked": false,
+      "index": "b0H"
     },
     {
       "id": "e80",
       "type": "text",
-      "x": 1312,
-      "y": 260,
-      "width": 228.8,
-      "height": 20.0,
+      "x": 1441.33342827691,
+      "y": 290.66669040256073,
+      "width": 202.67181396484375,
+      "height": 20,
       "angle": 0,
       "strokeColor": "#6741d9",
       "backgroundColor": "transparent",
@@ -2914,11 +3124,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 1205528894,
-      "version": 1,
-      "versionNonce": 1157444917,
+      "version": 167,
+      "versionNonce": 189308171,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793194875073,
       "link": null,
       "locked": false,
       "text": "src/main.py · orquestrador",
@@ -2929,15 +3139,16 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "b0I"
     },
     {
       "id": "e81",
       "type": "text",
-      "x": 1312,
-      "y": 284.0,
-      "width": 284.90000000000003,
-      "height": 210.0,
+      "x": 1439.5555419921875,
+      "y": 327.11109754774304,
+      "width": 251.90174865722656,
+      "height": 210,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -2950,11 +3161,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 564233311,
-      "version": 1,
-      "versionNonce": 1604199940,
+      "version": 169,
+      "versionNonce": 523890891,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793194872412,
       "link": null,
       "locked": false,
       "text": "para cada mês entre --inicio e --fim:\n  1. database_build.py\n  2. itens_build.py\n  3. classifica_alimentos.py\n  4. classifica_alimentos_servicos.py\n\ncada script roda como subprocesso\n\netapa concluída grava\noutput/progresso/<mês>_<etapa>.ok\ne é pulada na próxima execução\n(--refazer executa de novo)",
@@ -2965,15 +3176,16 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "b0J"
     },
     {
       "id": "e82",
       "type": "line",
-      "x": 1280,
-      "y": 310,
+      "x": 1320.6666395399304,
+      "y": 276.4444308810763,
       "width": 0,
-      "height": 885,
+      "height": 937,
       "angle": 0,
       "strokeColor": "#6741d9",
       "backgroundColor": "transparent",
@@ -2988,11 +3200,11 @@
         "type": 2
       },
       "seed": 1255388861,
-      "version": 1,
-      "versionNonce": 920054628,
+      "version": 78,
+      "versionNonce": 413080846,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793194883563,
       "link": null,
       "locked": false,
       "points": [
@@ -3002,58 +3214,23 @@
         ],
         [
           0,
-          885
+          937
         ]
       ],
       "lastCommittedPoint": null,
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": null
-    },
-    {
-      "id": "e83",
-      "type": "text",
-      "x": 1300,
-      "y": 580,
-      "width": 193.60000000000002,
-      "height": 40.0,
-      "angle": 0,
-      "strokeColor": "#6741d9",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": null,
-      "roundness": null,
-      "seed": 1928059963,
-      "version": 1,
-      "versionNonce": 1253127417,
-      "isDeleted": false,
-      "boundElements": [],
-      "updated": 1793180000000,
-      "link": null,
-      "locked": false,
-      "text": "repete os blocos 1 e 2\nmês a mês",
-      "originalText": "repete os blocos 1 e 2\nmês a mês",
-      "fontSize": 16,
-      "fontFamily": 5,
-      "textAlign": "left",
-      "verticalAlign": "top",
-      "containerId": null,
-      "lineHeight": 1.25,
-      "autoResize": true
+      "endArrowhead": null,
+      "index": "b0K"
     },
     {
       "id": "e84",
       "type": "arrow",
-      "x": 1480,
-      "y": 1245,
-      "width": -236,
-      "height": 107,
+      "x": 1321.7777845594615,
+      "y": 1221.888949924045,
+      "width": 106.22206624348951,
+      "height": 122.111083984375,
       "angle": 0,
       "strokeColor": "#6741d9",
       "backgroundColor": "transparent",
@@ -3068,11 +3245,11 @@
         "type": 2
       },
       "seed": 857706060,
-      "version": 1,
-      "versionNonce": 777381452,
+      "version": 299,
+      "versionNonce": 487772179,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793194902984,
       "link": null,
       "locked": false,
       "points": [
@@ -3081,24 +3258,29 @@
           0
         ],
         [
-          -236,
-          107
+          -106.22206624348951,
+          122.111083984375
         ]
       ],
       "lastCommittedPoint": null,
       "startBinding": null,
-      "endBinding": null,
+      "endBinding": {
+        "elementId": "DFmuYG-qUesOkA5MXvLTZ",
+        "focus": 0.6702098608823448,
+        "gap": 3.277615441217222
+      },
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "elbowed": false
+      "elbowed": false,
+      "index": "b0M"
     },
     {
       "id": "e85",
       "type": "text",
-      "x": 1300,
-      "y": 1215,
-      "width": 161.70000000000002,
-      "height": 35.0,
+      "x": 1328.2222493489585,
+      "y": 1239.8889295789925,
+      "width": 143.9898223876953,
+      "height": 35,
       "angle": 0,
       "strokeColor": "#6741d9",
       "backgroundColor": "transparent",
@@ -3111,11 +3293,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 470987741,
-      "version": 1,
-      "versionNonce": 2141740787,
+      "version": 145,
+      "versionNonce": 253240647,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1793180000000,
+      "updated": 1793194904705,
       "link": null,
       "locked": false,
       "text": "depois do último mês:\njunta os resultados",
@@ -3126,7 +3308,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "lineHeight": 1.25,
-      "autoResize": true
+      "autoResize": true,
+      "index": "b0N"
     }
   ],
   "appState": {
