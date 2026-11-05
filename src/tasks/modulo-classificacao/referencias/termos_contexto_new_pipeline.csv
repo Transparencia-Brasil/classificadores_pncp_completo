@@ -25,7 +25,7 @@ A25,alimentar,radical,coffee,novo,Serviço de coffee break,,Também marcado como
 A26,alimentar,radical,coquetel,novo,Serviço de coquetel,,
 A27,alimentar,radical,salgad,novo,Fornecimento de salgados,,
 A28,alimentar,radical,merend,novo,Preparo da merenda | Posto de merendeira,,Repete B01 e F01 para que merenda e merendeira contem como termo alimentar próprio nos resgates
-B01,escolar_forte,radical,merenda,atual,Preparo da merenda escolar,,Estava no grupo alimentar como A02. Termos escolares fortes também contam como alimentares
+B01,escolar_forte,radical,merenda,atual,Preparo da merenda escolar,,Estava no grupo alimentar como A02. Merenda conta como termo alimentar por A28
 B02,escolar_forte,radical,pnae,atual,Nutricionista responsável técnico pelo PNAE,,Estava no grupo alimentar como A17
 B04,escolar_forte,expressao,alimentacao escolar,TdP,Divisão de alimentação escolar,,
 B05,escolar_forte,regex,\b11\.947\b,novo,Lei nº 11.947/2009 | Lei Federal 11.947,Item 11.9470,Lei do PNAE. O texto de busca transforma nº em no

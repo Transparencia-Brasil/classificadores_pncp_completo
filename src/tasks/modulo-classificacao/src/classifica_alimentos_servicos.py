@@ -26,8 +26,11 @@ melhoria e acrescenta o grupo escolar função (merendeira e preparo da
 alimentação escolar ou da merenda), que descreve o trabalho contratado. Os
 trechos de exclusão são apagados antes da busca dos demais grupos. A busca
 funciona como filtro, em duas etapas, para os serviços ainda False:
-- 3a: sem termo alimentar, escolar forte ou de função na descrição, o serviço
-  termina como False, com o método "sem contexto alimentar";
+- 3a: sem termo alimentar ou de função na descrição, o serviço termina como
+  False, com o método "sem contexto alimentar". O escolar forte não conta aqui:
+  os termos dele que falam de comida (merenda, alimentação escolar) já casam
+  com o grupo alimentar, e os demais ("pnae", "alunos da educação básica")
+  aparecem em assessorias e no transporte escolar;
 - 3b: sem contexto escolar na descrição ou no objeto da compra, termina como
   False, com o método "sem contexto escolar". O contexto escolar é um termo
   escolar forte ou de função, ou um termo escolar fraco sem termo de outro
@@ -142,7 +145,7 @@ GRUPOS_TERMOS = [
     "exclusao",
 ]
 # Um destes grupos na descrição leva o serviço ao filtro de contexto escolar.
-GRUPOS_CONTEXTO_ALIMENTAR = ["alimentar", "escolar_forte", "escolar_funcao"]
+GRUPOS_CONTEXTO_ALIMENTAR = ["alimentar", "escolar_funcao"]
 METODO_SEM_CONTEXTO = "sem contexto alimentar"
 # Um destes grupos na descrição ou no objeto basta como contexto escolar. O
 # escolar fraco só vale sem termo de outro contexto.
