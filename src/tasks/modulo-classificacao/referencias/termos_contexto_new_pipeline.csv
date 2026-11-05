@@ -42,6 +42,8 @@ C07,escolar_fraco,radical,educac,TdP,Secretaria Municipal de Educação | Ativid
 C08,escolar_fraco,expressao,fnde,novo,Prestação de contas ao FNDE,,No lote aparece sobretudo em obras padrão FNDE
 C09,escolar_fraco,expressao,agricultura familiar,novo,Produtos da agricultura familiar,,Também aparece no PAA. Por isso não é escolar forte
 C10,escolar_fraco,regex,\b(seduc|semed|smed)\b,novo,Gêneros alimentícios CP 04/25-SEDUC | Secretaria Municipal de Educação - SEMED,,Siglas de secretarias de educação nos objetos e nomes de unidade
+C11,escolar_fraco,regex,"\b(instituto federal|if(ac|al|ap|am|ba|baiano|b|ce|es|g|goiano|ma|mg|nmg|sudestemg|suldeminas|tm|mt|ms|pa|pb|pe|sertaope|pi|pr|rj|f|fluminense|rn|rs|far|sul|ro|rr|sc|sp|s|to))\b",novo,Campus Avançado Parelhas deste IFRN | Instituto Federal do Piauí | unidades do IFFar,Pedido pelo iFood,"Institutos federais pela sigla. Sem ela, só ""Instituto Federal de Educação"" casava, por C07"
+C12,escolar_fraco,radical,discent,novo,Refeições ofertadas aos discentes,,Estudantes de institutos federais
 E01,exclusao,regex,\bfontes? de alimentacao\b,TdP,Fonte de alimentação bivolt | 2 fontes de alimentação,,
 E02,exclusao,expressao,alimentacao eletrica,novo,Ponto de alimentação elétrica,,
 E03,exclusao,radical,alimentador,novo,Alimentador automático de documentos,,
@@ -55,6 +57,11 @@ E10,exclusao,regex,"\b(reforma|construcao|ampliacao)( [a-z0-9.]+){0,4} cozinhas?
 E11,exclusao,expressao,educacao fisica,novo,Atividades de educação física,,Encontrado em objetos de contratação
 E12,exclusao,regex,\bpatrulhas? escolar(es)?\b,novo,Batalhão de Patrulha Escolar Comunitária,,Policiamento. Encontrado em objetos de contratação
 E13,exclusao,regex,\beducacao (alimentar e nutricional|alimentar|nutricional)\b,novo,Ações de educação nutricional | Educação alimentar e nutricional | Orientação nutricional e educação alimentar,,Atividade de nutrição. Sozinha não indica escola
+E14,exclusao,expressao,escola naval,novo,Cozinha da Escola Naval,,Nomes de instituições que não são de educação básica
+E15,exclusao,regex,\bescolas? de formacao\b,novo,Admissão às Escolas de Formação de Oficiais,,Nomes de instituições que não são de educação básica
+E16,exclusao,regex,\bescolas? do legislativo\b,novo,Demandas da Escola do Legislativo,,Nomes de instituições que não são de educação básica
+E17,exclusao,regex,\bescolas? de governo\b,novo,Curso da Escola de Governo,,Nomes de instituições que não são de educação básica
+E18,exclusao,expressao,saude escolar,novo,Pesquisa Nacional de Saúde Escolar,,Pesquisa do IBGE (PeNSE). Encontrado em objetos de contratação
 O17,outro_contexto,radical,universi,novo,Restaurante universitário | Universidade Federal,,Restaurantes universitários não fazem parte do PNAE. Institutos federais continuam como escolares
 O01,outro_contexto,radical,evento,novo,Buffet para eventos,,
 O02,outro_contexto,expressao,coffee break,novo,Coffee break para seminário,,
@@ -72,3 +79,11 @@ O13,outro_contexto,regex,\b(prision|presidi|detent|apenad|custodiad)[a-z]*,novo,
 O14,outro_contexto,radical,socioeducativ,novo,Unidades socioeducativas,,
 O15,outro_contexto,expressao,acolhimento institucional,novo,Serviços de acolhimento institucional,,
 O16,outro_contexto,radical,idoso,novo,Instituição de longa permanência para idosos,,
+O18,outro_contexto,expressao,jornada pedagogica,novo,Organização da Jornada Pedagógica,,Evento de professores
+O19,outro_contexto,radical,capacitac,novo,Lanche para capacitação de professores,,
+O20,outro_contexto,radical,treinament,novo,Coffee break para treinamentos,,
+O21,outro_contexto,regex,\breuni(ao|oes)\b,novo,Jantar da reunião do conselho | Lanches para reuniões,Reunir esforços,
+O22,outro_contexto,regex,\b(cantinas?|lanchonetes?)\b,novo,Exploração de cantina | Concessão de lanchonete,Cantineira escolar,Exploração comercial. Cantineira fica de fora
+O23,outro_contexto,regex,"\b(concessao|cessao)( [a-z]+){0,3} (uso|espaco|area)\b|\bexploracao comercial\b",novo,Concessão onerosa de espaço físico | Cessão de uso da área | Exploração comercial de restaurante,Concessão de reajuste,Exploração comercial de espaço público
+O24,outro_contexto,regex,\b(servidor(es|as?)?|colaborador(es|as?)?|motoristas?)\b,novo,Alimentação dos servidores | Marmitex para colaboradores | Refeições aos motoristas do transporte escolar,Prestação de serviços,Quem come não é aluno
+O25,outro_contexto,regex,"\b(ufac|ufal|ufam|ufba|ufc|ufca|ufcg|ufcspa|ufersa|ufes|uff|ufg|ufgd|ufjf|ufla|ufma|ufmg|ufms|ufmt|ufop|ufob|ufopa|ufpa|ufpb|ufpe|ufpel|ufpi|ufpr|ufra|ufrb|ufrgs|ufrj|ufrn|ufrpe|ufrr|ufrrj|ufs|ufsc|ufscar|ufsj|ufsm|ufsb|uft|uftm|ufu|ufv|ufvjm|ufape|ufcat|ufdpar|ufj|ufr|unb|unifesp|unirio|unifap|unir|unila|unilab|unipampa|unifal|unifei|unifesspa)\b",novo,Campus da UFS de São Cristóvão | Restaurante da UFMG,Valor em UFIR,Siglas de universidades federais. Completa O17
