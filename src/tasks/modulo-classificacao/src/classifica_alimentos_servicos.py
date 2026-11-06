@@ -141,6 +141,7 @@ GRUPOS_TERMOS = [
     "escolar_forte",
     "escolar_funcao",
     "escolar_fraco",
+    "escolar_indicio",
     "outro_contexto",
     "exclusao",
 ]
@@ -150,6 +151,8 @@ METODO_SEM_CONTEXTO = "sem contexto alimentar"
 # Um destes grupos na descrição ou no objeto basta como contexto escolar. O
 # escolar fraco só vale sem termo de outro contexto.
 GRUPOS_CONTEXTO_ESCOLAR = ["escolar_forte", "escolar_funcao"]
+# O escolar indício (ex.: agricultura familiar, que também aparece no PAA) fica
+# nas colunas de termos para consulta, mas não entra em nenhuma regra.
 METODO_SEM_CONTEXTO_ESCOLAR = "sem contexto escolar"
 
 # Cada classificador grava numa subpasta própria de output.

@@ -42,7 +42,7 @@ C05,escolar_fraco,regex,\b(cmei|emei|cemei)s?\b,novo,CMEI Pequeno Príncipe | EM
 C06,escolar_fraco,radical,ensino,novo,Rede municipal de ensino,,
 C07,escolar_fraco,radical,educac,TdP,Secretaria Municipal de Educação | Atividades educacionais,,
 C08,escolar_fraco,expressao,fnde,novo,Prestação de contas ao FNDE,,No lote aparece sobretudo em obras padrão FNDE
-C09,escolar_fraco,expressao,agricultura familiar,novo,Produtos da agricultura familiar,,Também aparece no PAA. Por isso não é escolar forte
+C09,escolar_indicio,expressao,agricultura familiar,novo,Produtos da agricultura familiar,,"Também aparece no PAA e em feiras rurais. É só indício: fica registrado, mas não decide o contexto escolar"
 C10,escolar_fraco,regex,\b(seduc|semed|smed)\b,novo,Gêneros alimentícios CP 04/25-SEDUC | Secretaria Municipal de Educação - SEMED,,Siglas de secretarias de educação nos objetos e nomes de unidade
 C11,escolar_fraco,regex,"\b(instituto federal|if(ac|al|ap|am|ba|baiano|b|ce|es|g|goiano|ma|mg|nmg|sudestemg|suldeminas|tm|mt|ms|pa|pb|pe|sertaope|pi|pr|rj|f|fluminense|rn|rs|far|sul|ro|rr|sc|sp|s|to))\b",novo,Campus Avançado Parelhas deste IFRN | Instituto Federal do Piauí | unidades do IFFar,Pedido pelo iFood,"Institutos federais pela sigla. Sem ela, só ""Instituto Federal de Educação"" casava, por C07"
 C12,escolar_fraco,radical,discent,novo,Refeições ofertadas aos discentes,,Estudantes de institutos federais

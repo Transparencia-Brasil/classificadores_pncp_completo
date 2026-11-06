@@ -118,6 +118,18 @@ class TestMarcarContextoEscolar(unittest.TestCase):
         self.assertEqual(linha["metodo_contexto_escolar"], METODO_SEM_CONTEXTO_ESCOLAR)
         self.assertNotEqual(linha["termos_outro_contexto_objeto"], "")
 
+    def test_agricultura_familiar_sozinha_e_so_indicio(self) -> None:
+        # Também aparece no PAA (ex.: compras do Exército pela Lei 14.628/2023).
+        linha = marcar("Aquisição de gêneros da agricultura familiar para o 4º GAC")
+        self.assertFalse(linha["contexto_escolar"])
+        self.assertEqual(linha["termos_escolar_indicio_objeto"], "agricultura familiar")
+        self.assertEqual(linha["termos_escolar_fraco_objeto"], "")
+
+    def test_agricultura_familiar_com_termo_escolar(self) -> None:
+        linha = marcar("Gêneros da agricultura familiar para a alimentação escolar")
+        self.assertTrue(linha["contexto_escolar"])
+        self.assertEqual(linha["metodo_contexto_escolar"], METODO_TERMO_FORTE)
+
     def test_sem_termo_escolar(self) -> None:
         linha = marcar("Gêneros alimentícios para a Câmara Municipal")
         self.assertFalse(linha["contexto_escolar"])
