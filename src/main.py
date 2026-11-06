@@ -2,8 +2,9 @@
 
 Para cada mês do período, o pipeline constrói a base de contratações e de itens
 (sem repetições entre as coletas quinzenais), classifica os materiais como
-candidatos a alimentos (CATMAT) e os serviços ligados à alimentação escolar
-(CATSER). No fim, junta os resultados dos meses em arquivos do período.
+candidatos a alimentos (CATMAT), marca o contexto escolar desses alimentos pela
+contratação e classifica os serviços ligados à alimentação escolar (CATSER). No
+fim, junta os resultados dos meses em arquivos do período.
 
 Cada etapa concluída deixa um marcador em ``output/progresso`` com a duração da
 etapa em segundos. Uma nova execução pula as etapas já feitas, a menos que se use
@@ -37,6 +38,7 @@ from itens_build import caminhos_saida as caminhos_itens  # noqa: E402
 SCRIPT_CONTRATACOES = PASTA_BASE / "src" / "database_build.py"
 SCRIPT_ITENS = PASTA_BASE / "src" / "itens_build.py"
 SCRIPT_ALIMENTOS = PASTA_CLASSIFICACAO / "src" / "classifica_alimentos.py"
+SCRIPT_CONTEXTO_ALIMENTOS = PASTA_CLASSIFICACAO / "src" / "contexto_escolar_alimentos.py"
 SCRIPT_SERVICOS = PASTA_CLASSIFICACAO / "src" / "classifica_alimentos_servicos.py"
 
 PASTA_PERIODO = PASTA_CLASSIFICACAO / "output" / "periodo"
@@ -65,18 +67,22 @@ def marcador_etapa(sufixo: str, nome: str) -> Path:
     return PASTA_PROGRESSO / f"{sufixo}_{nome}.ok"
 
 
-def executar_etapa(nome: str, sufixo: str, comando: list[str], refazer: bool) -> None:
-    """Roda um script e registra a conclusão, ou pula se já foi concluído."""
+def executar_etapa(nome: str, sufixo: str, comando: list[str], refazer: bool) -> bool:
+    """Roda um script e registra a conclusão, ou pula se já foi concluído.
+
+    Devolve ``True`` quando o script rodou nesta execução.
+    """
     marcador = marcador_etapa(sufixo, nome)
     if marcador.exists() and not refazer:
         print(f"[{sufixo}] {nome}: já concluída, pulando")
-        return
+        return False
 
     print(f"\n[{sufixo}] {nome}: {' '.join(comando)}", flush=True)
     inicio = time.perf_counter()
     subprocess.run([sys.executable, *comando], check=True)
     PASTA_PROGRESSO.mkdir(parents=True, exist_ok=True)
     marcador.write_text(f"{time.perf_counter() - inicio:.0f}", encoding="utf-8")
+    return True
 
 
 def processar_mes(mes: tuple[int, int], origem: Path, refazer: bool) -> str:
@@ -85,14 +91,24 @@ def processar_mes(mes: tuple[int, int], origem: Path, refazer: bool) -> str:
     sufixo = sufixo_periodo(mes, mes)
     periodo = ["--inicio", rotulo, "--fim", rotulo, "--origem", str(origem), "--deduplicar"]
     itens = caminhos_itens(SAIDA_PADRAO, sufixo)
+    contratacoes = str(SAIDA_PADRAO / f"contratacoes_{sufixo}.csv")
 
     executar_etapa("contratacoes", sufixo, [str(SCRIPT_CONTRATACOES), *periodo], refazer)
     executar_etapa("itens", sufixo, [str(SCRIPT_ITENS), *periodo], refazer)
-    executar_etapa(
+    alimentos_refeitos = executar_etapa(
         "alimentos",
         sufixo,
         [str(SCRIPT_ALIMENTOS), "--itens", str(itens["materiais"]), "--sufixo", sufixo],
         refazer,
+    )
+    # A etapa de alimentos regrava o CSV sem as colunas do contexto escolar, por
+    # isso o contexto é refeito sempre que os alimentos são refeitos. Mudanças só
+    # no contexto (como o dicionário de termos) refazem apenas esta etapa.
+    executar_etapa(
+        "contexto_alimentos",
+        sufixo,
+        [str(SCRIPT_CONTEXTO_ALIMENTOS), "--sufixo", sufixo, "--contratacoes", contratacoes],
+        refazer or alimentos_refeitos,
     )
     executar_etapa(
         "servicos",
@@ -100,7 +116,7 @@ def processar_mes(mes: tuple[int, int], origem: Path, refazer: bool) -> str:
         [
             str(SCRIPT_SERVICOS),
             "--itens", str(itens["servicos"]),
-            "--contratacoes", str(SAIDA_PADRAO / f"contratacoes_{sufixo}.csv"),
+            "--contratacoes", contratacoes,
             "--sufixo", sufixo,
         ],
         refazer,
@@ -186,6 +202,10 @@ def main() -> None:
 
     print()
     periodo = juntar_periodo(sufixos, sufixo_periodo(args.inicio, args.fim))
+    print("Alimentos candidatos por contexto escolar:")
+    metodos = periodo["alimentos"]["metodo_contexto_escolar"].value_counts()
+    for metodo, n in metodos.items():
+        print(f"  {metodo}: {n:,}")
     print("Serviços por método de classificação:")
     metodos = periodo["servicos"]["metodo_classificacao"].value_counts()
     for metodo, n in metodos.items():
