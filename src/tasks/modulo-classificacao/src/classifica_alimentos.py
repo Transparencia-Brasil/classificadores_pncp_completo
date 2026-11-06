@@ -42,14 +42,16 @@ CAMINHO_CATALOGO_CONSOLIDADO = (
     PASTA_REFERENCIAS / "catalogo_consolidado_itens_catmat_grupo_89_v0_1.csv"
 )
 PASTA_OUTPUT = PASTA_TAREFA / "output"
+# Cada classificador grava numa subpasta própria de output.
+PASTA_SAIDA_MATERIAIS = PASTA_OUTPUT / "materiais"
 PASTA_CACHE = PASTA_TAREFA / "cache"
 # O catálogo é o mesmo para todos os lotes, então seus vetores ficam num cache
 # único. As consultas mudam a cada lote e têm cache próprio (ver caminhos_lote).
-CAMINHO_CLASSE_ALIMENTOS = PASTA_OUTPUT / "classe_alimentos_catmat_v0_1.csv"
+CAMINHO_CLASSE_ALIMENTOS = PASTA_SAIDA_MATERIAIS / "classe_alimentos_catmat_v0_1.csv"
 CAMINHO_CACHE = PASTA_CACHE / "catalogo_alimentos_vetorizado.npz"
 
 
-def caminhos_lote(sufixo: str, pasta_saida: Path = PASTA_OUTPUT) -> dict[str, Path]:
+def caminhos_lote(sufixo: str, pasta_saida: Path = PASTA_SAIDA_MATERIAIS) -> dict[str, Path]:
     """Caminhos dos resultados e do cache de consultas de um lote do PNCP."""
     return {
         "alimentos": pasta_saida / f"alimentos_candidatos_pncp_{sufixo}.csv",
@@ -927,7 +929,9 @@ def criar_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--janela", help="Período gravado em janela_referencia_pncp (padrão: o sufixo)"
     )
-    parser.add_argument("--saida", type=Path, default=PASTA_OUTPUT, help="Pasta de saída")
+    parser.add_argument(
+        "--saida", type=Path, default=PASTA_SAIDA_MATERIAIS, help="Pasta de saída"
+    )
     parser.add_argument(
         "--catalogo-consolidado", type=Path, default=CAMINHO_CATALOGO_CONSOLIDADO
     )

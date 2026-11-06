@@ -28,7 +28,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from classifica_alimentos import PASTA_OUTPUT, caminhos_lote
+from classifica_alimentos import PASTA_SAIDA_MATERIAIS, caminhos_lote
 from classifica_alimentos_servicos import (
     CODIGOS_AMPARO_PNAE,
     GRUPOS_CONTEXTO_ESCOLAR,
@@ -41,7 +41,7 @@ from classifica_alimentos_servicos import (
 )
 
 
-def caminhos_contexto(sufixo: str, pasta_saida: Path = PASTA_OUTPUT) -> dict[str, Path]:
+def caminhos_contexto(sufixo: str, pasta_saida: Path = PASTA_SAIDA_MATERIAIS) -> dict[str, Path]:
     """Caminhos dos alimentos do lote com e sem contexto escolar."""
     # A maior parte dos alimentos fica sem contexto escolar. Esse arquivo é
     # compactado, como o False dos serviços.
@@ -156,6 +156,7 @@ def marcar_contexto_escolar(alimentos: pd.DataFrame, padroes: dict) -> pd.DataFr
 
 def gravar_csv(tabela: pd.DataFrame, caminho: Path) -> None:
     """Grava por um arquivo temporário para não deixar um CSV pela metade."""
+    caminho.parent.mkdir(parents=True, exist_ok=True)
     temporario = caminho.with_name(f"tmp_{caminho.name}")
     tabela.to_csv(temporario, index=False, encoding="utf-8")
     temporario.replace(caminho)
@@ -180,7 +181,9 @@ def main() -> None:
     parser.add_argument(
         "--contratacoes", type=Path, required=True, help="CSV de contratações do lote"
     )
-    parser.add_argument("--saida", type=Path, default=PASTA_OUTPUT, help="Pasta dos resultados")
+    parser.add_argument(
+        "--saida", type=Path, default=PASTA_SAIDA_MATERIAIS, help="Pasta dos resultados"
+    )
     args = parser.parse_args()
 
     destinos = caminhos_contexto(args.sufixo, args.saida)

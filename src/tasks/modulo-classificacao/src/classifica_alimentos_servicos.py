@@ -152,7 +152,9 @@ METODO_SEM_CONTEXTO = "sem contexto alimentar"
 GRUPOS_CONTEXTO_ESCOLAR = ["escolar_forte", "escolar_funcao"]
 METODO_SEM_CONTEXTO_ESCOLAR = "sem contexto escolar"
 
-CAMINHO_REFERENCIA = PASTA_OUTPUT / "referencia_servicos_alimentacao_catser.csv"
+# Cada classificador grava numa subpasta própria de output.
+PASTA_SAIDA_SERVICOS = PASTA_OUTPUT / "servicos"
+CAMINHO_REFERENCIA = PASTA_SAIDA_SERVICOS / "referencia_servicos_alimentacao_catser.csv"
 LIMITE_PADRAO = 0.5
 LIMITE_RESGATE_PADRAO = 0.4
 # Métodos atribuídos no passo 4, na ordem do desenho.
@@ -166,7 +168,7 @@ METODO_ABAIXO_SEM_FUNCAO = "abaixo de 0,4 sem função"
 
 
 
-def caminhos_lote(sufixo: str, pasta_saida: Path = PASTA_OUTPUT) -> dict[str, Path]:
+def caminhos_lote(sufixo: str, pasta_saida: Path = PASTA_SAIDA_SERVICOS) -> dict[str, Path]:
     """Caminhos dos resultados e do cache de consultas de um lote do PNCP."""
     # Quase todos os serviços terminam como False. O arquivo é compactado, como o
     # diagnóstico das versões anteriores.
@@ -586,7 +588,9 @@ def criar_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--janela", help="Período gravado em janela_referencia_pncp (padrão: o sufixo)"
     )
-    parser.add_argument("--saida", type=Path, default=PASTA_OUTPUT, help="Pasta de saída")
+    parser.add_argument(
+        "--saida", type=Path, default=PASTA_SAIDA_SERVICOS, help="Pasta de saída"
+    )
     parser.add_argument("--catser", type=Path, default=CAMINHO_CATSER)
     parser.add_argument("--termos", type=Path, default=CAMINHO_TERMOS)
     parser.add_argument("--modelo", default=MODELO_PADRAO)
