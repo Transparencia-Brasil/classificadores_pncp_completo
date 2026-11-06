@@ -1,8 +1,9 @@
 """Amostra dos resultados do pipeline para validação manual.
 
 Sorteia, com semente fixa, linhas dos arquivos do período gerados por
-``src/main.py``: os materiais classificados como alimentos candidatos e os
-serviços classificados como alimentação escolar. Cada amostra vai para uma aba
+``src/main.py``: os alimentos candidatos com contexto escolar (o arquivo True;
+os sem contexto escolar ficam fora da amostra) e os serviços classificados como
+alimentação escolar. Cada amostra vai para uma aba
 de ``output/periodo/amostra_validacao_<período>.xlsx``, com as colunas usadas
 na classificação e colunas em branco para a validação.
 
@@ -16,9 +17,10 @@ import pandas as pd
 from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.datavalidation import DataValidation
 
-from main import PASTA_PERIODO, parse_ano_mes, sufixo_periodo
-from resumo import RESULTADOS_PERIODO, ler_periodo
+from main import ARQUIVOS_PERIODO, PASTA_PERIODO, parse_ano_mes, sufixo_periodo
 
+# Arquivo do período (ARQUIVOS_PERIODO, em main.py) de onde sai cada amostra.
+ARQUIVO_AMOSTRA = {"materiais": "alimentos_true", "servicos": "servicos"}
 COLUNAS_ITEM = ["coleta_ano", "coleta_mes", "numeroControlePNCP", "numeroItem", "descricao"]
 # Colunas que explicam a decisão de cada classificador.
 COLUNAS_CLASSIFICACAO = {
@@ -30,6 +32,8 @@ COLUNAS_CLASSIFICACAO = {
         "grupo_taxonomico",
         "subgrupo_taxonomico",
         "metodo_classificacao",
+        "objetoCompra",
+        "metodo_contexto_escolar",
     ],
     "servicos": [
         "objetoCompra",
@@ -43,13 +47,18 @@ COLUNAS_CLASSIFICACAO = {
 }
 COLUNAS_VALIDACAO = ["classificacao_correta", "grupo_correto", "observacao"]
 OPCOES_CLASSIFICACAO = "Sim,Não,Dúvida"
-NOME_ABA = {"materiais": "Alimentos candidatos", "servicos": "Serviços True"}
+NOME_ABA = {"materiais": "Alimentos contexto escolar", "servicos": "Serviços True"}
 
 
 def sortear(sufixo_total: str, tipo: str, tamanho: int, semente: int) -> pd.DataFrame:
     """Sorteia as linhas de um resultado do período e acrescenta as colunas da validação."""
     colunas = COLUNAS_ITEM + COLUNAS_CLASSIFICACAO[tipo]
-    resultado = ler_periodo(sufixo_total, tipo, colunas)[colunas]
+    resultado = pd.read_csv(
+        PASTA_PERIODO / ARQUIVOS_PERIODO[ARQUIVO_AMOSTRA[tipo]].format(sufixo_total),
+        dtype=str,
+        keep_default_na=False,
+        usecols=colunas,
+    )[colunas]
     amostra = resultado.sample(n=min(tamanho, len(resultado)), random_state=semente)
     amostra = amostra.sort_values(["coleta_ano", "coleta_mes", "numeroControlePNCP"])
     for coluna in COLUNAS_VALIDACAO:
@@ -87,7 +96,7 @@ def main() -> None:
 
     periodo = sufixo_periodo(args.inicio, args.fim)
     amostras = {
-        tipo: sortear(periodo, tipo, args.tamanho, args.semente) for tipo in RESULTADOS_PERIODO
+        tipo: sortear(periodo, tipo, args.tamanho, args.semente) for tipo in ARQUIVO_AMOSTRA
     }
     destino = PASTA_PERIODO / f"amostra_validacao_{periodo}.xlsx"
     gravar_planilha(amostras, destino)
