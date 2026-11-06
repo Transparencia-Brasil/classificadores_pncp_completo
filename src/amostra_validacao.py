@@ -34,6 +34,8 @@ COLUNAS_CLASSIFICACAO = {
         "metodo_classificacao",
         "objetoCompra",
         "metodo_contexto_escolar",
+        "unidadeOrgao.nomeUnidade",
+        "orgaoEntidade.razaoSocial",
     ],
     "servicos": [
         "objetoCompra",
