@@ -1,11 +1,19 @@
-"""Acrescenta aos alimentos candidatos os dados da contratação de cada item.
+"""Marca o contexto escolar dos alimentos candidatos pela contratação de cada item.
 
 O classificador de alimentos olha só a descrição do item e responde se ele é um
 alimento candidato ao PNAE. Se a compra é para alimentação escolar depende da
 contratação: objeto, amparo legal e quem compra. Esta etapa roda depois dos
-embeddings e lê o CSV de alimentos candidatos do lote, liga cada item à sua
-contratação pela chave do endpoint e grava o mesmo CSV com as colunas da
-contratação. Assim, mudanças nesta etapa não exigem refazer os embeddings.
+embeddings e lê o CSV de alimentos candidatos do lote. Ela:
+
+1. liga cada item à sua contratação pela chave do endpoint e acrescenta objeto,
+   amparo, órgão e unidade;
+2. marca o contexto escolar: amparo 138/139, ou termo escolar forte ou de função
+   no objeto da compra, ou termo escolar fraco no objeto sem termo de outro
+   contexto (o mesmo dicionário e a mesma regra do passo 3b dos serviços).
+
+Nenhum item é removido: o CSV é regravado com as novas colunas e o recorte de
+alimentação escolar é ``contexto_escolar == True``. Mudanças nesta etapa, como
+novos termos no dicionário, não exigem refazer os embeddings.
 
 Exemplo:
     python contexto_escolar_alimentos.py --sufixo 2025-01_a_2025-01 \\
@@ -20,7 +28,16 @@ from pathlib import Path
 import pandas as pd
 
 from classifica_alimentos import PASTA_OUTPUT, caminhos_lote
-from classifica_alimentos_servicos import PADRAO_CHAVE_ENDPOINT
+from classifica_alimentos_servicos import (
+    CODIGOS_AMPARO_PNAE,
+    GRUPOS_CONTEXTO_ESCOLAR,
+    GRUPOS_TERMOS,
+    METODO_AMPARO,
+    METODO_SEM_CONTEXTO_ESCOLAR,
+    PADRAO_CHAVE_ENDPOINT,
+    buscar_termos_objeto,
+    carregar_padroes_termos,
+)
 
 # Campos da contratação levados aos alimentos. Os nomes seguem o PNCP sem o
 # prefixo "data.", como no CSV de serviços.
@@ -41,6 +58,16 @@ COLUNAS_CONTRATACAO_ALIMENTOS = {
 }
 # As colunas da contratação entram logo depois desta coluna, como nos serviços.
 COLUNA_ANTERIOR = "problema_codificacao"
+
+# Como cada item chegou (ou não) ao contexto escolar, em ordem de prioridade.
+METODO_TERMO_FORTE = "termo escolar forte ou função no objeto"
+METODO_TERMO_FRACO = "termo escolar fraco no objeto"
+# Colunas da marcação, gravadas depois das colunas da contratação.
+COLUNAS_CONTEXTO = [
+    *(f"termos_{grupo}_objeto" for grupo in GRUPOS_TERMOS),
+    "contexto_escolar",
+    "metodo_contexto_escolar",
+]
 
 
 def carregar_contratacoes(caminho: Path) -> pd.DataFrame:
@@ -71,7 +98,9 @@ def ligar_contratacoes(alimentos: pd.DataFrame, contratacoes: pd.DataFrame) -> p
     """
     novas = list(COLUNAS_CONTRATACAO_ALIMENTOS.values())
     # Uma nova execução substitui as colunas gravadas pela anterior.
-    base = alimentos.drop(columns=[coluna for coluna in novas if coluna in alimentos])
+    base = alimentos.drop(
+        columns=[coluna for coluna in novas + COLUNAS_CONTEXTO if coluna in alimentos]
+    )
     chave = base["endpoint"].str.extract(PADRAO_CHAVE_ENDPOINT)
     resultado = base.assign(
         chave_contratacao=chave[0] + "/" + chave[1] + "/" + chave[2]
@@ -90,10 +119,39 @@ def ligar_contratacoes(alimentos: pd.DataFrame, contratacoes: pd.DataFrame) -> p
     return resultado[colunas[:posicao] + novas + colunas[posicao:]]
 
 
+def marcar_contexto_escolar(alimentos: pd.DataFrame, padroes: dict) -> pd.DataFrame:
+    """Aplica o dicionário ao objeto da compra e marca o contexto escolar.
+
+    A regra é a do passo 3b dos serviços, restrita ao objeto: a descrição de um
+    material ("Arroz beneficiado") quase nunca diz para quem é a compra.
+    """
+    resultado = buscar_termos_objeto(alimentos, padroes)
+
+    def tem(grupos: list[str]) -> pd.Series:
+        return resultado[[f"termos_{grupo}_objeto" for grupo in grupos]].ne("").any(axis=1)
+
+    amparo = resultado["amparoLegal.codigo"].isin(CODIGOS_AMPARO_PNAE)
+    forte = tem(GRUPOS_CONTEXTO_ESCOLAR)
+    fraco = tem(["escolar_fraco"]) & ~tem(["outro_contexto"])
+    resultado["contexto_escolar"] = amparo | forte | fraco
+
+    resultado["metodo_contexto_escolar"] = METODO_SEM_CONTEXTO_ESCOLAR
+    resultado.loc[fraco, "metodo_contexto_escolar"] = METODO_TERMO_FRACO
+    resultado.loc[forte, "metodo_contexto_escolar"] = METODO_TERMO_FORTE
+    resultado.loc[amparo, "metodo_contexto_escolar"] = METODO_AMPARO
+
+    # As colunas da marcação ficam logo depois das colunas da contratação.
+    colunas = [coluna for coluna in resultado.columns if coluna not in COLUNAS_CONTEXTO]
+    ultima = list(COLUNAS_CONTRATACAO_ALIMENTOS.values())[-1]
+    posicao = colunas.index(ultima) + 1
+    return resultado[colunas[:posicao] + COLUNAS_CONTEXTO + colunas[posicao:]]
+
+
 def executar(caminho_alimentos: Path, caminho_contratacoes: Path) -> pd.DataFrame:
-    """Liga os alimentos do lote às contratações e regrava o CSV de alimentos."""
+    """Liga os alimentos às contratações, marca o contexto e regrava o CSV."""
     alimentos = pd.read_csv(caminho_alimentos, dtype=str, keep_default_na=False)
     resultado = ligar_contratacoes(alimentos, carregar_contratacoes(caminho_contratacoes))
+    resultado = marcar_contexto_escolar(resultado, carregar_padroes_termos())
     # A gravação temporária evita deixar o CSV de alimentos pela metade.
     temporario = caminho_alimentos.with_suffix(".tmp.csv")
     resultado.to_csv(temporario, index=False, encoding="utf-8")
@@ -113,7 +171,10 @@ def main() -> None:
 
     caminho = caminhos_lote(args.sufixo, args.saida)["alimentos"]
     resultado = executar(caminho, args.contratacoes)
-    print(f"{len(resultado):,} alimentos com as colunas da contratação -> {caminho}")
+    print(
+        f"{len(resultado):,} alimentos, {int(resultado['contexto_escolar'].sum()):,} "
+        f"com contexto escolar -> {caminho}"
+    )
 
 
 if __name__ == "__main__":
