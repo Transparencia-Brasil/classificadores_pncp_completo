@@ -86,7 +86,7 @@ tfoot th, tfoot td { font-weight: 600; border-bottom: 0; border-top: 1px solid v
 .selo { display: inline-block; font-size: 12px; font-weight: 600; padding: 1px 8px; border-radius: 999px; }
 .selo-proibido { color: var(--proib); background: var(--proib-bg); }
 .selo-restrito { color: var(--rest); background: var(--rest-bg); }
-.aviso { border-left: 3px solid var(--rest); background: var(--rest-bg); padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: 14px; max-width: 90ch; }
+.aviso { border-left: 3px solid var(--rest); background: var(--rest-bg); padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: 14px; max-width: 90ch; display: grid; gap: 8px; } .aviso ol { margin: 0; padding-left: 1.4em; display: grid; gap: 6px; }
 .pendencias { display: grid; gap: 0; }
 .pendencias > div { display: grid; grid-template-columns: 11em minmax(0, 1fr); gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--rule); }
 .pendencias dt { font-weight: 600; } .pendencias dd { margin: 0; color: var(--ink-2); }
@@ -180,7 +180,7 @@ footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--rule)
 <section id="pnae">
   <header><h2>Aplicabilidade ao PNAE</h2>
   <p>Se cada item CATMAT poderia ser comprado com recursos do PNAE. É uma característica do item, não da compra: a maioria das compras classificadas não usa recursos do programa.</p></header>
-  <p class="aviso">Análise preliminar. A coluna <code>aplicabilidade_pnae</code> do catálogo vale “candidata” para todos os resultados e não aplica as regras do FNDE. A triagem abaixo usa palavras-chave sobre a lista de proibidos e restritos da Resolução CD/FNDE nº 06/2020, sem validação e sem conferir alterações posteriores da norma.</p>
+  <div class="aviso"><p><strong>O que é um item “candidato”.</strong> Neste relatório, a palavra aparece em dois sentidos. Nenhum deles quer dizer que o item foi comprado com recursos do PNAE.</p><ol><li><strong>Alimento candidato:</strong> material do PNCP que o classificador automático pareou com um item do catálogo CATMAT de alimentos. A descrição do item é comparada por embeddings com os itens CATMAT do mesmo PDM, com similaridade mínima de 0,5. É “candidato” porque ainda não passou pela validação manual: pode haver falsos positivos, e os 66.475 itens são uma estimativa, não compras confirmadas.</li><li><strong>Aplicabilidade “candidata” ao PNAE:</strong> a coluna <code>aplicabilidade_pnae</code> do catálogo deveria indicar se o tipo de alimento pode ser comprado com recursos do programa. Hoje ela vale “candidata” para todos os resultados, porque as regras do FNDE ainda não foram aplicadas a cada item CATMAT. Por isso, a triagem abaixo é preliminar. Ela usa palavras-chave sobre a lista de proibidos e restritos da Resolução CD/FNDE nº 06/2020, sem validação e sem conferir alterações posteriores da norma.</li></ol></div>
   <div class="duas">
     <div class="cartao"><h3>Triagem por palavra-chave</h3>
       <div class="rolagem"><table><thead><tr><th scope="col">Situação</th><th scope="col">Categoria</th><th scope="col" class="num">Itens CATMAT</th><th scope="col" class="num">Itens PNCP</th></tr></thead>
