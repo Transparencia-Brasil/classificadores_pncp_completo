@@ -11,9 +11,10 @@ embeddings e lê o CSV de alimentos candidatos do lote. Ela:
    no objeto da compra, ou termo escolar fraco no objeto sem termo de outro
    contexto (o mesmo dicionário e a mesma regra do passo 3b dos serviços).
 
-Nenhum item é removido: o CSV é regravado com as novas colunas e o recorte de
-alimentação escolar é ``contexto_escolar == True``. Mudanças nesta etapa, como
-novos termos no dicionário, não exigem refazer os embeddings.
+Nenhum item é removido: os alimentos saem divididos em dois arquivos, com e sem
+contexto escolar, como os serviços. O CSV do classificador não é alterado.
+Mudanças nesta etapa, como novos termos no dicionário, não exigem refazer os
+embeddings.
 
 Exemplo:
     python contexto_escolar_alimentos.py --sufixo 2025-01_a_2025-01 \\
@@ -38,6 +39,16 @@ from classifica_alimentos_servicos import (
     buscar_termos_objeto,
     carregar_padroes_termos,
 )
+
+
+def caminhos_contexto(sufixo: str, pasta_saida: Path = PASTA_OUTPUT) -> dict[str, Path]:
+    """Caminhos dos alimentos do lote com e sem contexto escolar."""
+    # A maior parte dos alimentos fica sem contexto escolar. Esse arquivo é
+    # compactado, como o False dos serviços.
+    return {
+        "true": pasta_saida / f"alimentos_contexto_escolar_true_pncp_{sufixo}.csv",
+        "false": pasta_saida / f"alimentos_contexto_escolar_false_pncp_{sufixo}.csv.gz",
+    }
 
 # Campos da contratação levados aos alimentos. Os nomes seguem o PNCP sem o
 # prefixo "data.", como no CSV de serviços.
@@ -97,12 +108,8 @@ def ligar_contratacoes(alimentos: pd.DataFrame, contratacoes: pd.DataFrame) -> p
     exemplo) continuam no resultado, com as colunas da contratação vazias.
     """
     novas = list(COLUNAS_CONTRATACAO_ALIMENTOS.values())
-    # Uma nova execução substitui as colunas gravadas pela anterior.
-    base = alimentos.drop(
-        columns=[coluna for coluna in novas + COLUNAS_CONTEXTO if coluna in alimentos]
-    )
-    chave = base["endpoint"].str.extract(PADRAO_CHAVE_ENDPOINT)
-    resultado = base.assign(
+    chave = alimentos["endpoint"].str.extract(PADRAO_CHAVE_ENDPOINT)
+    resultado = alimentos.assign(
         chave_contratacao=chave[0] + "/" + chave[1] + "/" + chave[2]
     ).merge(contratacoes, on="chave_contratacao", how="left", validate="many_to_one")
 
@@ -114,7 +121,7 @@ def ligar_contratacoes(alimentos: pd.DataFrame, contratacoes: pd.DataFrame) -> p
         )
     resultado[novas] = resultado[novas].fillna("")
 
-    colunas = list(base.columns)
+    colunas = list(alimentos.columns)
     posicao = colunas.index(COLUNA_ANTERIOR) + 1 if COLUNA_ANTERIOR in colunas else len(colunas)
     return resultado[colunas[:posicao] + novas + colunas[posicao:]]
 
@@ -147,20 +154,27 @@ def marcar_contexto_escolar(alimentos: pd.DataFrame, padroes: dict) -> pd.DataFr
     return resultado[colunas[:posicao] + COLUNAS_CONTEXTO + colunas[posicao:]]
 
 
-def executar(caminho_alimentos: Path, caminho_contratacoes: Path) -> pd.DataFrame:
-    """Liga os alimentos às contratações, marca o contexto e regrava o CSV."""
+def gravar_csv(tabela: pd.DataFrame, caminho: Path) -> None:
+    """Grava por um arquivo temporário para não deixar um CSV pela metade."""
+    temporario = caminho.with_name(f"tmp_{caminho.name}")
+    tabela.to_csv(temporario, index=False, encoding="utf-8")
+    temporario.replace(caminho)
+
+
+def executar(
+    caminho_alimentos: Path, caminho_contratacoes: Path, destinos: dict[str, Path]
+) -> pd.DataFrame:
+    """Liga os alimentos às contratações, marca o contexto e grava true e false."""
     alimentos = pd.read_csv(caminho_alimentos, dtype=str, keep_default_na=False)
     resultado = ligar_contratacoes(alimentos, carregar_contratacoes(caminho_contratacoes))
     resultado = marcar_contexto_escolar(resultado, carregar_padroes_termos())
-    # A gravação temporária evita deixar o CSV de alimentos pela metade.
-    temporario = caminho_alimentos.with_suffix(".tmp.csv")
-    resultado.to_csv(temporario, index=False, encoding="utf-8")
-    temporario.replace(caminho_alimentos)
+    gravar_csv(resultado.loc[resultado["contexto_escolar"]], destinos["true"])
+    gravar_csv(resultado.loc[~resultado["contexto_escolar"]], destinos["false"])
     return resultado
 
 
 def main() -> None:
-    """Lê os argumentos e acrescenta as colunas da contratação ao lote."""
+    """Lê os argumentos e grava os alimentos do lote com e sem contexto escolar."""
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--sufixo", required=True, help="Lote (ex.: 2025-01_a_2025-01)")
     parser.add_argument(
@@ -169,12 +183,13 @@ def main() -> None:
     parser.add_argument("--saida", type=Path, default=PASTA_OUTPUT, help="Pasta dos resultados")
     args = parser.parse_args()
 
-    caminho = caminhos_lote(args.sufixo, args.saida)["alimentos"]
-    resultado = executar(caminho, args.contratacoes)
-    print(
-        f"{len(resultado):,} alimentos, {int(resultado['contexto_escolar'].sum()):,} "
-        f"com contexto escolar -> {caminho}"
+    destinos = caminhos_contexto(args.sufixo, args.saida)
+    resultado = executar(
+        caminhos_lote(args.sufixo, args.saida)["alimentos"], args.contratacoes, destinos
     )
+    com_contexto = int(resultado["contexto_escolar"].sum())
+    print(f"{com_contexto:,} alimentos com contexto escolar -> {destinos['true']}")
+    print(f"{len(resultado) - com_contexto:,} alimentos sem contexto escolar -> {destinos['false']}")
 
 
 if __name__ == "__main__":

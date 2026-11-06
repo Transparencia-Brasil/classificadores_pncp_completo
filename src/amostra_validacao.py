@@ -17,7 +17,7 @@ from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.datavalidation import DataValidation
 
 from main import PASTA_PERIODO, parse_ano_mes, sufixo_periodo
-from resumo import ARQUIVO_PERIODO
+from resumo import RESULTADOS_PERIODO, ler_periodo
 
 COLUNAS_ITEM = ["coleta_ano", "coleta_mes", "numeroControlePNCP", "numeroItem", "descricao"]
 # Colunas que explicam a decisão de cada classificador.
@@ -49,12 +49,7 @@ NOME_ABA = {"materiais": "Alimentos candidatos", "servicos": "Serviços True"}
 def sortear(sufixo_total: str, tipo: str, tamanho: int, semente: int) -> pd.DataFrame:
     """Sorteia as linhas de um resultado do período e acrescenta as colunas da validação."""
     colunas = COLUNAS_ITEM + COLUNAS_CLASSIFICACAO[tipo]
-    resultado = pd.read_csv(
-        PASTA_PERIODO / ARQUIVO_PERIODO[tipo].format(sufixo_total),
-        dtype=str,
-        keep_default_na=False,
-        usecols=colunas,
-    )[colunas]
+    resultado = ler_periodo(sufixo_total, tipo, colunas)[colunas]
     amostra = resultado.sample(n=min(tamanho, len(resultado)), random_state=semente)
     amostra = amostra.sort_values(["coleta_ano", "coleta_mes", "numeroControlePNCP"])
     for coluna in COLUNAS_VALIDACAO:
@@ -92,7 +87,7 @@ def main() -> None:
 
     periodo = sufixo_periodo(args.inicio, args.fim)
     amostras = {
-        tipo: sortear(periodo, tipo, args.tamanho, args.semente) for tipo in ARQUIVO_PERIODO
+        tipo: sortear(periodo, tipo, args.tamanho, args.semente) for tipo in RESULTADOS_PERIODO
     }
     destino = PASTA_PERIODO / f"amostra_validacao_{periodo}.xlsx"
     gravar_planilha(amostras, destino)

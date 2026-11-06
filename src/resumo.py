@@ -20,6 +20,7 @@ import argparse
 import pandas as pd
 
 from main import (
+    ARQUIVOS_PERIODO,
     COLUNAS_CHAVE_ITEM,
     PASTA_PERIODO,
     SAIDA_PADRAO,
@@ -31,13 +32,32 @@ from main import (
     sufixo_periodo,
 )
 
-ETAPAS = ["contratacoes", "itens", "alimentos", "servicos"]
+ETAPAS = ["contratacoes", "itens", "alimentos", "contexto_alimentos", "servicos"]
 # Coluna do grupo atribuído por cada classificador.
 COLUNA_GRUPO = {"materiais": "grupo_taxonomico", "servicos": "grupo_proposto"}
-ARQUIVO_PERIODO = {
-    "materiais": "alimentos_candidatos_pncp_{}.csv",
-    "servicos": "servicos_alimentacao_escolar_pncp_{}.csv",
+# Arquivos do período (ARQUIVOS_PERIODO, em main.py) que formam cada resultado.
+# Os materiais classificados são todos os alimentos candidatos, com e sem
+# contexto escolar.
+RESULTADOS_PERIODO = {
+    "materiais": ["alimentos_true", "alimentos_false"],
+    "servicos": ["servicos"],
 }
+
+
+def ler_periodo(sufixo_total: str, tipo: str, colunas: list[str]) -> pd.DataFrame:
+    """Lê e junta os arquivos do período de um resultado (materiais ou serviços)."""
+    return pd.concat(
+        [
+            pd.read_csv(
+                PASTA_PERIODO / ARQUIVOS_PERIODO[nome].format(sufixo_total),
+                dtype=str,
+                keep_default_na=False,
+                usecols=colunas,
+            )
+            for nome in RESULTADOS_PERIODO[tipo]
+        ],
+        ignore_index=True,
+    )
 
 
 def contar_analisados(sufixos: list[str], tipo: str) -> int:
@@ -57,12 +77,7 @@ def contar_analisados(sufixos: list[str], tipo: str) -> int:
 def contar_por_grupo(sufixo_total: str, tipo: str) -> pd.DataFrame:
     """Conta os itens classificados no período por grupo."""
     coluna = COLUNA_GRUPO[tipo]
-    classificados = pd.read_csv(
-        PASTA_PERIODO / ARQUIVO_PERIODO[tipo].format(sufixo_total),
-        dtype=str,
-        keep_default_na=False,
-        usecols=[coluna],
-    )
+    classificados = ler_periodo(sufixo_total, tipo, [coluna])
     grupos = classificados[coluna].replace("", "(sem grupo)").value_counts()
     return pd.DataFrame(
         {

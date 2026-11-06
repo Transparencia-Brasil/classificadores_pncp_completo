@@ -30,8 +30,8 @@ PASTA_CLASSIFICACAO = PASTA_TASKS / "modulo-classificacao"
 # pacotes. Os scripts são executados como estão e só os caminhos são importados.
 sys.path[:0] = [str(PASTA_BASE / "src"), str(PASTA_CLASSIFICACAO / "src")]
 
-from classifica_alimentos import caminhos_lote as caminhos_alimentos  # noqa: E402
 from classifica_alimentos_servicos import caminhos_lote as caminhos_servicos  # noqa: E402
+from contexto_escolar_alimentos import caminhos_contexto  # noqa: E402
 from database_build import ORIGEM_PADRAO, SAIDA_PADRAO, parse_ano_mes  # noqa: E402
 from itens_build import caminhos_saida as caminhos_itens  # noqa: E402
 
@@ -42,6 +42,13 @@ SCRIPT_CONTEXTO_ALIMENTOS = PASTA_CLASSIFICACAO / "src" / "contexto_escolar_alim
 SCRIPT_SERVICOS = PASTA_CLASSIFICACAO / "src" / "classifica_alimentos_servicos.py"
 
 PASTA_PERIODO = PASTA_CLASSIFICACAO / "output" / "periodo"
+# Arquivos do período. Os alimentos candidatos ficam divididos pelo contexto
+# escolar; dos serviços, o período guarda só os classificados como True.
+ARQUIVOS_PERIODO = {
+    "alimentos_true": "alimentos_contexto_escolar_true_pncp_{}.csv",
+    "alimentos_false": "alimentos_contexto_escolar_false_pncp_{}.csv.gz",
+    "servicos": "servicos_alimentacao_escolar_pncp_{}.csv",
+}
 PASTA_PROGRESSO = PASTA_CLASSIFICACAO / "output" / "progresso"
 
 COLUNAS_CHAVE_ITEM = ["endpoint", "numeroItem"]
@@ -101,9 +108,9 @@ def processar_mes(mes: tuple[int, int], origem: Path, refazer: bool) -> str:
         [str(SCRIPT_ALIMENTOS), "--itens", str(itens["materiais"]), "--sufixo", sufixo],
         refazer,
     )
-    # A etapa de alimentos regrava o CSV sem as colunas do contexto escolar, por
-    # isso o contexto é refeito sempre que os alimentos são refeitos. Mudanças só
-    # no contexto (como o dicionário de termos) refazem apenas esta etapa.
+    # Os arquivos com e sem contexto escolar saem do CSV de alimentos, por isso
+    # o contexto é refeito sempre que os alimentos são refeitos. Mudanças só no
+    # contexto (como o dicionário de termos) refazem apenas esta etapa.
     executar_etapa(
         "contexto_alimentos",
         sufixo,
@@ -160,12 +167,13 @@ def juntar_periodo(sufixos: list[str], sufixo_total: str) -> dict[str, pd.DataFr
         chaves_base.append(set(chave_item(base)))
 
     resultados = {
-        "alimentos": [caminhos_alimentos(sufixo)["alimentos"] for sufixo in sufixos],
+        "alimentos_true": [caminhos_contexto(sufixo)["true"] for sufixo in sufixos],
+        "alimentos_false": [caminhos_contexto(sufixo)["false"] for sufixo in sufixos],
         "servicos": [caminhos_servicos(sufixo)["true"] for sufixo in sufixos],
     }
     destinos = {
-        "alimentos": PASTA_PERIODO / f"alimentos_candidatos_pncp_{sufixo_total}.csv",
-        "servicos": PASTA_PERIODO / f"servicos_alimentacao_escolar_pncp_{sufixo_total}.csv",
+        nome: PASTA_PERIODO / arquivo.format(sufixo_total)
+        for nome, arquivo in ARQUIVOS_PERIODO.items()
     }
 
     PASTA_PERIODO.mkdir(parents=True, exist_ok=True)
@@ -203,7 +211,8 @@ def main() -> None:
     print()
     periodo = juntar_periodo(sufixos, sufixo_periodo(args.inicio, args.fim))
     print("Alimentos candidatos por contexto escolar:")
-    metodos = periodo["alimentos"]["metodo_contexto_escolar"].value_counts()
+    alimentos = pd.concat([periodo["alimentos_true"], periodo["alimentos_false"]])
+    metodos = alimentos["metodo_contexto_escolar"].value_counts()
     for metodo, n in metodos.items():
         print(f"  {metodo}: {n:,}")
     print("Serviços por método de classificação:")
