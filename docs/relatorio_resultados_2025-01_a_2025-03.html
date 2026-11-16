@@ -140,6 +140,10 @@ tfoot th, tfoot td { font-weight: 600; border-bottom: 0; border-top: 1px solid v
 .sub-uf { color: var(--muted); }
 .selo-lote { color: var(--accent); background: var(--track); }
 .selo { white-space: nowrap; }
+p.destaque { background: var(--soft); color: var(--head); border-left: 5px solid var(--marca); border-radius: 0 8px 8px 0; padding: .8rem 1rem; font-size: 1.04rem; max-width: 80ch; }
+.tb-matriz { min-width: 760px; } .tb-matriz tbody th { font-weight: 600; width: 26%; } .tb-matriz td, .tb-matriz th { vertical-align: top; }
+.tb-dim { min-width: 860px; } .tb-dim tbody th { font-weight: 600; width: 16%; vertical-align: top; } .tb-dim td { vertical-align: top; }
+.legenda a { color: var(--accent); }
 .tb-pnae { min-width: 820px; } .tb-pnae .det { min-width: 16em; }
 .tb-org .cnpj { font-family: var(--f-dado); font-size: 12.5px; white-space: nowrap; color: var(--ink-2); }
 .tb-org .zero { color: var(--muted); }
@@ -430,11 +434,66 @@ nav.idx .navt { display: none; }
 
 <section id="pnae">
   <header><h2>Aplicabilidade ao PNAE</h2>
-  <p>Se cada item CATMAT poderia ser comprado com recursos do PNAE. É uma característica do item, não da compra: os dados do PNCP não informam se a compra usou recursos do programa.</p></header>
-  <div class="aviso"><p><strong>O que é um item “candidato”.</strong> Neste relatório, a palavra aparece em dois sentidos. Nenhum deles quer dizer que o item foi comprado com recursos do PNAE.</p><ol><li><strong>Alimento candidato:</strong> material do PNCP que o classificador automático pareou com um item do catálogo CATMAT de alimentos. A descrição do item é comparada por embeddings com os itens CATMAT do mesmo PDM, com similaridade mínima de 0,5. É “candidato” porque o pareamento é automático: os 66.475 itens são uma estimativa, não compras confirmadas, e a validação manual mede os falsos positivos (veja <a href="#precisao">Precisão</a>).</li><li><strong>Aplicabilidade “candidata” ao PNAE:</strong> a coluna <code>aplicabilidade_pnae</code> do catálogo deveria indicar se o tipo de alimento pode ser comprado com recursos do programa. Hoje ela vale “candidata” para todos os resultados, porque as regras do FNDE ainda não foram aplicadas a cada item CATMAT. Por isso, a triagem abaixo é preliminar. Ela usa palavras-chave sobre a lista de proibidos e restritos da Resolução CD/FNDE nº 06/2020, sem validação e sem conferir alterações posteriores da norma.</li></ol></div>
+  <p>Se os alimentos comprados seguem as regras do Programa Nacional de Alimentação Escolar. A classificação é do item, não da compra: os dados do PNCP não informam se a compra usou recursos do programa.</p></header>
+  <div class="texto">
+    <p class="destaque"><strong>Por que esta seção importa.</strong> O PNAE repassa recursos federais a estados e municípios
+    para a alimentação dos estudantes da educação básica pública. A Lei nº 11.947/2009 (art. 1º) define alimentação escolar
+    como todo alimento oferecido no ambiente escolar durante o período letivo, e as normas do programa dizem o que pode ser
+    comprado, o que deve ter prioridade e o que tem limite. Achar no PNCP as compras de alimentação escolar é o primeiro passo.
+    Esta seção é o segundo: verificar se os alimentos comprados estão de acordo com essas regras.</p>
+    <p>A base é a <strong>taxonomia de alimentação escolar v0.1</strong>, descrita no relatório
+    <a href="https://docs.google.com/document/d/1yZOk4q3sPiIxP1-3pDC_xZZxwJBY4bfevfgZIfLxm5c/edit?usp=sharing">Taxonomia de alimentação escolar e identificação de itens no PNCP</a> (ago/2026). Ela organiza os 4.130 itens
+    do grupo 89 do CATMAT (Subsistência) em 15 grupos e 59 subgrupos de alimentos e trata à parte três características que não
+    mudam a identidade do alimento: grau de processamento, aplicabilidade ao PNAE e sociobiodiversidade. As regras da taxonomia
+    vêm da matriz normativa.</p>
+  </div>
+  <div class="cartao"><h3>Matriz normativa</h3>
+    <ul class="lista-texto">
+      <li><strong>O que é:</strong> o levantamento das normas e referências técnicas da alimentação escolar, com uma regra por linha.
+      Cada linha registra a fonte, o tema, o tipo de regra, o conteúdo resumido, o escopo, a possível aplicação na taxonomia e o
+      dispositivo que localiza a regra no documento original.</li>
+      <li><strong>Para que serve:</strong> fundamentar e rastrear a classificação. A matriz separa o que vem das normas das decisões
+      metodológicas tomadas para transformar a norma em regra executável. Ela não é a taxonomia.</li>
+      <li><strong>Normas revogadas:</strong> ficam registradas para mostrar a evolução da regulação, mas não geram decisões. A norma
+      vigente do PNAE é a Resolução CD/FNDE nº 4/2026. As Resoluções nº 6/2020 e nº 3/2025 estão revogadas.</li>
+      <li><strong>Regras que dependem de outros dados:</strong> algumas regras se aplicam só pela descrição do item. Outras dependem de
+      cardápio, valores, fornecedores ou público atendido e não podem ser verificadas só com o item comprado.</li>
+    </ul>
+    <div class="rolagem"><table class="tb-matriz"><thead><tr><th scope="col">Fonte e dispositivo</th><th scope="col">Regra resumida</th><th scope="col">Uso na classificação</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Lei nº 11.947/2009, art. 1º</th><td>Alimentação escolar é todo alimento oferecido no ambiente escolar durante o período letivo.</td><td>Define o universo considerado pela taxonomia.</td></tr>
+        <tr><th scope="row">Decreto nº 11.821/2023, art. 2º, II a V</th><td>Define alimentos in natura, minimamente processados, processados e ultraprocessados.</td><td>Fundamenta o grau de processamento.</td></tr>
+        <tr><th scope="row">Guia Alimentar para a População Brasileira, cap. 2</th><td>Organiza os alimentos em grupos e apresenta critérios ligados ao processamento.</td><td>Apoia os grupos, os subgrupos e as regras de processamento.</td></tr>
+        <tr><th scope="row">Portaria Interministerial nº 284/2018, art. 1º e anexo</th><td>Lista as espécies alimentícias da sociobiodiversidade brasileira.</td><td>Fornece o vocabulário da correspondência com espécies.</td></tr>
+        <tr><th scope="row">Resolução CD/FNDE nº 4/2026, arts. 17 e 21</th><td>Prioriza alimentos in natura ou minimamente processados e limita as compras por grau de processamento.</td><td>Orienta a leitura dos resultados. Os limites valem sobre o gasto e o cardápio, não sobre o item isolado.</td></tr>
+      </tbody></table></div>
+    <p class="legenda">Exemplos da matriz, reproduzidos da Tabela 4 do relatório da taxonomia.</p>
+  </div>
+  <div class="cartao"><h3>Dimensões da taxonomia nos alimentos com contexto escolar</h3>
+    <div class="rolagem"><table class="tb-dim"><thead><tr><th scope="col">Dimensão</th><th scope="col">Valores possíveis</th><th scope="col">O que indica</th><th scope="col">Nos 17.711 alimentos com contexto escolar</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Identidade alimentar</th><td class="det">15 grupos e 59 subgrupos, como cereais (arroz, milho, trigo, massas)</td><td class="det">O que o alimento é, pela identidade do produto final. Pão de trigo é preparação, não cereal.</td><td class="det">Veja <a href="#grupos">Grupos</a>.</td></tr>
+        <tr><th scope="row">Grau de processamento</th><td class="det">in natura, minimamente processado, ingrediente culinário processado, processado, ultraprocessado, indeterminado</td><td class="det">O processamento, quando o nome do PDM traz evidência suficiente.</td><td class="det">48,9% indeterminado (gráfico no fim desta seção).</td></tr>
+        <tr><th scope="row">Aplicabilidade ao PNAE</th><td class="det">candidata, fora do escopo operacional, indeterminada</td><td class="det">Se o item está no recorte operacional do estudo. Não diz se a compra é permitida pelo PNAE.</td><td class="det">Todos “candidata”.</td></tr>
+        <tr><th scope="row">Sociobiodiversidade</th><td class="det">correspondência textual identificada, não identificada, indeterminada</td><td class="det">Se a descrição do item CATMAT cita uma espécie da Portaria nº 284/2018. Não comprova a origem do produto nem compra da agricultura familiar.</td><td class="det">984 (5,6%) com correspondência textual.</td></tr>
+      </tbody></table></div>
+    <ul class="legenda lista">
+      <li>Ausência de correspondência não é confirmação negativa: sem evidência suficiente, o resultado fica indeterminado.</li>
+      <li>Documentação: <a href="https://docs.google.com/document/d/1yZOk4q3sPiIxP1-3pDC_xZZxwJBY4bfevfgZIfLxm5c/edit?usp=sharing">relatório da taxonomia</a>, <a href="https://github.com/Transparencia-Brasil/alimentacao-escolar-analises/blob/main/tasks/matriz_normativa/src/matriz_normativa_alimentacao_escolar.ipynb">notebook da matriz normativa</a>, <a href="https://github.com/Transparencia-Brasil/alimentacao-escolar-analises/blob/main/tasks/matriz_normativa/output/especies_sociobiodiversidade.csv">lista de espécies da sociobiodiversidade</a> e <a href="https://github.com/Transparencia-Brasil/alimentacao-escolar-analises/blob/main/tasks/taxonomia_alimentacao_escolar/manual_classificacao_v0_1.md">manual de classificação da taxonomia v0.1</a>.</li>
+    </ul>
+  </div>
+  <div class="cartao"><h3>O que dá e o que não dá para verificar com os dados do PNCP</h3>
+    <ul class="lista-texto">
+      <li><strong>Dá para verificar, pela descrição do item:</strong> se o alimento está entre os proibidos ou restritos (triagem abaixo), o grau de processamento quando o catálogo traz evidência e a citação de espécies da sociobiodiversidade.</li>
+      <li><strong>Não dá para verificar:</strong> se a compra usou recursos do PNAE, porque o PNCP não informa a fonte do dinheiro, e as regras que dependem de cardápio, valores, fornecedores ou público atendido, como os limites de compra por grau de processamento e a parcela mínima de compras da agricultura familiar.</li>
+      <li><strong>Por isso:</strong> um item proibido em uma compra com contexto escolar é um sinal para conferir, não uma irregularidade comprovada.</li>
+    </ul>
+  </div>
+  <div class="aviso"><p><strong>O que é um item “candidato”.</strong> Neste relatório, a palavra aparece em dois sentidos. Nenhum deles quer dizer que o item foi comprado com recursos do PNAE.</p><ol><li><strong>Alimento candidato:</strong> material do PNCP que o classificador automático pareou com um item do catálogo CATMAT de alimentos. A descrição do item é comparada por embeddings com os itens CATMAT do mesmo PDM, com similaridade mínima de 0,5. É “candidato” porque o pareamento é automático: os 66.475 itens são uma estimativa, não compras confirmadas, e a validação manual mede os falsos positivos (veja <a href="#precisao">Precisão</a>).</li><li><strong>Aplicabilidade “candidata” ao PNAE:</strong> na coluna <code>aplicabilidade_pnae</code> do catálogo, “candidata” quer dizer que o item está dentro do recorte operacional do estudo. A versão 0.1 tem uma só regra para essa dimensão: 9 itens de ração humana de emergência para uso militar ficaram fora do escopo, e os outros 4.047 itens do catálogo, todos os usados aqui, são “candidata”. As listas de proibidos e restritos do FNDE ainda não foram aplicadas item a item. Por isso, a triagem abaixo é preliminar.</li></ol></div>
   <div class="cartao"><h3>Triagem por palavra-chave</h3>
     <ul class="lista-texto">
-      <li><strong>Situação</strong> é como a Resolução CD/FNDE nº 06/2020 trata o tipo de alimento. <span class="selo selo-proibido">Proibido</span>: a resolução não permite a compra com recursos do PNAE. <span class="selo selo-restrito">Restrito</span>: a resolução permite a compra, mas com limites.</li>
+      <li><strong>Norma usada:</strong> a triagem usa as listas da Resolução CD/FNDE nº 06/2020, que está revogada. Ela precisa ser refeita com a Resolução CD/FNDE nº 4/2026, a norma vigente.</li>
+      <li><strong>Situação</strong> é como a Resolução CD/FNDE nº 06/2020 tratava o tipo de alimento. <span class="selo selo-proibido">Proibido</span>: a resolução não permitia a compra com recursos do PNAE. <span class="selo selo-restrito">Restrito</span>: a resolução permitia a compra, mas com limites.</li>
       <li><strong>Categoria</strong> é um agrupamento dos alimentos citados na resolução, montado para esta triagem. Não é uma classificação oficial do FNDE nem do CATMAT.</li>
       <li><strong>Palavras-chave</strong> são os termos procurados no nome do PDM e na descrição de cada item do catálogo CATMAT, sem acento e sem diferença entre maiúsculas e minúsculas. Termos ligados por “+” precisam aparecer juntos na mesma descrição, como “biscoito + recheio”.</li>
       <li><strong>Itens CATMAT</strong> é o número de itens do catálogo que contêm as palavras-chave da categoria. <strong>Itens PNCP</strong> é o número de alimentos com contexto escolar pareados a esses itens do catálogo.</li>
@@ -446,7 +505,7 @@ nav.idx .navt { display: none; }
       <tr><td></td><th scope="row">Restritos</th><td></td><td class="num">507</td><td class="num">1.535</td></tr></tfoot></table></div>
     <ul class="legenda lista">
       <li>A palavra-chave acha o termo, não o sentido. “Doce” também pega biscoito de sabor doce, pão doce e batata-doce, e “gelatina” pega gelatina sem sabor, usada como ingrediente.</li>
-      <li>A triagem não cobre todos os alimentos da resolução (por exemplo, cereais adoçados e barras de cereal) e não confere alterações posteriores da norma.</li>
+      <li>A triagem não cobre todos os alimentos da resolução (por exemplo, cereais adoçados e barras de cereal) e ainda não foi conferida com a Resolução CD/FNDE nº 4/2026.</li>
       <li>Os itens PNCP são contados sobre os 17.711 alimentos com contexto escolar. Uma compra com contexto escolar não usa necessariamente recursos do PNAE, então um item proibido aqui não é, por si só, uma irregularidade.</li>
     </ul></div>
   <div class="cartao"><h3>Alimentos com contexto escolar por grau de processamento</h3><ul class="lb"><li><span class="lb-nome">in natura</span><span class="lb-trilho"><span style="width:36.84%" title="in natura: 3.187 itens"></span></span><span class="lb-valor">3.187</span><span class="lb-pct">18,0%</span></li><li><span class="lb-nome">minimamente processado</span><span class="lb-trilho"><span style="width:38.42%" title="minimamente processado: 3.324 itens"></span></span><span class="lb-valor">3.324</span><span class="lb-pct">18,8%</span></li><li><span class="lb-nome">ingrediente culinário processado</span><span class="lb-trilho"><span style="width:12.25%" title="ingrediente culinário processado: 1.060 itens"></span></span><span class="lb-valor">1.060</span><span class="lb-pct">6,0%</span></li><li><span class="lb-nome">processado</span><span class="lb-trilho"><span style="width:16.57%" title="processado: 1.434 itens"></span></span><span class="lb-valor">1.434</span><span class="lb-pct">8,1%</span></li><li><span class="lb-nome">ultraprocessado</span><span class="lb-trilho"><span style="width:0.62%" title="ultraprocessado: 54 itens"></span></span><span class="lb-valor">54</span><span class="lb-pct">0,3%</span></li><li><span class="lb-nome">indeterminado</span><span class="lb-trilho"><span style="width:100.00%" title="indeterminado: 8.652 itens"></span></span><span class="lb-valor">8.652</span><span class="lb-pct">48,9%</span></li></ul>
