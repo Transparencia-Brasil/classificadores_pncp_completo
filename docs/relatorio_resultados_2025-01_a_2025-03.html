@@ -3,25 +3,29 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 /* Relatório em coluna única: resumo e achados primeiro, depois uma seção por análise. */
 :root {
-  --bg: #f6f7f9; --surface: #ffffff; --ink: #121821; --ink-2: #48525f; --muted: #6f7a88;
-  --rule: #dfe3e9; --axis: #b9c0ca; --accent: #2a78d6; --accent-soft: #86b6ef;
-  --track: #eceff3; --proib: #b3261e; --proib-bg: #fbe9e7; --rest: #8a5a00; --rest-bg: #fdf1d8;
-  --f-texto: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* Paleta de transparencia.org.br: azul-petróleo #39b1bb / #2a8a92, laranja #f9a124, texto #3e3e3e. */
+  --bg: #f3fafb; --surface: #ffffff; --ink: #3e3e3e; --ink-2: #555b5d; --muted: #6e7679;
+  --rule: #e3e3e3; --axis: #bfcfd1; --accent: #1f6f76; --accent-soft: #8fd3d9;
+  --marca: #39b1bb; --laranja: #f9a124;
+  --track: #eaf6f7; --proib: #b3261e; --proib-bg: #fbe9e7; --rest: #8a5a00; --rest-bg: #fdf1d8;
+  --f-texto: "Open Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --f-dado: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --bg: #0f1216; --surface: #171b21; --ink: #eef1f5; --ink-2: #b8c0cb; --muted: #8b95a2;
-  --rule: #2a3039; --axis: #3c4450; --accent: #3987e5; --accent-soft: #1c5cab;
-  --track: #232933; --proib: #f2a49c; --proib-bg: #3a1d1b; --rest: #f0c46b; --rest-bg: #33280f;
+  --bg: #0f1617; --surface: #162022; --ink: #eef3f3; --ink-2: #bcc8ca; --muted: #8d9a9c;
+  --rule: #263234; --axis: #3a4a4d; --accent: #5cc6cf; --accent-soft: #1f6f76;
+  --marca: #39b1bb; --laranja: #f9a124;
+  --track: #1d2b2d; --proib: #f2a49c; --proib-bg: #3a1d1b; --rest: #f0c46b; --rest-bg: #33280f;
   color-scheme: dark; } }
 :root[data-theme="dark"] {
-  --bg: #0f1216; --surface: #171b21; --ink: #eef1f5; --ink-2: #b8c0cb; --muted: #8b95a2;
-  --rule: #2a3039; --axis: #3c4450; --accent: #3987e5; --accent-soft: #1c5cab;
-  --track: #232933; --proib: #f2a49c; --proib-bg: #3a1d1b; --rest: #f0c46b; --rest-bg: #33280f;
+  --bg: #0f1617; --surface: #162022; --ink: #eef3f3; --ink-2: #bcc8ca; --muted: #8d9a9c;
+  --rule: #263234; --axis: #3a4a4d; --accent: #5cc6cf; --accent-soft: #1f6f76;
+  --marca: #39b1bb; --laranja: #f9a124;
+  --track: #1d2b2d; --proib: #f2a49c; --proib-bg: #3a1d1b; --rest: #f0c46b; --rest-bg: #33280f;
   color-scheme: dark; }
 * { box-sizing: border-box; }
 body { background: var(--bg); color: var(--ink); font: 400 15px/1.6 var(--f-texto); }
@@ -29,7 +33,7 @@ body { background: var(--bg); color: var(--ink); font: 400 15px/1.6 var(--f-text
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
   display: grid; gap: 48px; }
 header { display: grid; gap: 14px; }
-.sobre { font: 500 12px/1.4 var(--f-dado); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.sobre { font: 500 12px/1.4 var(--f-dado); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); border-left: 4px solid var(--laranja); padding-left: 10px; }
 h1 { font-size: clamp(28px, 4.4vw, 40px); line-height: 1.12; font-weight: 700; margin: 0; text-wrap: balance; letter-spacing: -.01em; }
 h2 { font-size: 22px; line-height: 1.25; margin: 0; font-weight: 700; text-wrap: balance; }
 h3 { font-size: 15px; margin: 0; font-weight: 600; }
@@ -49,7 +53,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .numeros .det { font-size: 13px; color: var(--muted); }
 .numeros .val.destaque { color: var(--accent); }
 section { display: grid; gap: 18px; scroll-margin-top: 16px; }
-section > header { gap: 6px; border-top: 2px solid var(--ink); padding-top: 14px; }
+section > header { gap: 6px; border-top: 3px solid var(--laranja); padding-top: 14px; }
 .achados { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; counter-reset: a; }
 .achados li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 10px; max-width: 80ch; }
 .achados li::before { counter-increment: a; content: counter(a); font: 500 13px/1.75 var(--f-dado); color: var(--accent); }
@@ -57,7 +61,7 @@ section > header { gap: 6px; border-top: 2px solid var(--ink); padding-top: 14px
 .duas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .legenda { font-size: 13px; color: var(--muted); max-width: 90ch; }
 .colunas { width: 100%; height: auto; display: block; }
-.colunas .col { fill: var(--accent); } .colunas .col-clara { fill: var(--accent-soft); }
+.colunas .col { fill: var(--marca); } .colunas .col-clara { fill: var(--accent-soft); }
 .colunas .col:hover, .colunas .col-clara:hover { opacity: .82; }
 .colunas .eixo { stroke: var(--axis); stroke-width: 1; }
 .colunas text { text-anchor: middle; fill: var(--ink); font-family: var(--f-texto); }
@@ -75,13 +79,13 @@ tfoot th, tfoot td { font-weight: 600; border-bottom: 0; border-top: 1px solid v
 .tb-amparo { min-width: 980px; } .tb-amparo .c-rot { width: 24%; } .tb-amparo .c-det { width: 30%; } .tb-amparo .c-bar { width: 9%; }
 .det { font-size: 13px; color: var(--ink-2); }
 .barra { padding-left: 4px; }
-.barra span { display: block; height: 10px; min-width: 2px; background: var(--accent); border-radius: 0 3px 3px 0; }
+.barra span { display: block; height: 10px; min-width: 2px; background: var(--marca); border-radius: 0 3px 3px 0; }
 .cod { display: inline-block; min-width: 3.2em; color: var(--muted); }
 .lb { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
 .lb li { display: grid; grid-template-columns: minmax(0, 15em) minmax(0, 1fr) 4.6em 3.6em; gap: 10px; align-items: center; font-size: 14px; }
 .lb-nome { overflow-wrap: anywhere; }
 .lb-trilho { background: var(--track); height: 10px; border-radius: 0 3px 3px 0; }
-.lb-trilho span { display: block; height: 100%; min-width: 2px; background: var(--accent); border-radius: 0 3px 3px 0; }
+.lb-trilho span { display: block; height: 100%; min-width: 2px; background: var(--marca); border-radius: 0 3px 3px 0; }
 .lb-valor, .lb-pct { text-align: right; font-variant-numeric: tabular-nums; }
 .lb-pct { color: var(--ink-2); }
 .selo { display: inline-block; font-size: 12px; font-weight: 600; padding: 1px 8px; border-radius: 999px; }
