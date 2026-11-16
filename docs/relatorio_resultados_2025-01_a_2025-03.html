@@ -171,14 +171,13 @@ footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--rule)
 <section id="precisao">
   <header><h2>Precisão dos classificadores</h2></header>
   <div class="texto">
-    <p>Para cada classificador, sorteamos 200 itens (semente 42) entre os classificados como alimentação escolar
-    no período: 17.711 materiais e 870 serviços. Cada item foi conferido à mão em quatro critérios: se é alimento
-    (ou serviço de alimentação), se o item de catálogo pareado corresponde à descrição, se o grupo está certo e se a
-    compra é para alimentação escolar. O item só conta como correto quando passa nos quatro.</p>
-    <p>O resultado é chamado de precisão porque a amostra só tem itens que o classificador marcou como positivos.
-    Ela mostra quantos são verdadeiros positivos e quantos são falsos positivos. Não mostra os falsos negativos,
-    as compras de alimentação escolar que o classificador deixou de fora. Sem eles, não é possível calcular a
-    acurácia nem a cobertura (recall).</p>
+    <ul class="lista-texto">
+      <li><strong>Amostra:</strong> 200 itens por classificador (semente 42), sorteados entre os classificados como alimentação escolar no período (17.711 materiais e 870 serviços).</li>
+      <li><strong>Critérios:</strong> cada item foi conferido à mão em quatro pontos: se é alimento (ou serviço de alimentação), se o item de catálogo pareado corresponde à descrição, se o grupo está certo e se a compra é para alimentação escolar.</li>
+      <li><strong>Regra:</strong> o item só conta como correto quando passa nos quatro critérios.</li>
+      <li><strong>Por que precisão:</strong> a amostra só tem itens que o classificador marcou como positivos, então mostra quantos são verdadeiros positivos e quantos são falsos positivos.</li>
+      <li><strong>Limite:</strong> a amostra não mostra os falsos negativos, as compras de alimentação escolar que o classificador deixou de fora. Sem eles, não é possível calcular a acurácia nem a cobertura (recall).</li>
+    </ul>
     <p class="formula">precisão = itens corretos ÷ itens da amostra</p>
   </div>
   <div class="cartao"><div class="rolagem"><table class="tb-prec">
