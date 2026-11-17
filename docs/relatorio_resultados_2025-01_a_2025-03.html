@@ -1,4 +1,5 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+
 <title>Relatório dos resultados do pipeline de classificação dos itens do PNCP</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -224,7 +225,7 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
     <h3>Contexto</h3>
     <p>Estados, municípios e a União compram alimentos e serviços para a alimentação dos estudantes da rede pública. Parte
     desse gasto é financiada pelo PNAE, que repassa recursos federais e define regras sobre o que pode ser comprado. Desde a
-    Lei nº 14.133/2021, as contratações públicas são publicadas no PNCP, o que permite acompanhar essas compras em todo o país.</p>
+    <a href="https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14133.htm">Lei nº 14.133/2021</a>, as contratações públicas são publicadas no PNCP, o que permite acompanhar essas compras em todo o país.</p>
     <p>O PNCP, porém, não tem um campo que diga se a compra é de alimentação escolar nem de onde vem o dinheiro. Para achar
     essas compras, é preciso classificar a descrição de cada item e o objeto de cada contratação.</p>
     <p class="destaque">A Transparência Brasil construiu a <strong>taxonomia de alimentação escolar v0.1</strong>, que organiza
@@ -349,7 +350,7 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
   <p>Se os alimentos comprados seguem as regras do Programa Nacional de Alimentação Escolar. A classificação é do item, não da compra: os dados do PNCP não informam se a compra usou recursos do programa.</p></header>
   <div class="texto">
     <p class="destaque"><strong>Por que esta seção importa.</strong> O PNAE repassa recursos federais a estados e municípios
-    para a alimentação dos estudantes da educação básica pública. A Lei nº 11.947/2009 (art. 1º) define alimentação escolar
+    para a alimentação dos estudantes da educação básica pública. A <a href="https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2009/lei/l11947.htm">Lei nº 11.947/2009</a> (art. 1º) define alimentação escolar
     como todo alimento oferecido no ambiente escolar durante o período letivo, e as normas do programa dizem o que pode ser
     comprado, o que deve ter prioridade e o que tem limite. Achar no PNCP as compras de alimentação escolar é o primeiro passo.
     Esta seção é o segundo: verificar se os alimentos comprados estão de acordo com essas regras.</p>
@@ -378,11 +379,11 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
     </ul>
     <div class="rolagem"><table class="tb-matriz"><thead><tr><th scope="col">Fonte e dispositivo</th><th scope="col">Regra resumida</th><th scope="col">Uso na classificação</th></tr></thead>
       <tbody>
-        <tr><th scope="row">Lei nº 11.947/2009, art. 1º</th><td>Alimentação escolar é todo alimento oferecido no ambiente escolar durante o período letivo.</td><td>Define o universo considerado pela taxonomia.</td></tr>
-        <tr><th scope="row">Decreto nº 11.821/2023, art. 2º, II a V</th><td>Define alimentos in natura, minimamente processados, processados e ultraprocessados.</td><td>Fundamenta o grau de processamento.</td></tr>
-        <tr><th scope="row">Guia Alimentar para a População Brasileira, cap. 2</th><td>Organiza os alimentos em grupos e apresenta critérios ligados ao processamento.</td><td>Apoia os grupos, os subgrupos e as regras de processamento.</td></tr>
-        <tr><th scope="row">Portaria Interministerial nº 284/2018, art. 1º e anexo</th><td>Lista as espécies alimentícias da sociobiodiversidade brasileira.</td><td>Fornece o vocabulário da correspondência com espécies.</td></tr>
-        <tr><th scope="row">Resolução CD/FNDE nº 4/2026, arts. 17 e 21</th><td>Prioriza alimentos in natura ou minimamente processados e limita as compras por grau de processamento.</td><td>Orienta a leitura dos resultados. Os limites valem sobre o gasto e o cardápio, não sobre o item isolado.</td></tr>
+        <tr><th scope="row"><a href="https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2009/lei/l11947.htm">Lei nº 11.947/2009, art. 1º</a></th><td>Alimentação escolar é todo alimento oferecido no ambiente escolar durante o período letivo.</td><td>Define o universo considerado pela taxonomia.</td></tr>
+        <tr><th scope="row"><a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/decreto/d11821.htm">Decreto nº 11.821/2023, art. 2º, II a V</a></th><td>Define alimentos in natura, minimamente processados, processados e ultraprocessados.</td><td>Fundamenta o grau de processamento.</td></tr>
+        <tr><th scope="row"><a href="https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view">Guia Alimentar para a População Brasileira, cap. 2</a></th><td>Organiza os alimentos em grupos e apresenta critérios ligados ao processamento.</td><td>Apoia os grupos, os subgrupos e as regras de processamento.</td></tr>
+        <tr><th scope="row"><a href="https://pesquisa.in.gov.br/imprensa/jsp/visualiza/index.jsp?data=10/07/2018&amp;jornal=515&amp;pagina=92&amp;totalArquivos=160">Portaria Interministerial nº 284/2018, art. 1º e anexo</a></th><td>Lista as espécies alimentícias da sociobiodiversidade brasileira.</td><td>Fornece o vocabulário da correspondência com espécies.</td></tr>
+        <tr><th scope="row"><a href="https://www.gov.br/fnde/pt-br/acesso-a-informacao/legislacao/resolucoes/2026/resolucao-cd_fnde-no-4-de-26-de-fevereiro-de-2026.pdf">Resolução CD/FNDE nº 4/2026, arts. 17 e 21</a></th><td>Prioriza alimentos in natura ou minimamente processados e limita as compras por grau de processamento.</td><td>Orienta a leitura dos resultados. Os limites valem sobre o gasto e o cardápio, não sobre o item isolado.</td></tr>
       </tbody></table></div>
     <p class="legenda">Exemplos da matriz, reproduzidos da Tabela 4 do relatório da taxonomia.</p>
   </div>
@@ -408,6 +409,10 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
   </div>
   <div class="aviso"><p><strong>O que é um item “candidato”.</strong> Neste relatório, a palavra aparece em dois sentidos. Nenhum deles quer dizer que o item foi comprado com recursos do PNAE.</p><ol><li><strong>Alimento candidato:</strong> material do PNCP que o classificador automático pareou com um item do catálogo CATMAT de alimentos. A descrição do item é comparada por embeddings com os itens CATMAT do mesmo PDM, com similaridade mínima de 0,5. É “candidato” porque o pareamento é automático: os 66.475 itens são uma estimativa, não compras confirmadas, e a validação manual mede os falsos positivos (veja <a href="#precisao">Precisão</a>).</li><li><strong>Aplicabilidade “candidata” ao PNAE:</strong> na coluna <code>aplicabilidade_pnae</code> do catálogo, “candidata” quer dizer que o item está dentro do recorte operacional do estudo. A versão 0.1 tem uma só regra para essa dimensão: 9 itens de ração humana de emergência para uso militar ficaram fora do escopo, e os outros 4.047 itens do catálogo, todos os usados aqui, são “candidata”. As listas de proibidos e restritos do FNDE ainda não foram aplicadas item a item. Por isso, a triagem abaixo é preliminar.</li></ol></div>
   <div class="cartao"><h3>Triagem por palavra-chave</h3>
+    <p><strong>Por que foi feita.</strong> A taxonomia ainda não diz, item a item, quais alimentos do catálogo o PNAE proíbe ou limita (veja o aviso acima). Enquanto essa regra não existe, a triagem dá uma primeira medida: quantos alimentos com contexto escolar são de tipos que a norma do PNAE não permitia ou limitava, e quais tipos pesam mais. Ela serve para dimensionar o tema e indicar onde olhar primeiro, não para julgar compras.</p>
+    <p><strong>Como foi feita.</strong> Os alimentos proibidos e restritos citados na resolução foram reunidos em categorias. Para cada categoria, palavras-chave foram procuradas nos itens do catálogo CATMAT. Depois, foram contados os alimentos com contexto escolar pareados aos itens encontrados.</p>
+    <p><strong>O que mostra.</strong> 1.404 alimentos com contexto escolar (7,9% dos 17.711) são de tipos que a resolução proibia, e 1.234 deles são biscoito ou bolacha recheada. Outros 1.535 (8,7%) são de tipos que ela permitia com limites.</p>
+    <p><strong>Como ler a tabela.</strong></p>
     <ul class="lista-texto">
       <li><strong>Norma usada:</strong> a triagem usa as listas da Resolução CD/FNDE nº 06/2020, que está revogada. Ela precisa ser refeita com a Resolução CD/FNDE nº 4/2026, a norma vigente.</li>
       <li><strong>Situação</strong> é como a Resolução CD/FNDE nº 06/2020 tratava o tipo de alimento. <span class="selo selo-proibido">Proibido</span>: a resolução não permitia a compra com recursos do PNAE. <span class="selo selo-restrito">Restrito</span>: a resolução permitia a compra, mas com limites.</li>
