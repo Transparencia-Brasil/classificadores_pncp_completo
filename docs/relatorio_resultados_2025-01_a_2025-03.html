@@ -197,7 +197,7 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
 
 <nav class="idx" aria-label="Seções"><p class="navt">Nesta página</p><ul>
     <li><a href="#introducao">Introdução</a></li><li><a href="#achados">Principais achados</a></li>
-    <li class="navgrupo" aria-hidden="true">Confiabilidade</li><li><a href="#precisao">Precisão</a></li>
+    <li class="navgrupo" aria-hidden="true">Confiabilidade</li><li><a href="#precisao">Precisão e recall</a></li>
     <li class="navgrupo" aria-hidden="true">O que se compra</li><li><a href="#grupos">Grupos</a></li><li><a href="#pnae" class="nav-destaque">Aplicabilidade ao PNAE</a></li>
     <li class="navgrupo" aria-hidden="true">Quem compra e quanto</li><li><a href="#orgaos">Órgãos compradores</a></li><li><a href="#maiores">Maiores valores</a></li><li><a href="#esfera">Esfera</a></li>
     <li class="navgrupo" aria-hidden="true">Como se compra</li><li><a href="#modalidade">Modalidade</a></li><li><a href="#amparo">Amparo legal</a></li><li><a href="#publicacao">Mês de publicação</a></li>
@@ -241,7 +241,7 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
       pelo amparo do PNAE (138 ou 139) ou por termos escolares no objeto da compra. 17.711 dos 66.475 candidatos passam nesse critério.</li>
       <li><strong>Serviços:</strong> o amparo do PNAE e os termos alimentares e escolares da descrição e do objeto selecionam
       os itens, que depois são comparados ao catálogo de serviços (CATSER) por busca semântica. São 870 serviços.</li>
-      <li><strong>Validação:</strong> uma amostra de 200 itens de cada resultado foi conferida à mão (veja <a href="#precisao">Precisão</a>).</li>
+      <li><strong>Validação:</strong> amostras de 200 itens dos positivos e de 200 itens dos negativos de cada classificador foram conferidas à mão (veja <a href="#precisao">Precisão e recall</a>).</li>
     </ul>
     <h3>Recorte</h3>
     <ul class="lista-texto">
@@ -273,16 +273,16 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
 </section>
 
 <section id="precisao">
-  <header><span class="parte">Parte 1 · Confiabilidade</span><h2>Precisão dos classificadores</h2>
-  <p class="porque"><strong>Por que importa.</strong> Todos os números das seções seguintes dependem dos classificadores. A precisão diz quanto confiar neles: de cada 100 itens apontados como alimentação escolar, quantos de fato são. Ela não diz quantas compras ficaram de fora.</p>
-  <p class="dizem"><strong>O que os números dizem.</strong> 93% nos alimentos e 80% nos serviços. Nos serviços, os erros mais comuns são compras para cursos de escolas militares e profissionalizantes (13 dos 40) e contratações com amparo do PNAE sem relação com alimentação (7).</p></header>
+  <header><span class="parte">Parte 1 · Confiabilidade</span><h2>Precisão e recall dos classificadores</h2>
+  <p class="porque"><strong>Por que importa.</strong> Todos os números das seções seguintes dependem dos classificadores. A precisão diz quanto confiar neles: de cada 100 itens apontados como alimentação escolar, quantos de fato são. O recall (cobertura) diz quantas compras de alimentação escolar eles encontram: de cada 100 que existem, quantas foram apontadas.</p>
+  <p class="dizem"><strong>O que os números dizem.</strong> Precisão de 93% nos alimentos e 80% nos serviços; recall estimado de 97% e 89%. Nos serviços, os erros mais comuns são compras para cursos de escolas militares e profissionalizantes (13 dos 40) e contratações com amparo do PNAE sem relação com alimentação (7).</p></header>
   <div class="texto">
     <ul class="lista-texto">
       <li><strong>Amostra:</strong> 200 itens por classificador (semente 42), sorteados entre os classificados como alimentação escolar no período (17.711 materiais e 870 serviços).</li>
       <li><strong>Critérios:</strong> cada item foi conferido à mão em quatro pontos: se é alimento (ou serviço de alimentação), se o item de catálogo pareado corresponde à descrição, se o grupo está certo e se a compra é para alimentação escolar.</li>
       <li><strong>Regra:</strong> o item só conta como correto quando passa nos quatro critérios.</li>
       <li><strong>Por que precisão:</strong> a amostra só tem itens que o classificador marcou como positivos, então mostra quantos são verdadeiros positivos e quantos são falsos positivos.</li>
-      <li><strong>Limite:</strong> a amostra não mostra os falsos negativos, as compras de alimentação escolar que o classificador deixou de fora. Sem eles, não é possível calcular a acurácia nem a cobertura (recall).</li>
+      <li><strong>Limite:</strong> essa amostra não mostra os falsos negativos, as compras de alimentação escolar que o classificador deixou de fora. Eles foram medidos numa segunda amostra, dos itens classificados como negativos (veja <a href="#recall">Precisão, recall, F1 e acurácia</a>).</li>
     </ul>
     <p class="formula">precisão = itens corretos ÷ itens da amostra</p>
   </div>
@@ -293,6 +293,20 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
       <tr><th scope="row">Serviços de alimentação escolar</th><td class="num">870</td><td class="num">200</td><td class="num">160</td><td class="num">40</td><td class="num forte">80,0%</td><td class="num pct">73,9% a 85,0%</td></tr>
     </tbody></table></div>
     <p class="legenda">Intervalo de confiança de Wilson. A unidade é o item: uma contratação com muitos itens pesa mais que uma com poucos. Os números valem para as coletas de jan a mar/2025.</p></div>
+  <div class="cartao" id="recall"><h3>Precisão, recall, F1 e acurácia</h3><div class="rolagem"><table class="tb-prec">
+    <thead><tr><th scope="col">Classificador</th><th scope="col" class="num">Precisão</th><th scope="col" class="num">Recall (cobertura)</th><th scope="col" class="num">F1</th><th scope="col" class="num">Acurácia</th><th scope="col" class="num">Acurácia se tudo fosse negativo</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Materiais (alimentos com contexto escolar)</th><td class="num forte">93,0%<br><span class="det">88,6% a 95,8%</span></td><td class="num forte">97,2%<br><span class="det">96,0% a 98,3%</span></td><td class="num forte">95,0%</td><td class="num">97,4%</td><td class="num pct">73,4%</td></tr>
+      <tr><th scope="row">Serviços de alimentação escolar</th><td class="num forte">80,0%<br><span class="det">73,9% a 85,0%</span></td><td class="num forte">88,5%<br><span class="det">82,9% a 94,0%</span></td><td class="num forte">84,0%</td><td class="num">99,9%</td><td class="num pct">99,8%</td></tr>
+    </tbody></table></div>
+    <p class="formula">recall = verdadeiros positivos ÷ (verdadeiros positivos + falsos negativos) · F1 = 2 × precisão × recall ÷ (precisão + recall)</p>
+    <ul class="legenda lista">
+      <li><strong>Falsos negativos:</strong> amostra estratificada de 200 itens classificados como negativos, com mais itens nos estratos com mais chance de erro. Cada estrato é ponderado pelo seu tamanho. Estimativa: cerca de 482 alimentos fora do contexto escolar que deveriam estar nele, sendo 384 comprados por unidades ou órgãos de educação, 75 com termo escolar anulado por termo de outro contexto e 23 só com indício (agricultura familiar). Nos serviços, cerca de 91, todos rejeitados pelas regras de similaridade baixa (74 abaixo de 0,4 e 17 entre 0,4 e 0,5).</li>
+      <li><strong>Estratos sem nenhum falso negativo na amostra</strong> entram com zero. Nos materiais, os estratos “demais municipais” (22.089 itens) e “demais” (24.403) não tiveram nenhum caso em 70 itens validados, mas não é possível descartar alguns: no pior caso estatístico, o recall dos materiais cairia para cerca de 78%. Nos serviços, o estrato sem nenhum termo de alimentação no objeto (402.161 itens) foi tratado como sem falsos negativos.</li>
+      <li><strong>Acurácia:</strong> inflada pelo desbalanceamento. Nos serviços, 99,8% dos itens são negativos, então um classificador que respondesse “não” para tudo teria 99,8% de acurácia sem encontrar nenhum serviço de alimentação escolar. Por isso o recall e o F1 descrevem melhor o desempenho.</li>
+      <li><strong>Universo:</strong> nos materiais, os 66.475 alimentos candidatos (17.711 positivos e 48.764 negativos); itens que não foram reconhecidos como alimento ficam fora da conta. Nos serviços, os 418.273 itens de serviço (870 positivos e 417.403 negativos).</li>
+      <li><strong>Pendência:</strong> na amostra de negativos dos serviços, só os casos “Sim” estavam marcados; os itens em branco foram contados como “Não”.</li>
+    </ul></div>
   <div class="cartao"><h3>Acerto por critério</h3><div class="rolagem"><table class="tb-crit">
     <thead><tr><th scope="col">Critério</th><th scope="col" class="num">Materiais</th><th scope="col" class="num">Serviços</th></tr></thead>
     <tbody>
@@ -591,7 +605,7 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
   <header><span class="parte">Parte 5 · Limites</span><h2>Limites e pendências</h2>
   <p class="porque"><strong>Por que importa.</strong> Diz o que ainda falta para que os números possam ser usados com segurança e o que vem a seguir.</p></header>
   <dl class="pendencias">
-    <div><dt>Validação manual</dt><dd>As amostras de 200 alimentos com contexto escolar e 200 serviços (semente 42) foram conferidas (veja <a href="#precisao">Precisão</a>). Falta medir os falsos negativos, com uma amostra dos itens que o classificador deixou de fora.</dd></div>
+    <div><dt>Validação manual</dt><dd>As amostras de 200 alimentos com contexto escolar e 200 serviços (semente 42) foram conferidas (veja <a href="#precisao">Precisão</a>). Os falsos negativos foram medidos numa amostra estratificada de 200 itens negativos de cada classificador (<code>src/amostra_validacao_falses_neg.py</code>, semente 42).</dd></div>
     <div><dt>Fornecedores e preço homologado</dt><dd>Dependem do endpoint de resultados de cada item (<code>/itens/{n}/resultados</code>), que não foi coletado. Entre os classificados, 10.368 alimentos com contexto escolar e 546 serviços têm resultado publicado (<code>temResultado</code>).</dd></div>
     <div><dt>Aplicabilidade ao PNAE</dt><dd>Precisa de uma tabela de regras por item CATMAT, validada por PDM, e da versão vigente da resolução do FNDE.</dd></div>
     <div><dt>Colunas deslocadas</dt><dd>28.315 contratações da coleta de fev/2025 (2ª quinzena) têm as colunas deslocadas a partir de <code>dataInclusao</code>. As colunas usadas na classificação estão corretas. A origem está nos arquivos da coleta.</dd></div>
