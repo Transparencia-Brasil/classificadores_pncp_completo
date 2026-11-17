@@ -600,8 +600,35 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
 </section>
 
 <section id="metodo">
-  <header><span class="parte">Anexo</span><h2>Método e execução</h2></header>
-  <p>Para cada mês, o pipeline (<code>src/main.py</code>) monta a base de contratações, consolida os itens e separa materiais de serviços. Depois roda dois classificadores. Para materiais, <code>classifica_alimentos.py</code> detecta o PDM no texto e compara a descrição com os itens CATMAT desse PDM por embeddings, com similaridade mínima de 0,5. Em seguida, <code>contexto_escolar_alimentos.py</code> liga cada alimento à sua contratação e marca o contexto escolar pelo amparo do PNAE ou por termos escolares no objeto da compra. Para serviços, <code>classifica_alimentos_servicos.py</code> marca os amparos 138 e 139, descarta os itens sem contexto alimentar e escolar na descrição ou no objeto da compra e compara o restante com o CATSER por busca semântica. Os resultados mensais são juntados em arquivos por período, com os alimentos divididos entre os com e os sem contexto escolar.</p>
+  <header><span class="parte">Anexo</span><h2>Método e execução</h2>
+  <p>Como os números deste relatório foram produzidos: as etapas do pipeline, as regras de cada classificador, os arquivos gerados e o tempo de execução.</p>
+  <p class="porque"><strong>Por que importa.</strong> Os resultados vêm de regras automáticas, e cada escolha (o limite de similaridade, os termos procurados, os amparos) muda o que entra e o que fica de fora. Documentar as regras permite conferir qualquer número do relatório e rodar o mesmo processo para outros meses.</p>
+  <p class="dizem"><strong>O que os números dizem.</strong> O período levou 6 h 57 min para rodar. A classificação de serviços ocupou 75% desse tempo, porque calcula os embeddings de todas as descrições de serviços.</p></header>
+  <div class="cartao"><h3>Etapas do pipeline</h3>
+    <p>O pipeline (<code>src/main.py</code>) roda as cinco primeiras etapas para cada mês e, no fim, junta os meses.</p>
+    <ol class="lista-texto">
+      <li><strong>Contratações</strong> (<code>database_build.py</code>): junta em um só arquivo as contratações das coletas quinzenais do mês, sem repetições entre as coletas.</li>
+      <li><strong>Itens</strong> (<code>itens_build.py</code>): junta os itens das mesmas coletas e separa materiais de serviços.</li>
+      <li><strong>Alimentos</strong> (<code>classifica_alimentos.py</code>): procura na descrição do material os termos dos nomes dos PDMs de alimentos do catálogo CATMAT. O item só segue se os termos apontarem para um único PDM, para não comparar famílias diferentes. A descrição é então comparada por embeddings (modelo <code>snowflake-arctic-embed-l-v2.0</code>) com os itens CATMAT desse PDM, e o mais parecido é guardado. Com similaridade de 0,5 ou mais, o item vira alimento candidato.</li>
+      <li><strong>Contexto escolar dos alimentos</strong> (<code>contexto_escolar_alimentos.py</code>): liga cada alimento à sua contratação. A compra tem contexto escolar se o amparo legal é 138 ou 139 (PNAE), se o objeto traz um termo escolar forte ou de função (como merenda ou merendeira), ou se traz um termo escolar fraco sem termo de outro contexto. Nenhum alimento é descartado: eles saem divididos em dois arquivos, com e sem contexto escolar.</li>
+      <li><strong>Serviços</strong> (<code>classifica_alimentos_servicos.py</code>): segue esta ordem.
+        <ul>
+          <li>Amparo 138 ou 139, ou código CATSER igual a um dos 29 serviços da aba “Alimentação escolar”: entra direto.</li>
+          <li>Sem termo alimentar ou de função escolar na descrição, ou sem contexto escolar na descrição e no objeto da compra: fica de fora.</li>
+          <li>Os demais são comparados por embeddings com os 29 serviços CATSER. Entram os de similaridade de 0,5 ou mais. De 0,4 a 0,5, entram se tiverem termo alimentar na descrição e termo escolar forte ou de função na descrição ou no objeto. Abaixo de 0,4, entram só se a descrição trouxer termo alimentar e termo de função escolar.</li>
+        </ul></li>
+      <li><strong>Junção do período</strong> (<code>main.py</code>): junta os resultados dos meses. Se um item aparece em mais de um mês, vale a versão do mês mais recente.</li>
+    </ol>
+  </div>
+  <div class="cartao"><h3>Arquivos gerados e como rodar</h3>
+    <ul class="lista-texto">
+      <li><strong>Alimentos com contexto escolar:</strong> <code>alimentos_contexto_escolar_true_pncp_2025-01_a_2025-03.csv</code>, com 17.711 itens.</li>
+      <li><strong>Alimentos sem contexto escolar:</strong> <code>alimentos_contexto_escolar_false_pncp_2025-01_a_2025-03.csv.gz</code>, compactado.</li>
+      <li><strong>Serviços de alimentação escolar:</strong> <code>servicos_alimentacao_escolar_pncp_2025-01_a_2025-03.csv</code>, com 870 itens.</li>
+      <li><strong>Auditoria:</strong> os arquivos guardam o PDM detectado, o item CATMAT ou CATSER mais parecido, a similaridade, os termos encontrados e o método que decidiu cada item.</li>
+      <li><strong>Como rodar:</strong> <code>python -m src.main --inicio 2025-01 --fim 2025-03</code>. Cada etapa concluída deixa um marcador em <code>output/progresso</code>, e uma nova execução pula as etapas já feitas, a menos que se use <code>--refazer</code>.</li>
+    </ul>
+  </div>
   <div class="cartao"><h3>Tempo de execução por etapa</h3>
     <div class="rolagem"><table><thead><tr><th scope="col">Mês</th><th scope="col" class="num">Contratações</th><th scope="col" class="num">Itens</th><th scope="col" class="num">Alimentos</th><th scope="col" class="num">Contexto escolar</th><th scope="col" class="num">Serviços</th><th scope="col" class="num">Total</th></tr></thead>
     <tbody><tr><th scope="row">jan/2025</th><td class="num">7 s</td><td class="num">20 s</td><td class="num">30 min 22 s</td><td class="num">5 s</td><td class="num">1 h 34 min</td><td class="num forte">2 h 05 min</td></tr><tr><th scope="row">fev/2025</th><td class="num">12 s</td><td class="num">31 s</td><td class="num">33 min 47 s</td><td class="num">6 s</td><td class="num">1 h 46 min</td><td class="num forte">2 h 20 min</td></tr><tr><th scope="row">mar/2025</th><td class="num">22 s</td><td class="num">59 s</td><td class="num">36 min 23 s</td><td class="num">9 s</td><td class="num">1 h 53 min</td><td class="num forte">2 h 30 min</td></tr></tbody>
