@@ -299,6 +299,12 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
       <tr><th scope="row">Materiais (alimentos com contexto escolar)</th><td class="num forte">93,0%<br><span class="det">88,6% a 95,8%</span></td><td class="num forte">97,2%<br><span class="det">96,0% a 98,3%</span></td><td class="num forte">95,0%</td><td class="num">97,4%</td></tr>
       <tr><th scope="row">Serviços de alimentação escolar</th><td class="num forte">80,0%<br><span class="det">73,9% a 85,0%</span></td><td class="num forte">88,5%<br><span class="det">82,9% a 94,0%</span></td><td class="num forte">84,0%</td><td class="num">99,9%</td></tr>
     </tbody></table></div>
+    <ul class="legenda lista">
+      <li><strong>Precisão:</strong> dos itens que o classificador marcou como alimentação escolar, quantos de fato são?</li>
+      <li><strong>Recall (cobertura):</strong> das compras de alimentação escolar que existem na base, quantas o classificador encontrou?</li>
+      <li><strong>F1:</strong> o classificador equilibra acertar o que marca e encontrar o que existe? É a média harmônica da precisão e do recall e cai quando uma das duas é baixa.</li>
+      <li><strong>Acurácia:</strong> de todos os itens analisados, positivos e negativos, quantos foram classificados corretamente?</li>
+    </ul>
     <p class="formula">recall = verdadeiros positivos ÷ (verdadeiros positivos + falsos negativos) · F1 = 2 × precisão × recall ÷ (precisão + recall)</p>
     <ul class="legenda lista">
       <li><strong>Falsos negativos:</strong> amostra estratificada de 200 itens classificados como negativos, com mais itens nos estratos com mais chance de erro. Cada estrato é ponderado pelo seu tamanho. Estimativa: cerca de 482 alimentos fora do contexto escolar que deveriam estar nele, sendo 384 comprados por unidades ou órgãos de educação, 75 com termo escolar anulado por termo de outro contexto e 23 só com indício (agricultura familiar). Nos serviços, cerca de 91, todos rejeitados pelas regras de similaridade baixa (74 abaixo de 0,4 e 17 entre 0,4 e 0,5).</li>
