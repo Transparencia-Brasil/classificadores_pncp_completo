@@ -119,6 +119,7 @@ tfoot th, tfoot td { font-weight: 600; border-bottom: 0; border-top: 1px solid v
 .lead a, .texto a { color: var(--accent); }
 .texto { display: grid; gap: 10px; }
 .formula { font: 500 14px/1.5 var(--f-dado); background: var(--soft); border-left: 5px solid var(--marca); padding: 8px 12px; border-radius: 6px; justify-self: start; max-width: 100%; overflow-wrap: anywhere; }
+.formulas li { font: 500 14px/1.5 var(--f-dado); overflow-wrap: anywhere; }
 .tb-prec { min-width: 640px; } .tb-prec td.forte { color: var(--laranja); font-weight: 800; } .tb-crit { min-width: 420px; } .tb-fp { min-width: 760px; }
 .tb-fp .c-causa { width: 30%; } .tb-fp .c-crit { width: 15%; } .tb-fp .c-n { width: 8%; }
 .revisao { color: var(--rest); font-weight: 600; }
@@ -305,7 +306,10 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
       <li><strong>F1:</strong> o classificador equilibra acertar o que marca e encontrar o que existe? É a média harmônica da precisão e do recall e cai quando uma das duas é baixa.</li>
       <li><strong>Acurácia:</strong> de todos os itens analisados, positivos e negativos, quantos foram classificados corretamente?</li>
     </ul>
-    <p class="formula">recall = verdadeiros positivos ÷ (verdadeiros positivos + falsos negativos) · F1 = 2 × precisão × recall ÷ (precisão + recall)</p>
+    <ul class="lista-texto formulas">
+      <li>recall = verdadeiros positivos ÷ (verdadeiros positivos + falsos negativos)</li>
+      <li>F1 = 2 × precisão × recall ÷ (precisão + recall)</li>
+    </ul>
     <ul class="legenda lista">
       <li><strong>Falsos negativos:</strong> amostra estratificada de 200 itens classificados como negativos, com mais itens nos estratos com mais chance de erro. Cada estrato é ponderado pelo seu tamanho. Estimativa: cerca de 482 alimentos fora do contexto escolar que deveriam estar nele, sendo 384 comprados por unidades ou órgãos de educação, 75 com termo escolar anulado por termo de outro contexto e 23 só com indício (agricultura familiar). Nos serviços, cerca de 91, todos rejeitados pelas regras de similaridade baixa (74 abaixo de 0,4 e 17 entre 0,4 e 0,5).</li>
       <li><strong>Estratos sem nenhum falso negativo na amostra</strong> entram com zero. Nos materiais, os estratos “demais municipais” (22.089 itens) e “demais” (24.403) não tiveram nenhum caso em 70 itens validados, mas não é possível descartar alguns: no pior caso estatístico, o recall dos materiais cairia para cerca de 78%. Nos serviços, o estrato sem nenhum termo de alimentação no objeto (402.161 itens) foi tratado como sem falsos negativos.</li>
