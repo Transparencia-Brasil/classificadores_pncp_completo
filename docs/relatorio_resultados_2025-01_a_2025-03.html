@@ -120,7 +120,7 @@ tfoot th, tfoot td { font-weight: 600; border-bottom: 0; border-top: 1px solid v
 .texto { display: grid; gap: 10px; }
 .formula { font: 500 14px/1.5 var(--f-dado); background: var(--soft); border-left: 5px solid var(--marca); padding: 8px 12px; border-radius: 6px; justify-self: start; max-width: 100%; overflow-wrap: anywhere; }
 .formulas li { font: 500 14px/1.5 var(--f-dado); overflow-wrap: anywhere; }
-.tb-prec { min-width: 640px; } .tb-prec td.forte { color: var(--laranja); font-weight: 800; } .tb-crit { min-width: 420px; } .tb-fp { min-width: 760px; }
+.tb-prec { min-width: 960px; } .tb-prec td.forte { color: var(--laranja); font-weight: 800; } .tb-crit { min-width: 420px; } .tb-fp { min-width: 760px; }
 .tb-fp .c-causa { width: 30%; } .tb-fp .c-crit { width: 15%; } .tb-fp .c-n { width: 8%; }
 .revisao { color: var(--rest); font-weight: 600; }
 .filtros { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: end; }
@@ -383,19 +383,13 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
     </ul>
     <p class="formula">precisão = itens corretos ÷ itens da amostra</p>
   </div>
-  <div class="cartao"><div class="rolagem"><table class="tb-prec">
-    <thead><tr><th scope="col">Classificador</th><th scope="col" class="num">Itens classificados</th><th scope="col" class="num">Amostra</th><th scope="col" class="num">Corretos</th><th scope="col" class="num">Falsos positivos</th><th scope="col" class="num">Precisão</th><th scope="col" class="num">IC 95%</th></tr></thead>
-    <tbody>
-      <tr><th scope="row">Materiais (alimentos com contexto escolar)</th><td class="num">17.711</td><td class="num">200</td><td class="num">186</td><td class="num">14</td><td class="num forte">93,0%</td><td class="num pct">88,6% a 95,8%</td></tr>
-      <tr><th scope="row">Serviços de alimentação escolar</th><td class="num">870</td><td class="num">200</td><td class="num">160</td><td class="num">40</td><td class="num forte">80,0%</td><td class="num pct">73,9% a 85,0%</td></tr>
-    </tbody></table></div>
-    <p class="legenda">Intervalo de confiança de Wilson. A unidade é o item: uma contratação com muitos itens pesa mais que uma com poucos. Os números valem para as coletas de jan a mar/2025.</p></div>
   <div class="cartao" id="recall"><h3>Precisão, recall, F1 e acurácia</h3><div class="rolagem"><table class="tb-prec">
-    <thead><tr><th scope="col">Classificador</th><th scope="col" class="num">Precisão</th><th scope="col" class="num">Recall (cobertura)</th><th scope="col" class="num">F1</th><th scope="col" class="num">Acurácia</th></tr></thead>
+    <thead><tr><th scope="col">Classificador</th><th scope="col" class="num">Itens classificados</th><th scope="col" class="num">Amostra</th><th scope="col" class="num">Corretos</th><th scope="col" class="num">Falsos positivos</th><th scope="col" class="num">Precisão</th><th scope="col" class="num">Recall (cobertura)</th><th scope="col" class="num">F1</th><th scope="col" class="num">Acurácia</th></tr></thead>
     <tbody>
-      <tr><th scope="row">Materiais (alimentos com contexto escolar)</th><td class="num forte">93,0%<br><span class="det">88,6% a 95,8%</span></td><td class="num forte">97,2%<br><span class="det">96,0% a 98,3%</span></td><td class="num forte">95,0%</td><td class="num">97,4%</td></tr>
-      <tr><th scope="row">Serviços de alimentação escolar</th><td class="num forte">80,0%<br><span class="det">73,9% a 85,0%</span></td><td class="num forte">88,5%<br><span class="det">82,9% a 94,0%</span></td><td class="num forte">84,0%</td><td class="num">99,9%</td></tr>
+      <tr><th scope="row">Materiais (alimentos com contexto escolar)</th><td class="num">17.711</td><td class="num">200</td><td class="num">186</td><td class="num">14</td><td class="num forte">93,0%<br><span class="det">88,6% a 95,8%</span></td><td class="num forte">97,2%<br><span class="det">96,0% a 98,3%</span></td><td class="num forte">95,0%</td><td class="num">97,4%</td></tr>
+      <tr><th scope="row">Serviços de alimentação escolar</th><td class="num">870</td><td class="num">200</td><td class="num">160</td><td class="num">40</td><td class="num forte">80,0%<br><span class="det">73,9% a 85,0%</span></td><td class="num forte">88,5%<br><span class="det">82,9% a 94,0%</span></td><td class="num forte">84,0%</td><td class="num">99,9%</td></tr>
     </tbody></table></div>
+    <p class="legenda">Abaixo da precisão e do recall, o intervalo de confiança de 95%: de Wilson na precisão e da amostra estratificada dos negativos no recall. A unidade é o item: uma contratação com muitos itens pesa mais que uma com poucos. Os números valem para as coletas de jan a mar/2025.</p>
     <ul class="legenda lista">
       <li><strong>Precisão:</strong> dos itens que o classificador marcou como alimentação escolar, quantos de fato são?</li>
       <li><strong>Recall (cobertura):</strong> das compras de alimentação escolar que existem na base, quantas o classificador encontrou?</li>
