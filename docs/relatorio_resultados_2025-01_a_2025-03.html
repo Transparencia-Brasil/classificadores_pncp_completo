@@ -405,13 +405,6 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
     <ul class="lista-texto formulas">
       <li>recall = verdadeiros positivos ÷ (verdadeiros positivos + falsos negativos)</li>
       <li>F1 = 2 × precisão × recall ÷ (precisão + recall)</li>
-    </ul>
-    <ul class="legenda lista">
-      <li><strong>Falsos negativos:</strong> amostra estratificada de 200 itens classificados como negativos, com mais itens nos estratos com mais chance de erro. Cada estrato é ponderado pelo seu tamanho. Estimativa: cerca de 482 alimentos fora do contexto escolar que deveriam estar nele, sendo 384 comprados por unidades ou órgãos de educação, 75 com termo escolar anulado por termo de outro contexto e 23 só com indício (agricultura familiar). Nos serviços, cerca de 91, todos rejeitados pelas regras de similaridade baixa (74 abaixo de 0,4 e 17 entre 0,4 e 0,5).</li>
-      <li><strong>Estratos sem nenhum falso negativo na amostra</strong> entram com zero. Nos materiais, os estratos “demais municipais” (22.089 itens) e “demais” (24.403) não tiveram nenhum caso em 70 itens validados, mas não é possível descartar alguns: no pior caso estatístico, o recall dos materiais cairia para cerca de 78%. Nos serviços, o estrato sem nenhum termo de alimentação no objeto (402.161 itens) foi tratado como sem falsos negativos.</li>
-      <li><strong>Acurácia:</strong> inflada pelo desbalanceamento. Nos serviços, 99,8% dos itens são negativos, então um classificador que respondesse “não” para tudo teria 99,8% de acurácia sem encontrar nenhum serviço de alimentação escolar. Por isso o recall e o F1 descrevem melhor o desempenho.</li>
-      <li><strong>Universo:</strong> nos materiais, os 66.475 alimentos candidatos (17.711 positivos e 48.764 negativos); itens que não foram reconhecidos como alimento ficam fora da conta. Nos serviços, os 418.273 itens de serviço (870 positivos e 417.403 negativos).</li>
-      <li><strong>Pendência:</strong> na amostra de negativos dos serviços, só os casos “Sim” estavam marcados; os itens em branco foram contados como “Não”.</li>
     </ul></div>
   <div class="cartao"><h3>Acerto por critério</h3><div class="rolagem"><table class="tb-crit">
     <thead><tr><th scope="col">Critério</th><th scope="col" class="num">Materiais</th><th scope="col" class="num">Serviços</th></tr></thead>
