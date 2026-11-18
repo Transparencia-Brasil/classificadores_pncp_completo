@@ -381,7 +381,6 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
       <li><strong>Por que precisão:</strong> a amostra só tem itens que o classificador marcou como positivos, então mostra quantos são verdadeiros positivos e quantos são falsos positivos.</li>
       <li><strong>Limite:</strong> essa amostra não mostra os falsos negativos, as compras de alimentação escolar que o classificador deixou de fora. Eles foram medidos numa segunda amostra, dos itens classificados como negativos (veja <a href="#recall">Precisão, recall, F1 e acurácia</a>).</li>
     </ul>
-    <p class="formula">precisão = itens corretos ÷ itens da amostra</p>
   </div>
   <div class="cartao" id="recall"><h3>Precisão, recall, F1 e acurácia</h3><div class="rolagem"><table class="tb-prec">
     <thead><tr><th scope="col">Classificador</th><th scope="col" class="num">Itens classificados</th><th scope="col" class="num">Amostra</th><th scope="col" class="num">Corretos</th><th scope="col" class="num">Falsos positivos</th><th scope="col" class="num">Precisão</th><th scope="col" class="num">Recall (cobertura)</th><th scope="col" class="num">F1</th><th scope="col" class="num">Acurácia</th></tr></thead>
@@ -397,6 +396,7 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
       <li><strong>Acurácia:</strong> de todos os itens analisados, positivos e negativos, quantos foram classificados corretamente?</li>
     </ul>
     <ul class="lista-texto formulas">
+      <li>precisão = itens corretos ÷ itens da amostra</li>
       <li>recall = verdadeiros positivos ÷ (verdadeiros positivos + falsos negativos)</li>
       <li>F1 = 2 × precisão × recall ÷ (precisão + recall)</li>
     </ul></div>
