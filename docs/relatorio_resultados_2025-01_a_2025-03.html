@@ -265,12 +265,13 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
   <header><span class="parte">Resumo</span><h2>Resumo do pipeline dos classificadores</h2>
   <p>Como cada classificador decide se um item é alimentação escolar, da base do mês ao resultado True ou False. O processo roda mês a mês, orquestrado por <code>src/main.py</code>; os números são das coletas de jan a mar/2025.</p></header>
   <div class="cartao"><div class="rolagem"><div class="fluxo">
-<svg class="fluxo-svg" viewBox="28 98 1498 1032" role="img" aria-labelledby="fluxo-titulo fluxo-desc" xmlns="http://www.w3.org/2000/svg">
-<title id="fluxo-titulo">Resumo do pipeline dos classificadores</title><desc id="fluxo-desc">Fluxograma em duas colunas. Materiais: entrada de 1.245.354 itens, detecção de PDM, embeddings com similaridade mínima de 0,5 (66.475 alimentos candidatos) e contexto escolar, com 17.711 True e 48.764 False. Serviços: entrada de 418.279 itens, amparo legal 138/139 (60 True), código CATSER (1 True), contexto alimentar, contexto escolar e embeddings contra 29 serviços CATSER, com 870 True.</desc><defs>
+<svg class="fluxo-svg" viewBox="-332 98 1858 1032" role="img" aria-labelledby="fluxo-titulo fluxo-desc" xmlns="http://www.w3.org/2000/svg">
+<title id="fluxo-titulo">Resumo do pipeline dos classificadores</title><desc id="fluxo-desc">Fluxograma em duas colunas, com uma faixa de referência à esquerda: a matriz normativa gera a taxonomia v0.1, que gera o catálogo de referência de 4.047 itens CATMAT, consultado nos passos 1 e 2 dos materiais. Materiais: entrada de 1.245.354 itens, detecção de PDM, embeddings com similaridade mínima de 0,5 (66.475 alimentos candidatos) e contexto escolar, com 17.711 True e 48.764 False. Serviços: entrada de 418.279 itens, amparo legal 138/139 (60 True), código CATSER (1 True), contexto alimentar, contexto escolar e embeddings contra 29 serviços CATSER, com 870 True.</desc><defs>
 <marker id="ponta0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1e1e1e"/></marker>
 <marker id="ponta1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#2f9e44"/></marker>
 <marker id="ponta2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#495057"/></marker>
-<marker id="ponta3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#e03131"/></marker>
+<marker id="ponta3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6741d9"/></marker>
+<marker id="ponta4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#e03131"/></marker>
 </defs>
 <rect x="40.0" y="110.0" width="1474.0" height="48.0" rx="12.0" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
 <rect x="40.0" y="210.0" width="714.0" height="68.0" rx="17.0" fill="#a5d8ff" stroke="#1971c2" stroke-width="2"/>
@@ -295,6 +296,9 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
 <rect x="800.0" y="878.0" width="480.0" height="128.0" rx="32.0" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
 <rect x="1324.0" y="910.5" width="190.0" height="63.0" rx="15.8" fill="#ffc9c9" stroke="#e03131" stroke-width="2"/>
 <rect x="800.0" y="1050.0" width="480.0" height="68.0" rx="17.0" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
+<rect x="-320.0" y="210.0" width="300.0" height="88.0" rx="22.0" fill="#e5dbff" stroke="#6741d9" stroke-width="2"/>
+<rect x="-320.0" y="322.0" width="300.0" height="108.0" rx="27.0" fill="#e5dbff" stroke="#6741d9" stroke-width="2"/>
+<rect x="-320.0" y="462.0" width="300.0" height="188.0" rx="32.0" fill="#e5dbff" stroke="#6741d9" stroke-width="2"/>
 <line x1="280.0" y1="158.0" x2="280.0" y2="210.0" stroke="#1e1e1e" stroke-width="2" marker-end="url(#ponta0)"/>
 <line x1="1040.0" y1="158.0" x2="1040.0" y2="210.0" stroke="#1e1e1e" stroke-width="2" marker-end="url(#ponta0)"/>
 <line x1="280.0" y1="278.0" x2="280.0" y2="318.0" stroke="#1e1e1e" stroke-width="2" marker-end="url(#ponta0)"/>
@@ -304,19 +308,23 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
 <line x1="280.0" y1="518.0" x2="280.0" y2="562.0" stroke="#1e1e1e" stroke-width="2" marker-end="url(#ponta0)"/>
 <line x1="520.0" y1="616.0" x2="564.0" y2="616.0" stroke="#495057" stroke-width="2" marker-end="url(#ponta2)"/>
 <line x1="280.0" y1="670.0" x2="280.0" y2="714.0" stroke="#1e1e1e" stroke-width="2" marker-end="url(#ponta0)"/>
-<line x1="520.0" y1="768.0" x2="564.0" y2="768.0" stroke="#e03131" stroke-width="2" marker-end="url(#ponta3)"/>
+<line x1="520.0" y1="768.0" x2="564.0" y2="768.0" stroke="#e03131" stroke-width="2" marker-end="url(#ponta4)"/>
 <line x1="280.0" y1="822.0" x2="280.0" y2="866.0" stroke="#1e1e1e" stroke-width="2" marker-end="url(#ponta0)"/>
 <line x1="1040.0" y1="386.0" x2="1040.0" y2="430.0" stroke="#1e1e1e" stroke-width="2" marker-end="url(#ponta0)"/>
 <line x1="1280.0" y1="454.0" x2="1324.0" y2="454.0" stroke="#2f9e44" stroke-width="2" marker-end="url(#ponta1)"/>
 <line x1="1040.0" y1="478.0" x2="1040.0" y2="522.0" stroke="#1e1e1e" stroke-width="2" marker-end="url(#ponta0)"/>
 <line x1="1280.0" y1="556.0" x2="1324.0" y2="556.0" stroke="#2f9e44" stroke-width="2" marker-end="url(#ponta1)"/>
 <line x1="1040.0" y1="590.0" x2="1040.0" y2="634.0" stroke="#1e1e1e" stroke-width="2" marker-end="url(#ponta0)"/>
-<line x1="1280.0" y1="668.0" x2="1324.0" y2="668.0" stroke="#e03131" stroke-width="2" marker-end="url(#ponta3)"/>
+<line x1="1280.0" y1="668.0" x2="1324.0" y2="668.0" stroke="#e03131" stroke-width="2" marker-end="url(#ponta4)"/>
 <line x1="1040.0" y1="702.0" x2="1040.0" y2="746.0" stroke="#1e1e1e" stroke-width="2" marker-end="url(#ponta0)"/>
-<line x1="1280.0" y1="790.0" x2="1324.0" y2="790.0" stroke="#e03131" stroke-width="2" marker-end="url(#ponta3)"/>
+<line x1="1280.0" y1="790.0" x2="1324.0" y2="790.0" stroke="#e03131" stroke-width="2" marker-end="url(#ponta4)"/>
 <line x1="1040.0" y1="834.0" x2="1040.0" y2="878.0" stroke="#1e1e1e" stroke-width="2" marker-end="url(#ponta0)"/>
-<line x1="1280.0" y1="942.0" x2="1324.0" y2="942.0" stroke="#e03131" stroke-width="2" marker-end="url(#ponta3)"/>
+<line x1="1280.0" y1="942.0" x2="1324.0" y2="942.0" stroke="#e03131" stroke-width="2" marker-end="url(#ponta4)"/>
 <line x1="1040.0" y1="1006.0" x2="1040.0" y2="1050.0" stroke="#1e1e1e" stroke-width="2" marker-end="url(#ponta0)"/>
+<line x1="-170.0" y1="298.0" x2="-170.0" y2="322.0" stroke="#6741d9" stroke-width="2" marker-end="url(#ponta3)"/>
+<line x1="-170.0" y1="430.0" x2="-170.0" y2="462.0" stroke="#6741d9" stroke-width="2" marker-end="url(#ponta3)"/>
+<line x1="-20.0" y1="480.0" x2="40.0" y2="480.0" stroke="#6741d9" stroke-width="2" stroke-dasharray="8 6" marker-end="url(#ponta3)"/>
+<line x1="-20.0" y1="616.0" x2="40.0" y2="616.0" stroke="#6741d9" stroke-width="2" stroke-dasharray="8 6" marker-end="url(#ponta3)"/>
 <text font-size="16" fill="#1e1e1e" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan x="777.0" y="134.0">BASE DO MÊS · contratações e itens do PNCP, sem repetição entre as coletas quinzenais (módulo de construção da base)</tspan></text>
 <text font-size="16" fill="#1e1e1e" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan x="397.0" y="234.0">MATERIAIS · o item é um alimento comprado para a escola?</tspan><tspan x="397.0" y="254.0">classifica_alimentos.py → contexto_escolar_alimentos.py</tspan></text>
 <text font-size="16" fill="#1e1e1e" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan x="1157.0" y="234.0">SERVIÇOS · o serviço é de alimentação escolar?</tspan><tspan x="1157.0" y="254.0">classifica_alimentos_servicos.py</tspan></text>
@@ -348,6 +356,13 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
 <text font-size="14" fill="#1e1e1e" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan x="1419.0" y="933.2">FALSE</tspan><tspan x="1419.0" y="950.8">demais casos</tspan></text>
 <text font-size="14" fill="#e03131" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan x="1290.5" y="928.8">não</tspan></text>
 <text font-size="16" fill="#1e1e1e" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan x="1040.0" y="1074.0">TRUE · 870</tspan><tspan x="1040.0" y="1094.0">semântica 673 · resgate 136 · amparo 60 · código 1</tspan></text>
+<text font-size="16" fill="#6741d9" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan x="-320.0" y="128.0">REFERÊNCIA DOS ALIMENTOS</tspan></text>
+<text font-size="14" fill="#495057" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan x="-320.0" y="148.8">vem da taxonomia, não do PNCP</tspan></text>
+<text font-size="16" fill="#1e1e1e" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan x="-306.0" y="234.0">MATRIZ NORMATIVA</tspan><tspan x="-306.0" y="254.0">normas do PNAE, uma regra</tspan><tspan x="-306.0" y="274.0">por linha (73 regras)</tspan></text>
+<text font-size="16" fill="#1e1e1e" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan x="-306.0" y="346.0">TAXONOMIA v0.1</tspan><tspan x="-306.0" y="366.0">15 grupos e 59 subgrupos,</tspan><tspan x="-306.0" y="386.0">processamento, aplicabilidade</tspan><tspan x="-306.0" y="406.0">e sociobiodiversidade</tspan></text>
+<text font-size="16" fill="#1e1e1e" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan x="-306.0" y="496.0">CATÁLOGO DE REFERÊNCIA</tspan><tspan x="-306.0" y="516.0">4.047 itens CATMAT</tspan><tspan x="-306.0" y="536.0">classificados e candidatos</tspan><tspan x="-306.0" y="556.0">ao PNAE (ração militar fora)</tspan><tspan x="-306.0" y="576.0">cada item traz grupo,</tspan><tspan x="-306.0" y="596.0">processamento, aplicabilidade</tspan><tspan x="-306.0" y="616.0">e sociobiodiversidade</tspan></text>
+<text font-size="14" fill="#6741d9" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan x="-14.0" y="466.8">PDMs</tspan></text>
+<text font-size="14" fill="#6741d9" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan x="-14.0" y="602.8">itens</tspan></text>
 </svg>
   </div></div>
     <p class="legenda fluxo-fonte">Diagrama de <code>docs/resumo_classificadores.excalidraw</code>. As regras de cada etapa estão no anexo <a href="#metodo">Método e execução</a>.</p></div>
