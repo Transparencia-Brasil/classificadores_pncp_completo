@@ -281,8 +281,8 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
   <header><span class="parte">Resumo</span><h2>Resumo do pipeline dos classificadores</h2>
   <p>Como cada classificador decide se um item é alimentação escolar, da base do mês ao resultado True ou False. O processo roda mês a mês, orquestrado por <code>src/main.py</code>; os números são das coletas de jan a mar/2025.</p></header>
   <div class="cartao"><div class="rolagem"><div class="fluxo">
-<svg class="fluxo-svg" viewBox="28 98 1498 1363" role="img" aria-labelledby="fluxo-titulo fluxo-desc" xmlns="http://www.w3.org/2000/svg">
-<title id="fluxo-titulo">Resumo do pipeline dos classificadores</title><desc id="fluxo-desc">Fluxograma em duas colunas. Materiais: entrada de 1.245.354 itens, detecção de PDM, embeddings com similaridade mínima de 0,5 (66.475 alimentos candidatos) e contexto escolar, com 17.711 True e 48.764 False. Serviços: entrada de 418.279 itens, amparo legal 138/139 (60 True), código CATSER (1 True), contexto alimentar, contexto escolar e embeddings contra 29 serviços CATSER, com 870 True. Os dois usam o mesmo dicionário de termos de contexto.</desc><defs>
+<svg class="fluxo-svg" viewBox="28 98 1498 1032" role="img" aria-labelledby="fluxo-titulo fluxo-desc" xmlns="http://www.w3.org/2000/svg">
+<title id="fluxo-titulo">Resumo do pipeline dos classificadores</title><desc id="fluxo-desc">Fluxograma em duas colunas. Materiais: entrada de 1.245.354 itens, detecção de PDM, embeddings com similaridade mínima de 0,5 (66.475 alimentos candidatos) e contexto escolar, com 17.711 True e 48.764 False. Serviços: entrada de 418.279 itens, amparo legal 138/139 (60 True), código CATSER (1 True), contexto alimentar, contexto escolar e embeddings contra 29 serviços CATSER, com 870 True.</desc><defs>
 <marker id="ponta0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1e1e1e"/></marker>
 <marker id="ponta1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#2f9e44"/></marker>
 <marker id="ponta2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#495057"/></marker>
@@ -311,12 +311,6 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
 <rect x="800.0" y="878.0" width="480.0" height="128.0" rx="32.0" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/>
 <rect x="1324.0" y="910.5" width="190.0" height="63.0" rx="15.8" fill="#ffc9c9" stroke="#e03131" stroke-width="2"/>
 <rect x="800.0" y="1050.0" width="480.0" height="68.0" rx="17.0" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
-<rect x="40.0" y="1168.0" width="1474.0" height="103.0" rx="25.8" fill="#fff3bf" stroke="#f08c00" stroke-width="2"/>
-<rect x="40.0" y="1295.0" width="1474.0" height="84.2" rx="21.1" fill="#e9ecef" stroke="#495057" stroke-width="2"/>
-<rect x="40.0" y="1403.2" width="160.0" height="45.5" rx="11.4" fill="#fff3bf" stroke="#f08c00" stroke-width="2"/>
-<rect x="220.0" y="1403.2" width="160.0" height="45.5" rx="11.4" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"/>
-<rect x="400.0" y="1403.2" width="160.0" height="45.5" rx="11.4" fill="#ffc9c9" stroke="#e03131" stroke-width="2"/>
-<rect x="580.0" y="1403.2" width="160.0" height="45.5" rx="11.4" fill="#e9ecef" stroke="#495057" stroke-width="2"/>
 <line x1="280.0" y1="158.0" x2="280.0" y2="210.0" stroke="#1e1e1e" stroke-width="2" marker-end="url(#ponta0)"/>
 <line x1="1040.0" y1="158.0" x2="1040.0" y2="210.0" stroke="#1e1e1e" stroke-width="2" marker-end="url(#ponta0)"/>
 <line x1="280.0" y1="278.0" x2="280.0" y2="318.0" stroke="#1e1e1e" stroke-width="2" marker-end="url(#ponta0)"/>
@@ -370,12 +364,6 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
 <text font-size="14" fill="#1e1e1e" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan x="1419.0" y="933.2">FALSE</tspan><tspan x="1419.0" y="950.8">demais casos</tspan></text>
 <text font-size="14" fill="#e03131" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan x="1290.5" y="928.8">não</tspan></text>
 <text font-size="16" fill="#1e1e1e" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan x="1040.0" y="1074.0">TRUE · 870</tspan><tspan x="1040.0" y="1094.0">semântica 673 · resgate 136 · amparo 60 · código 1</tspan></text>
-<text font-size="15" fill="#1e1e1e" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan x="54.0" y="1191.4">DICIONÁRIO COMUM · referencias/termos_contexto_new_pipeline.csv · 90 termos</tspan><tspan x="54.0" y="1210.1">grupos: alimentar · escolar forte · escolar função · escolar fraco · outro contexto (anula o fraco)</tspan><tspan x="54.0" y="1228.9">exclusão (apaga nomes como Escola Naval) · escolar indício (só registra, não decide: agricultura familiar)</tspan><tspan x="54.0" y="1247.6">usado no passo 3 dos materiais (só objeto) e nos passos 3a/3b dos serviços (descrição e objeto)</tspan></text>
-<text font-size="15" fill="#1e1e1e" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan x="54.0" y="1318.4">SAÍDAS · output/materiais: alimentos_contexto_escolar_true_*.csv e _false_*.csv.gz</tspan><tspan x="54.0" y="1337.1">output/servicos: servicos_alimentacao_escolar_true_*.csv e _false_*.csv.gz</tspan><tspan x="54.0" y="1355.9">output/periodo: os mesmos arquivos juntando os meses, resumo e amostras · output/progresso: marcadores</tspan></text>
-<text font-size="14" fill="#1e1e1e" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan x="120.0" y="1426.0">novo nesta versão</tspan></text>
-<text font-size="14" fill="#1e1e1e" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan x="300.0" y="1426.0">resultado True</tspan></text>
-<text font-size="14" fill="#1e1e1e" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan x="480.0" y="1426.0">resultado False</tspan></text>
-<text font-size="14" fill="#1e1e1e" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan x="660.0" y="1426.0">fora do resultado</tspan></text>
 </svg>
   </div></div>
     <p class="legenda fluxo-fonte">Diagrama de <code>docs/resumo_classificadores.excalidraw</code>. As regras de cada etapa estão no anexo <a href="#metodo">Método e execução</a>.</p></div>
