@@ -200,7 +200,7 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
 </div></div>
 
 <nav class="idx" aria-label="Seções"><p class="navt">Nesta página</p><ul>
-    <li><a href="#introducao">Introdução</a></li><li><a href="#pipeline">Resumo do pipeline</a></li><li><a href="#achados">Principais achados</a></li>
+    <li><a href="#introducao">Introdução</a></li><li><a href="#encp">Alimentação escolar e a ENCP</a></li><li><a href="#pipeline">Resumo do pipeline</a></li><li><a href="#achados">Principais achados</a></li>
     <li class="navgrupo" aria-hidden="true">Confiabilidade</li><li><a href="#precisao">Precisão e recall</a></li>
     <li class="navgrupo" aria-hidden="true">O que se compra</li><li><a href="#grupos">Grupos</a></li><li><a href="#pnae" class="nav-destaque">Aplicabilidade ao PNAE</a></li>
     <li class="navgrupo" aria-hidden="true">Quem compra e quanto</li><li><a href="#orgaos">Órgãos compradores</a></li><li><a href="#maiores">Maiores valores</a></li><li><a href="#esfera">Esfera</a></li>
@@ -251,6 +251,7 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
     </ul>
     <h3>Como este relatório está organizado</h3>
     <ol class="lista-texto">
+      <li><a href="#encp">Alimentação escolar e a ENCP</a>: por que essas compras importam para a estratégia federal de contratações e como a taxonomia ajuda a avaliá-la.</li>
       <li><a href="#pipeline">Resumo do pipeline</a>: como cada classificador decide se um item é alimentação escolar.</li>
       <li><a href="#precisao">Confiabilidade</a>: quanto confiar nos classificadores.</li>
       <li><a href="#grupos">O que se compra</a>: os grupos de alimentos e serviços e a <a href="#pnae">aplicabilidade ao PNAE</a>, a parte central do relatório.</li>
@@ -259,6 +260,63 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
       <li><a href="#limites">Limites</a> e, no anexo, o <a href="#metodo">método e a execução</a>.</li>
     </ol>
   </div>
+</section>
+
+<section id="encp">
+  <header><span class="parte">Contexto</span><h2>Alimentação escolar e a ENCP</h2>
+  <p>Por que as compras de alimentação escolar importam para a Estratégia Nacional de Contratações Públicas para o Desenvolvimento Sustentável (ENCP) e como a taxonomia ajuda a avaliar os objetivos dela.</p></header>
+  <div class="texto">
+    <p>A ENCP foi instituída pelo <a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/decreto/D12771.htm">Decreto nº 12.771/2025</a> para usar o poder de compra do Estado a favor do
+    desenvolvimento sustentável. O decreto organiza a estratégia em quatro eixos (econômico, social, ambiental e de gestão) e dá a
+    cada eixo seus objetivos (art. 5º). O MGI acompanha a estratégia com indicadores calculados sobre as compras do Executivo
+    federal, replicados pela Transparência Brasil na página dos <a href="https://transparencia-brasil.github.io/indicadores-encp/">indicadores da ENCP</a>.</p>
+    <h3>Por que a alimentação escolar importa para a ENCP</h3>
+    <p>A compra de alimentos para as escolas segue uma lei federal que já usa o poder de compra para fins que a ENCP busca. A
+    <a href="https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2009/lei/l11947.htm">Lei nº 11.947/2009</a> (art. 14, com a redação da Lei nº 15.226/2025) obriga a gastar pelo menos 45% dos
+    recursos do PNAE repassados pelo FNDE em alimentos comprados diretamente da agricultura familiar e do empreendedor familiar
+    rural. A lei dá prioridade aos assentamentos da reforma agrária, às comunidades indígenas e quilombolas e aos grupos de mulheres
+    e de jovens agricultores, e permite comprar sem licitação, pela chamada pública (§ 1º). A tabela liga esses pontos aos objetivos
+    do decreto.</p>
+  </div>
+  <div class="cartao"><h3>Objetivos da ENCP e alimentação escolar</h3><div class="rolagem"><table class="tb-dim">
+    <thead><tr><th scope="col">Objetivo da ENCP (art. 5º)</th><th scope="col">Ligação com a alimentação escolar</th><th scope="col">O que este relatório mostra</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Econômico (I, b e c): reduzir as desigualdades regionais e ampliar o acesso de microempreendedores, micro e pequenas empresas e negócios locais às contratações</th><td class="det">A compra da agricultura familiar leva o dinheiro a produtores locais, e as compras são feitas por órgãos de todo o país.</td><td class="det">2.469 órgãos compraram alimentos ou serviços de alimentação escolar no período. 1.042 alimentos (5,9%) foram comprados pela chamada pública da agricultura familiar (amparo 138).</td></tr>
+      <tr><th scope="row">Social (II, b): práticas de equidade e inclusão que ampliem a representatividade racial, de gênero e social dos fornecedores</th><td class="det">A lei dá prioridade a comunidades indígenas e quilombolas, assentados e grupos de mulheres e de jovens agricultores.</td><td class="det">O PNCP não informa se o fornecedor pertence a esses grupos. Só dá para ver o amparo da compra.</td></tr>
+      <tr><th scope="row">Ambiental (III, a e c): contratações sustentáveis e soluções da bioindústria e da bioeconomia, com uso sustentável dos recursos da natureza</th><td class="det">O PNAE permite pagar até 30% a mais por alimentos orgânicos ou agroecológicos (<a href="https://www.gov.br/fnde/pt-br/acesso-a-informacao/legislacao/resolucoes/2026/resolucao-cd_fnde-no-4-de-26-de-fevereiro-de-2026.pdf">Resolução CD/FNDE nº 4/2026</a>, alterada pela nº 17/2026) e valoriza as espécies da sociobiodiversidade.</td><td class="det">984 alimentos (5,6%) citam uma espécie da sociobiodiversidade (Portaria Interministerial nº 284/2018). A taxonomia ainda não identifica orgânicos.</td></tr>
+      <tr><th scope="row">Gestão (IV, a e d): articular os entes federativos e as políticas federais e usar dados para tomar decisões</th><td class="det">O PNAE é uma política federal executada por estados e municípios com recursos repassados pela União.</td><td class="det">Municípios, estados e DF compram 88,1% dos alimentos com contexto escolar, e órgãos federais, 5,3% (veja <a href="#esfera">Esfera</a>). O valor estimado dos itens classificados soma R$ 6,06 bi.</td></tr>
+    </tbody></table></div>
+    <p class="legenda">O decreto não cita a alimentação escolar. A ligação com cada objetivo é uma leitura da Transparência Brasil. Os números valem para as coletas de jan a mar/2025.</p></div>
+  <div class="aviso"><p><strong>Alcance da ENCP.</strong> As obrigações da ENCP valem para a administração pública federal direta,
+  autárquica e fundacional (art. 8º). Estados, DF e municípios podem aderir, mas não são obrigados. Como quase toda a alimentação
+  escolar é comprada por eles, a maior parte dessas compras fica fora dos indicadores calculados hoje, que cobrem só o Executivo
+  federal. Para a ENCP, a alimentação escolar é o caso de uma política federal que orienta compras feitas em todo o país, e o PNCP
+  permite acompanhá-las.</p></div>
+  <div class="texto">
+    <h3>Como a taxonomia ajuda a avaliar os objetivos</h3>
+    <ul class="lista-texto">
+      <li><strong>Acha a compra sem depender do código.</strong> Os indicadores da ENCP identificam os itens pelo código do catálogo
+      (CATMAT para materiais, CATSER para serviços). Segundo o <a href="https://transparencia-brasil.github.io/indicadores-encp/tasks/indicadores-encp/docs/eixo_ambiental_ENCP.html">relatório do eixo ambiental</a>, o código vem preenchido
+      em cerca de 91% dos materiais, mas em só 6% dos serviços, e por isso os números são um piso. O pipeline deste relatório classifica
+      pela descrição do item e pelo objeto da contratação, e a validação manual mede quanto ele acerta (precisão) e quanto deixa de fora
+      (recall), como mostra a <a href="#precisao">Parte 1</a>.</li>
+      <li><strong>Dá a cada item atributos ligados aos objetivos.</strong> A taxonomia atribui grupo de alimento, grau de processamento,
+      sociobiodiversidade e aplicabilidade ao PNAE. Junto com os dados da contratação (amparo, órgão, UF, esfera), esses atributos permitem
+      calcular indicadores como os da tabela abaixo.</li>
+      <li><strong>Tem regras rastreáveis.</strong> Cada regra da taxonomia sai de uma norma registrada na <a href="#pnae">matriz normativa</a>.
+      O relatório do eixo ambiental aponta que os indicadores ambientais dependem de taxonomias ainda não consolidadas, e o decreto põe a
+      Taxonomia Sustentável Brasileira (Decreto nº 12.705/2025) entre os instrumentos da ENCP (art. 6º, IV). A taxonomia de alimentação
+      escolar é um exemplo de taxonomia temática já aplicada aos dados do PNCP.</li>
+    </ul>
+  </div>
+  <div class="cartao"><h3>Indicadores possíveis com a taxonomia</h3><div class="rolagem"><table class="tb-dim">
+    <thead><tr><th scope="col">Indicador</th><th scope="col">Objetivo da ENCP</th><th scope="col">Nas coletas de jan a mar/2025</th><th scope="col">Limite</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Alimentos com contexto escolar comprados pela chamada pública da agricultura familiar</th><td class="det">I, c e II, b</td><td class="det">1.042 itens (5,9%)</td><td class="det">Conta o amparo, não o fornecedor. Compras da agricultura familiar registradas com outro amparo ficam de fora.</td></tr>
+      <tr><th scope="row">Alimentos com espécie da sociobiodiversidade</th><td class="det">III, c</td><td class="det">984 itens (5,6%)</td><td class="det">A correspondência é pelo texto e não comprova a origem do produto.</td></tr>
+      <tr><th scope="row">Compras por UF e por esfera de governo</th><td class="det">I, b e IV, a</td><td class="det">Veja <a href="#orgaos">Órgãos compradores</a> e <a href="#esfera">Esfera</a></td><td class="det">O valor é o estimado na contratação, não o homologado.</td></tr>
+    </tbody></table></div>
+    <p class="legenda">Os percentuais são sobre os 17.711 alimentos com contexto escolar e contam itens, não valor. O PNCP não informa a fonte do recurso nem se o fornecedor é agricultor familiar, e a taxonomia ainda não identifica orgânicos: esses são os próximos dados a cruzar para medir os objetivos social e ambiental.</p></div>
 </section>
 
 <section id="pipeline">
