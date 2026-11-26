@@ -935,4 +935,76 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
   spy();
 })();
 </script>
+
+<style>
+#voltar { position: fixed; right: 1rem; bottom: 1rem; z-index: 50; display: none; align-items: center; gap: .45rem;
+  padding: .65rem 1rem; border: 2px solid var(--accent); border-radius: 999px; background: var(--bg); color: var(--accent);
+  font-weight: 700; font-size: .9rem; line-height: 1.2; font-family: inherit; cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,.25); }
+#voltar.on { display: inline-flex; }
+#voltar:hover { background: var(--accent); color: var(--bg); }
+svg.fluxo-svg { cursor: zoom-in; }
+#zoom { position: fixed; inset: 0; z-index: 100; display: none; flex-direction: column; background: rgba(0,0,0,.82); }
+#zoom.on { display: flex; }
+#zoom .zbar { display: flex; justify-content: flex-end; gap: .6rem; padding: .7rem 1rem; }
+#zoom .zbar button { padding: .5rem .9rem; border: 2px solid var(--accent); border-radius: 999px; background: var(--bg); color: var(--accent);
+  font-weight: 700; font-size: .9rem; font-family: inherit; cursor: pointer; }
+#zoom .zbar button:hover { background: var(--accent); color: var(--bg); }
+#zoom .zcorpo { flex: 1; overflow: auto; padding: 0 1rem 1rem; }
+#zoom .zcaixa { background: #ffffff; border-radius: 10px; padding: 1rem; margin: 0 auto; width: 100%; }
+#zoom .zcaixa svg { display: block; width: 100%; height: auto; max-width: none; cursor: zoom-in; }
+#zoom.grande .zcaixa { width: 220%; }
+#zoom.grande .zcaixa svg { cursor: zoom-out; }
+@media print { #voltar, #zoom { display: none !important; } }
+</style>
+<button type="button" id="voltar" aria-label="Voltar para onde eu estava">↩ Voltar para onde eu estava</button>
+<div id="zoom" role="dialog" aria-modal="true" aria-label="Imagem ampliada">
+  <div class="zbar"><button type="button" id="zoom-tam">Ampliar mais</button><button type="button" id="zoom-fechar">Fechar (Esc)</button></div>
+  <div class="zcorpo"><div class="zcaixa fluxo"></div></div>
+</div>
+<script>
+(function () {
+  // "Voltar para onde eu estava": lembra a posição antes de um link interno
+  var btn = document.getElementById("voltar"), origem = null;
+  var esconder = function () { origem = null; btn.classList.remove("on"); };
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a || a.closest("nav.idx") || a.getAttribute("href") === "#") return;
+    var alvo = document.getElementById(decodeURIComponent(a.getAttribute("href").slice(1)));
+    if (!alvo) return;
+    origem = window.scrollY;
+    setTimeout(function () { if (origem !== null) btn.classList.add("on"); }, 50);
+  });
+  btn.addEventListener("click", function () {
+    var y = origem; esconder();
+    if (y !== null) window.scrollTo({ top: y, behavior: "smooth" });
+  });
+  addEventListener("scroll", function () {
+    if (origem !== null && btn.classList.contains("on") && Math.abs(window.scrollY - origem) < 80) esconder();
+  }, { passive: true });
+
+  // Zoom em popup no fluxograma
+  var z = document.getElementById("zoom"), caixa = z.querySelector(".zcaixa"), tam = document.getElementById("zoom-tam"), foco = null;
+  var abrir = function (svg) {
+    var c = svg.cloneNode(true);
+    [].forEach.call(c.querySelectorAll("[id]"), function (n) { n.removeAttribute("id"); });
+    c.removeAttribute("aria-labelledby"); c.setAttribute("aria-label", svg.querySelector("title") ? svg.querySelector("title").textContent : "Imagem ampliada");
+    caixa.innerHTML = ""; caixa.appendChild(c);
+    z.classList.remove("grande"); tam.textContent = "Ampliar mais";
+    z.classList.add("on"); foco = document.activeElement; document.body.style.overflow = "hidden";
+    document.getElementById("zoom-fechar").focus();
+  };
+  var alternar = function () { var g = z.classList.toggle("grande"); tam.textContent = g ? "Reduzir" : "Ampliar mais"; };
+  var fechar = function () { z.classList.remove("on"); document.body.style.overflow = ""; caixa.innerHTML = ""; if (foco && foco.focus) foco.focus(); };
+  [].forEach.call(document.querySelectorAll("svg.fluxo-svg"), function (s) {
+    s.setAttribute("tabindex", "0"); s.setAttribute("title", "Clique para ampliar");
+    s.addEventListener("click", function () { abrir(s); });
+    s.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); abrir(s); } });
+  });
+  caixa.addEventListener("click", alternar);
+  tam.addEventListener("click", alternar);
+  document.getElementById("zoom-fechar").addEventListener("click", fechar);
+  z.addEventListener("click", function (e) { if (e.target === z || e.target.classList.contains("zcorpo")) fechar(); });
+  addEventListener("keydown", function (e) { if (e.key === "Escape" && z.classList.contains("on")) fechar(); });
+})();
+</script>
 </body></html>
