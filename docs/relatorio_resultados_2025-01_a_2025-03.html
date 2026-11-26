@@ -156,6 +156,12 @@ p.destaque { background: var(--soft); color: var(--head); border-left: 5px solid
 .pendencias { display: grid; gap: 0; }
 .pendencias > div { display: grid; grid-template-columns: 11em minmax(0, 1fr); gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--rule); }
 .pendencias dt { font-weight: 600; } .pendencias dd { margin: 0; color: var(--ink-2); }
+.ficha { border-top: 1px solid var(--rule); padding-top: 14px; display: grid; gap: 10px; }
+.ficha-t { font-size: .75rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.ficha dl { margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(13em, 1fr)); gap: 10px 24px; }
+.ficha dt { font-size: 11.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.ficha dd { margin: 0; font-size: 14px; font-weight: 600; color: var(--head); }
+.ficha dd.pend { color: var(--ochre); font-weight: 400; font-style: italic; }
 footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 16px; display: grid; gap: 6px; }
 @media (max-width: 760px) {
   .numeros { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -215,6 +221,17 @@ p.dizem { border-left: 3px solid var(--marca); padding-left: .8rem; }
   <p class="lead">Este material mostra quanto das compras registradas no Portal Nacional de Contratações Públicas (PNCP)
   é alimentação escolar, o que se compra, quem compra e como, e o que já dá para dizer sobre as regras do Programa
   Nacional de Alimentação Escolar (PNAE), a partir das coletas de janeiro a março de 2025.</p>
+  <div class="ficha" role="group" aria-labelledby="ficha-t">
+    <p class="ficha-t" id="ficha-t">Ficha técnica · novembro/2026</p>
+    <dl>
+      <div><dt>Direção executiva</dt><dd>Juliana Sakai</dd></div>
+      <div><dt>Supervisão</dt><dd>Raul Durlo</dd></div>
+      <div><dt>Edição</dt><dd>Gabriel Lacerda</dd></div>
+      <div><dt>Pesquisa e redação</dt><dd class="pend">a definir</dd></div>
+      <div><dt>Análise e revisão de dados</dt><dd>Gabriel Lacerda</dd></div>
+      <div><dt>Financiamento</dt><dd class="pend">a definir</dd></div>
+    </dl>
+  </div>
 </header>
 
 <section id="introducao">
